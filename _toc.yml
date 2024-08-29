@@ -2,7 +2,7 @@
 
 
 format: jb-book
-root: chapters/intro
+root: intro
 title: Introduction
 options:
   numbered: true
