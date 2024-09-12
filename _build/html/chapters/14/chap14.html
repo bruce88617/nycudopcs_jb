@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pandas and More Data Visualization &#8212; Introduction to Computer Science and Programming</title>
+    <title>Data Analysis and More Data Visualization with Python I &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/14/chap14';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to Concurrency and Parallelism" href="../../archives/IntroConcurrencyParallelism.html" />
+    <link rel="next" title="Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
     <link rel="prev" title="Introduction to NumPy and Matplotlib II" href="../13/chap13.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -199,7 +199,8 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Pandas and More Data Visualization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
@@ -389,7 +390,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pandas and More Data Visualization</h1>
+    <h1>Data Analysis and More Data Visualization with Python I</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,8 +424,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pandas-and-more-data-visualization">
-<h1><code class="docutils literal notranslate"><span class="pre">Pandas</span></code> and More Data Visualization<a class="headerlink" href="#pandas-and-more-data-visualization" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-analysis-and-more-data-visualization-with-python-i">
+<h1>Data Analysis and More Data Visualization with Python I<a class="headerlink" href="#data-analysis-and-more-data-visualization-with-python-i" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Please refer to <a class="reference external" href="https://github.com/bruce88617/nycudopcs/tree/main/Lectures/Lecture14">here</a> for the data in this lecture.</p></li>
 </ul>
@@ -556,11 +557,11 @@ type(df1.iloc[0]): &lt;class &#39;pandas.core.series.Series&#39;&gt;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    22
-1    57
-2    67
-3    94
-4    76
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    23
+1    64
+2    35
+3    51
+4    15
 Name: HW#4, dtype: int32
 </pre></div>
 </div>
@@ -577,11 +578,11 @@ Name: HW#4, dtype: int32
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Student ID  Gender  HW#1  HW#2  HW#3  HW#4
-0  112514001  Female   100    90   100    22
-1  112514002    Male     0    60    75    57
-2  112514003   Third    70    95    80    67
-3  112514004  Female    90    85   100    94
-4  112514005    Male    80   100    60    76
+0  112514001  Female   100    90   100    23
+1  112514002    Male     0    60    75    64
+2  112514003   Third    70    95    80    35
+3  112514004  Female    90    85   100    51
+4  112514005    Male    80   100    60    15
 </pre></div>
 </div>
 </div>
@@ -597,11 +598,11 @@ Name: HW#4, dtype: int32
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Student ID  Gender  HW#1  HW#2  HW#3  HW#4  Final
-0  112514001  Female   100    90   100    22   89.2
-1  112514002    Male     0    60    75    57   46.2
-2  112514003   Third    70    95    80    67   80.2
-3  112514004  Female    90    85   100    94   91.9
-4  112514005    Male    80   100    60    76   79.6
+0  112514001  Female   100    90   100    23   89.3
+1  112514002    Male     0    60    75    64   46.9
+2  112514003   Third    70    95    80    35   77.0
+3  112514004  Female    90    85   100    51   87.6
+4  112514005    Male    80   100    60    15   73.5
 </pre></div>
 </div>
 </div>
@@ -648,7 +649,7 @@ Name: HW#4, dtype: int32
       <td>5.000000</td>
       <td>5.000000</td>
       <td>5.000000</td>
-      <td>5.00000</td>
+      <td>5.000000</td>
       <td>5.000000</td>
     </tr>
     <tr>
@@ -656,56 +657,56 @@ Name: HW#4, dtype: int32
       <td>68.000000</td>
       <td>86.000000</td>
       <td>83.000000</td>
-      <td>63.20000</td>
-      <td>77.420000</td>
+      <td>37.600000</td>
+      <td>74.860000</td>
     </tr>
     <tr>
       <th>std</th>
       <td>39.623226</td>
       <td>15.572412</td>
       <td>17.175564</td>
-      <td>26.75257</td>
-      <td>18.272986</td>
+      <td>20.044949</td>
+      <td>17.022133</td>
     </tr>
     <tr>
       <th>min</th>
       <td>0.000000</td>
       <td>60.000000</td>
       <td>60.000000</td>
-      <td>22.00000</td>
-      <td>46.200000</td>
+      <td>15.000000</td>
+      <td>46.900000</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>70.000000</td>
       <td>85.000000</td>
       <td>75.000000</td>
-      <td>57.00000</td>
-      <td>79.600000</td>
+      <td>23.000000</td>
+      <td>73.500000</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>80.000000</td>
       <td>90.000000</td>
       <td>80.000000</td>
-      <td>67.00000</td>
-      <td>80.200000</td>
+      <td>35.000000</td>
+      <td>77.000000</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>90.000000</td>
       <td>95.000000</td>
       <td>100.000000</td>
-      <td>76.00000</td>
-      <td>89.200000</td>
+      <td>51.000000</td>
+      <td>87.600000</td>
     </tr>
     <tr>
       <th>max</th>
       <td>100.000000</td>
       <td>100.000000</td>
       <td>100.000000</td>
-      <td>94.00000</td>
-      <td>91.900000</td>
+      <td>64.000000</td>
+      <td>89.300000</td>
     </tr>
   </tbody>
 </table>
@@ -753,16 +754,16 @@ dtype: object
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           2050-12-29  2051-01-05  2051-01-12  2051-01-19  2051-01-26
-139514001           0           1           2           0           2
-139514002           1           0           0           1           2
-139514003           0           1           1           0           2
-139514004           1           1           0           1           2
-139514005           1           2           1           1           0
-139514006           1           1           1           1           0
-139514007           2           2           0           0           1
-139514008           0           1           0           2           1
-139514009           1           2           2           0           1
-139514010           0           0           2           1           1
+139514001           0           1           2           0           0
+139514002           1           1           1           0           1
+139514003           2           2           1           1           2
+139514004           0           2           1           2           0
+139514005           0           2           2           2           0
+139514006           2           1           1           0           0
+139514007           1           2           0           0           2
+139514008           2           1           2           2           1
+139514009           0           1           2           1           1
+139514010           0           1           2           1           2
 Index([&#39;139514001&#39;, &#39;139514002&#39;, &#39;139514003&#39;, &#39;139514004&#39;, &#39;139514005&#39;,
        &#39;139514006&#39;, &#39;139514007&#39;, &#39;139514008&#39;, &#39;139514009&#39;, &#39;139514010&#39;],
       dtype=&#39;object&#39;)
@@ -1260,11 +1261,11 @@ DatetimeIndex([&#39;2050-12-29&#39;, &#39;2051-01-05&#39;, &#39;2051-01-12&#39;,
       </div>
     </a>
     <a class="right-next"
-       href="../../archives/IntroConcurrencyParallelism.html"
+       href="../15/chap15.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Concurrency and Parallelism</p>
+        <p class="prev-next-title">Data Analysis and More Data Visualization with Python II</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

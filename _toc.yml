@@ -40,7 +40,9 @@ parts:
     - file: chapters/13/chap13.ipynb
       title: 13. Introduction to NumPy and Matplotlib II
     - file: chapters/14/chap14.ipynb
-      title: 14. Pandas and More Data Visualization
+      title: 14. Data Analysis and More Data Visualization with Python I
+    - file: chapters/15/chap15.ipynb
+      title: 15. Data Analysis and More Data Visualization with Python II
   
   - caption: "Archives"
     chapters:
