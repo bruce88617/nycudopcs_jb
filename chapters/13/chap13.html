@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/13/chap13';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Pandas and More Data Visualization" href="../14/chap14.html" />
+    <link rel="next" title="Data Analysis and More Data Visualization with Python I" href="../14/chap14.html" />
     <link rel="prev" title="Introduction to NumPy and Matplotlib I" href="../12/chap12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,8 +155,8 @@
       
     
     
-    <img src="../../_static/nycu_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
-    <script>document.write(`<img src="../../_static/nycu_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
   
   
 </a></div>
@@ -199,7 +199,14 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Introduction to NumPy and Matplotlib II</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Pandas and More Data Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
@@ -842,25 +849,7 @@ np.pad(a, ((0,3),(2,2)), constant_values=1):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;.//data//arr3d.npy&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">141</span><span class="p">)</span>
-
-<span class="nn">File O:\Envs\nycudopcs\Lib\site-packages\numpy\lib\npyio.py:427,</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">425</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">426</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">427</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os_fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">428</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">430</span> <span class="c1"># Code to distinguish from NumPy binary files and pickles.</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;.//data//arr3d.npy&#39;
-</pre></div>
-</div>
+<img alt="../../_images/b1e822c5f2cf9d04c76afa8cfc4020d20e7056f0a1cbfd156765fc40812a4acc.png" src="../../_images/b1e822c5f2cf9d04c76afa8cfc4020d20e7056f0a1cbfd156765fc40812a4acc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -882,6 +871,9 @@ np.pad(a, ((0,3),(2,2)), constant_values=1):
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b1e822c5f2cf9d04c76afa8cfc4020d20e7056f0a1cbfd156765fc40812a4acc.png" src="../../_images/b1e822c5f2cf9d04c76afa8cfc4020d20e7056f0a1cbfd156765fc40812a4acc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -935,7 +927,7 @@ np.pad(a, ((0,3),(2,2)), constant_values=1):
 <h3>Exercise 13.1: Image<a class="headerlink" href="#exercise-13-1-image" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>Please write a program that plots below’s figure.</p></li>
-<li><p>Your data is <a class="reference internal" href="#.//data//exercise1.npy"><span class="xref myst">here (exercise1.npy)</span></a></p>
+<li><p>Your data is <a class="reference download internal" download="" href="../../_downloads/f37d3b1979fdde20e86de6ec7ee8a725/exercise1.npy"><span class="xref download myst">here (exercise1.npy)</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;.//data//exercise1.npy&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -987,7 +979,7 @@ f(x;\mu, \sigma) = \dfrac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \left(\frac{x-\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8831cd5e67ec4753e8cfc0dc0f37ef92790622be1ad77af244587a4b32cfa864.png" src="../../_images/8831cd5e67ec4753e8cfc0dc0f37ef92790622be1ad77af244587a4b32cfa864.png" />
+<img alt="../../_images/fd8f38059d4fe35c080c79fd6bed1cc6e1babc5ae0fc1ae51a652b6176caf806.png" src="../../_images/fd8f38059d4fe35c080c79fd6bed1cc6e1babc5ae0fc1ae51a652b6176caf806.png" />
 </div>
 </div>
 </section>
@@ -1042,6 +1034,17 @@ f(x,y) = (x^{2}+y-11)^{2} + (x+y^{2}-7)^{2}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x.shape: (501,)
+y.shape: (501,)
+============================================================
+x.shape: (1, 501)
+y.shape: (501, 1)
+Is f1 equal to f2?
+ True
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1058,6 +1061,9 @@ f(x,y) = (x^{2}+y-11)^{2} + (x+y^{2}-7)^{2}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/188d7ce49b7e8c275d6496f6458b1820ed2df7e9277151aeeac972bb12785627.png" src="../../_images/188d7ce49b7e8c275d6496f6458b1820ed2df7e9277151aeeac972bb12785627.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1082,6 +1088,9 @@ f(x,y) = (x^{2}+y-11)^{2} + (x+y^{2}-7)^{2}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7d7e4d25bc2a66f6d53c7e87f661515528ca15126e30bcd2335675f2445f5081.png" src="../../_images/7d7e4d25bc2a66f6d53c7e87f661515528ca15126e30bcd2335675f2445f5081.png" />
 </div>
 </div>
 </section>
@@ -1146,6 +1155,9 @@ f(x,y) = (x^{2}+y-11)^{2} + (x+y^{2}-7)^{2}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5bcf5cc0a22cab28948e8b57e7fb832189e9605dea2eabb788033866af02e48c.png" src="../../_images/5bcf5cc0a22cab28948e8b57e7fb832189e9605dea2eabb788033866af02e48c.png" />
 </div>
 </div>
 </section>
@@ -1293,7 +1305,7 @@ E_{i} = -\nabla V_{i} &amp;= -\dfrac{\partial V_{i}}{\partial x} \hat{x} -\dfrac
 <h3>Exercise 13.3:<a class="headerlink" href="#exercise-13-3" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Please write a program that plots below’s figure.</p></li>
-<li><p>Your data is <a class="reference internal" href="#.//data//arr3d.npy"><span class="xref myst">here (arr3d.npy)</span></a></p></li>
+<li><p>Your data is <a class="reference download internal" download="" href="../../_downloads/86f154dc07b272fc990d41557da955b9/arr3d.npy"><span class="xref download myst">here (arr3d.npy)</span></a></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;.//data//arr3d.npy&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1444,7 +1456,7 @@ Y = 0.299 * R + 0.587 * G + 0.114 * B
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">Pandas</span></code> and More Data Visualization</p>
+        <p class="prev-next-title">Data Analysis and More Data Visualization with Python I</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
