@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/18/chap18';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to Concurrency and Parallelism" href="../../archives/IntroConcurrencyParallelism.html" />
+    <link rel="next" title="Introduction to Statistical Inference" href="../19/chap19.html" />
     <link rel="prev" title="Random Walks and Stochastic Programs" href="../17/chap17.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -207,6 +207,8 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Limit Theorems and Monte Carlo Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19/chap19.html">19. Introduction to Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20/chap20.html">20. Randomized Trials and Hypothesis Checking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
@@ -530,10 +532,10 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Sample = 1
     Theoretical: (Mean, Var) = (0.50, 0.0833)
-    Sample: (Mean, Var) = (0.47, 0.0955)
+    Sample: (Mean, Var) = (0.43, 0.0775)
 Number of Sample = 10
     Theoretical: (Mean, Var) = (0.50, 0.0833)
-    Sample: (Mean, Var) = (0.50, 0.0092)
+    Sample: (Mean, Var) = (0.50, 0.0103)
 Number of Sample = 100
     Theoretical: (Mean, Var) = (0.50, 0.0833)
     Sample: (Mean, Var) = (0.50, 0.0008)
@@ -584,10 +586,10 @@ Number of Sample = 1000
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Simulation of Pascal&#39;s Game
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Probability of winning = 0.4958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Probability of winning = 0.4963
 </pre></div>
 </div>
-<img alt="../../_images/67503ed7800ac60783c6eecdbec0bf951af54c0c9b1cbcd4313b8f66c7f4641c.png" src="../../_images/67503ed7800ac60783c6eecdbec0bf951af54c0c9b1cbcd4313b8f66c7f4641c.png" />
+<img alt="../../_images/313be5c534c0c0f80885f388f8719c0c420198469c5567fd0a3d2daa9435be1f.png" src="../../_images/313be5c534c0c0f80885f388f8719c0c420198469c5567fd0a3d2daa9435be1f.png" />
 </div>
 </div>
 <section id="what-have-we-learned-in-the-pascal-s-problem">
@@ -632,33 +634,33 @@ Number of Sample = 1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.280000, STD = 1.536750, numData = 1
-Est. = 3.160000, STD = 1.065082, numData = 2
-Est. = 3.160000, STD = 0.902441, numData = 4
-Est. = 3.085714, STD = 0.671277, numData = 7
-Est. = 3.147500, STD = 0.433150, numData = 16
-Est. = 3.147500, STD = 0.292286, numData = 32
-Est. = 3.149206, STD = 0.234491, numData = 63
-Est. = 3.130709, STD = 0.141417, numData = 127
-Est. = 3.127031, STD = 0.101374, numData = 256
-Est. = 3.150000, STD = 0.068634, numData = 512
-Est. = 3.136328, STD = 0.049861, numData = 1024
-Est. = 3.138867, STD = 0.035002, numData = 2048
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.120000, STD = 1.656985, numData = 1
+Est. = 2.960000, STD = 1.248359, numData = 2
+Est. = 3.180000, STD = 0.864639, numData = 4
+Est. = 3.068571, STD = 0.602877, numData = 7
+Est. = 3.200000, STD = 0.348210, numData = 16
+Est. = 3.177500, STD = 0.253833, numData = 32
+Est. = 3.130159, STD = 0.167864, numData = 63
+Est. = 3.141732, STD = 0.135570, numData = 127
+Est. = 3.112969, STD = 0.100993, numData = 256
+Est. = 3.135312, STD = 0.073818, numData = 512
+Est. = 3.137578, STD = 0.052085, numData = 1024
+Est. = 3.143047, STD = 0.034098, numData = 2048
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144195, STD = 0.024529, numData = 4095
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.143228, STD = 0.022543, numData = 4095
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144578, STD = 0.017188, numData = 8191
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.140374, STD = 0.017446, numData = 8191
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144398, STD = 0.012648, numData = 16383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144018, STD = 0.013028, numData = 16383
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.141299, STD = 0.009148, numData = 32768
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.141995, STD = 0.008367, numData = 32768
 </pre></div>
 </div>
-<img alt="../../_images/8fb6331a567539e2c5f84c8e3d0879223ba637924f6b6a76c9829e47cd6cca29.png" src="../../_images/8fb6331a567539e2c5f84c8e3d0879223ba637924f6b6a76c9829e47cd6cca29.png" />
+<img alt="../../_images/8bceeecf47d2afa7b23876a36b17a5447881e56934a6404f0738daab6287ba67.png" src="../../_images/8bceeecf47d2afa7b23876a36b17a5447881e56934a6404f0738daab6287ba67.png" />
 </div>
 </div>
 <section id="what-have-we-learned-in-the-pi-estimation">
@@ -782,35 +784,35 @@ Est. = 3.138867, STD = 0.035002, numData = 2048
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.61000, STD = 0.48775, numData = 1
-Est. = 0.55500, STD = 0.32323, numData = 2
-Est. = 0.59000, STD = 0.23854, numData = 4
-Est. = 0.58143, STD = 0.19405, numData = 7
-Est. = 0.54750, STD = 0.11830, numData = 16
-Est. = 0.56375, STD = 0.08442, numData = 32
-Est. = 0.56476, STD = 0.06724, numData = 63
-Est. = 0.56827, STD = 0.04107, numData = 127
-Est. = 0.57281, STD = 0.03159, numData = 256
-Est. = 0.57176, STD = 0.02015, numData = 512
-Est. = 0.57258, STD = 0.01733, numData = 1024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.60000, STD = 0.48990, numData = 1
+Est. = 0.53500, STD = 0.34099, numData = 2
+Est. = 0.60500, STD = 0.24541, numData = 4
+Est. = 0.57286, STD = 0.16720, numData = 7
+Est. = 0.56875, STD = 0.12231, numData = 16
+Est. = 0.57781, STD = 0.09307, numData = 32
+Est. = 0.56333, STD = 0.05787, numData = 63
+Est. = 0.56898, STD = 0.04244, numData = 127
+Est. = 0.56973, STD = 0.03306, numData = 256
+Est. = 0.57637, STD = 0.02272, numData = 512
+Est. = 0.57059, STD = 0.01577, numData = 1024
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.56997, STD = 0.01103, numData = 2048
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57094, STD = 0.01103, numData = 2048
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57228, STD = 0.00829, numData = 4095
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57045, STD = 0.00702, numData = 4095
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57084, STD = 0.00503, numData = 8191
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57137, STD = 0.00582, numData = 8191
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57111, STD = 0.00321, numData = 16383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57081, STD = 0.00364, numData = 16383
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57079, STD = 0.00237, numData = 32768
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57108, STD = 0.00267, numData = 32768
 </pre></div>
 </div>
-<img alt="../../_images/5cc9dd7b04e4052a3ad24d8163c779117892d64eca9555d160dad64ee2aaf391.png" src="../../_images/5cc9dd7b04e4052a3ad24d8163c779117892d64eca9555d160dad64ee2aaf391.png" />
+<img alt="../../_images/4c8a6f2bc79109f7245aeac5ff00109db24537cddf3adedbdd2d61daaff7908b.png" src="../../_images/4c8a6f2bc79109f7245aeac5ff00109db24537cddf3adedbdd2d61daaff7908b.png" />
 </div>
 </div>
 <p><a id="tag4"></a></p>
@@ -847,29 +849,29 @@ Est. = 0.57258, STD = 0.01733, numData = 1024
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.81076, STD = 0.80174, numData = 1
-Est. = 2.64477, STD = 0.53939, numData = 2
-Est. = 2.69791, STD = 0.37507, numData = 4
-Est. = 2.67956, STD = 0.26085, numData = 7
-Est. = 2.71422, STD = 0.16652, numData = 16
-Est. = 2.71018, STD = 0.12625, numData = 32
-Est. = 2.70173, STD = 0.09708, numData = 63
-Est. = 2.70459, STD = 0.06494, numData = 127
-Est. = 2.70422, STD = 0.04715, numData = 256
-Est. = 2.70225, STD = 0.03079, numData = 512
-Est. = 2.70088, STD = 0.02299, numData = 1024
-Est. = 2.70385, STD = 0.01787, numData = 2048
-Est. = 2.70357, STD = 0.01075, numData = 4095
-Est. = 2.70172, STD = 0.00819, numData = 8191
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.72336, STD = 0.70636, numData = 1
+Est. = 2.79813, STD = 0.51678, numData = 2
+Est. = 2.73305, STD = 0.40265, numData = 4
+Est. = 2.67896, STD = 0.27738, numData = 7
+Est. = 2.70899, STD = 0.17728, numData = 16
+Est. = 2.69735, STD = 0.14079, numData = 32
+Est. = 2.70631, STD = 0.09520, numData = 63
+Est. = 2.71191, STD = 0.07091, numData = 127
+Est. = 2.70141, STD = 0.04609, numData = 256
+Est. = 2.70331, STD = 0.03281, numData = 512
+Est. = 2.70555, STD = 0.02427, numData = 1024
+Est. = 2.70345, STD = 0.01737, numData = 2048
+Est. = 2.70245, STD = 0.01178, numData = 4095
+Est. = 2.70418, STD = 0.00822, numData = 8191
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70186, STD = 0.00604, numData = 16383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70268, STD = 0.00615, numData = 16383
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70305, STD = 0.00409, numData = 32768
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70257, STD = 0.00471, numData = 32768
 </pre></div>
 </div>
-<img alt="../../_images/deb39d3e1c924ac37b1d4a63cd94f0a61ba3fc3e0b8362c2281e00dddc6e206f.png" src="../../_images/deb39d3e1c924ac37b1d4a63cd94f0a61ba3fc3e0b8362c2281e00dddc6e206f.png" />
+<img alt="../../_images/74f4df2e9946efdd27f21a4f8e05f97ffe290007b436ea4b42c8087e3619a89f.png" src="../../_images/74f4df2e9946efdd27f21a4f8e05f97ffe290007b436ea4b42c8087e3619a89f.png" />
 </div>
 </div>
 <hr class="docutils" />
@@ -978,35 +980,35 @@ f(x) = \frac{1}{1 + \sin{x} \cdot (\ln{x})^2}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.32213, STD = 0.75632, numData = 1
-Est. = 0.42451, STD = 0.55285, numData = 2
-Est. = 0.43377, STD = 0.44072, numData = 4
-Est. = 0.36498, STD = 0.29608, numData = 7
-Est. = 0.43628, STD = 0.20733, numData = 16
-Est. = 0.35599, STD = 0.14940, numData = 32
-Est. = 0.40810, STD = 0.09647, numData = 63
-Est. = 0.39041, STD = 0.07376, numData = 127
-Est. = 0.39693, STD = 0.04156, numData = 256
-Est. = 0.39377, STD = 0.03174, numData = 512
-Est. = 0.39460, STD = 0.02286, numData = 1024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.41397, STD = 0.79212, numData = 1
+Est. = 0.41469, STD = 0.57013, numData = 2
+Est. = 0.34087, STD = 0.41745, numData = 4
+Est. = 0.46852, STD = 0.28105, numData = 7
+Est. = 0.41422, STD = 0.18340, numData = 16
+Est. = 0.37921, STD = 0.12315, numData = 32
+Est. = 0.40414, STD = 0.10252, numData = 63
+Est. = 0.39210, STD = 0.06620, numData = 127
+Est. = 0.38387, STD = 0.04680, numData = 256
+Est. = 0.39724, STD = 0.03428, numData = 512
+Est. = 0.39387, STD = 0.02382, numData = 1024
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39231, STD = 0.01704, numData = 2048
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39192, STD = 0.01683, numData = 2048
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39459, STD = 0.01039, numData = 4095
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39135, STD = 0.01223, numData = 4095
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39239, STD = 0.00925, numData = 8191
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39263, STD = 0.00920, numData = 8191
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39307, STD = 0.00693, numData = 16383
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39360, STD = 0.00606, numData = 16383
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39289, STD = 0.00430, numData = 32768
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39304, STD = 0.00427, numData = 32768
 </pre></div>
 </div>
-<img alt="../../_images/60df583442cde9272cc0004b76fa2eff493302008b8f08c462a703bc2c2285f8.png" src="../../_images/60df583442cde9272cc0004b76fa2eff493302008b8f08c462a703bc2c2285f8.png" />
+<img alt="../../_images/1ad964523abfd1aade0be60ab76eea0452a14a62713eef4ce5fbde32796512ba.png" src="../../_images/1ad964523abfd1aade0be60ab76eea0452a14a62713eef4ce5fbde32796512ba.png" />
 </div>
 </div>
 </section>
@@ -1252,11 +1254,11 @@ Est. = 0.39460, STD = 0.02286, numData = 1024
       </div>
     </a>
     <a class="right-next"
-       href="../../archives/IntroConcurrencyParallelism.html"
+       href="../19/chap19.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Concurrency and Parallelism</p>
+        <p class="prev-next-title">Introduction to Statistical Inference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
