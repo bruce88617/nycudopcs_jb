@@ -207,6 +207,8 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Random Walks and Stochastic Programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19/chap19.html">19. Introduction to Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20/chap20.html">20. Randomized Trials and Hypothesis Checking</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
@@ -546,15 +548,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #1: Random Walk of Drunkard HoHoChen
     UsualDrunk random walk of 10 steps
-        Mean = 2.871, Max = 6.3, Min = 0.0
+        Mean = 3.039, Max = 6.3, Min = 0.0
     UsualDrunk random walk of 100 steps
-        Mean = 9.785, Max = 27.5, Min = 0.0
+        Mean = 9.299, Max = 18.9, Min = 0.0
     UsualDrunk random walk of 1000 steps
-        Mean = 31.222, Max = 78.4, Min = 5.1
+        Mean = 28.113, Max = 72.8, Min = 2.8
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    UsualDrunk random walk of 10000 steps
-        Mean = 90.461, Max = 228.3, Min = 15.3
+        Mean = 87.919, Max = 236.7, Min = 8.5
 ==================== End of Test 1 ====================
 </pre></div>
 </div>
@@ -570,7 +572,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #2: Random Walk of Drunkard YenYenChen
 </pre></div>
 </div>
-<img alt="../../_images/1ff3c7b05dd3e6a638b0d3c39e6f3e5e295eb333a9a1227082a5ff3869e99922.png" src="../../_images/1ff3c7b05dd3e6a638b0d3c39e6f3e5e295eb333a9a1227082a5ff3869e99922.png" />
+<img alt="../../_images/892799ec500fbc423b70ba03250d93a46ab07e83c0074eccda6ef3a57c25b53b.png" src="../../_images/892799ec500fbc423b70ba03250d93a46ab07e83c0074eccda6ef3a57c25b53b.png" />
 </div>
 </div>
 <p><a id="tag2"></a></p>
@@ -597,17 +599,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #3: Random Walk of Drunkard YingYingChen
     UsualDrunk random walk of 100 steps
-        Mean = 8.792, Max = 19.8, Min = 1.4
+        Mean = 8.779, Max = 22.0, Min = 0.0
     UsualDrunk random walk of 1000 steps
-        Mean = 26.654, Max = 76.5, Min = 5.7
+        Mean = 27.760, Max = 66.2, Min = 2.8
     HeatAvoidDrunk random walk of 100 steps
-        Mean = 24.946, Max = 46.3, Min = 4.0
+        Mean = 27.850, Max = 54.3, Min = 2.2
     HeatAvoidDrunk random walk of 1000 steps
-        Mean = 250.208, Max = 319.2, Min = 178.5
+        Mean = 249.221, Max = 323.1, Min = 169.0
     EastWardDrunk random walk of 100 steps
-        Mean = 67.692, Max = 86.5, Min = 46.0
+        Mean = 68.707, Max = 93.1, Min = 47.8
     EastWardDrunk random walk of 1000 steps
-        Mean = 667.322, Max = 726.0, Min = 594.9
+        Mean = 663.934, Max = 753.7, Min = 581.2
 ==================== End of Test 3 ====================
 </pre></div>
 </div>
@@ -647,20 +649,12 @@ document.write(`
 <span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">field</span><span class="o">.</span><span class="n">moveDrunk</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">return</span> <span class="n">start</span><span class="o">.</span><span class="n">distFrom</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">getLoc</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
 
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:48,</span> in <span class="ni">Field.moveDrunk</span><span class="nt">(self, drunk)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span> <span class="o">=</span> <span class="n">drunk</span><span class="o">.</span><span class="n">takeStep</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">currentLocation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">48</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span> <span class="o">=</span> <span class="n">currentLocation</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span><span class="p">)</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:16,</span> in <span class="ni">Location.move</span><span class="nt">(self, deltaX, deltaY)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="k">return</span> <span class="n">Location</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">+</span><span class="n">deltaX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">+</span><span class="n">deltaY</span><span class="p">)</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:12,</span> in <span class="ni">Location.__init__</span><span class="nt">(self, x, y)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">):</span>
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:43,</span> in <span class="ni">Field.moveDrunk</span><span class="nt">(self, drunk)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span> <span class="o">=</span> <span class="n">loc</span>
+<span class="ne">---&gt; </span><span class="mi">43</span> <span class="k">def</span> <span class="nf">moveDrunk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drunk</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="k">if</span> <span class="n">drunk</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Drunk not in field&quot;</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -834,7 +828,7 @@ TTTTT
 </ul>
 <div class="math notranslate nohighlight">
 \[
-X: S \to \R
+X: S \to \Reals
 \]</div>
 <ul class="simple">
 <li><p>Since a random variable is a function that returns you a real value represented an event in the sample space, it means we will get different results if we measure it (different experiments). Therefore, we define <span class="math notranslate nohighlight">\(X_i\)</span> as the <span class="math notranslate nohighlight">\(i^{th}\)</span> measurement of the random variable <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
