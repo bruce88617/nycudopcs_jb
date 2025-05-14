@@ -1,0 +1,1870 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Random Walks and Stochastic Programs &#8212; Introduction to Computer Science and Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/17/chap17';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
+    <link rel="prev" title="Knapsack Problems, Dynamic Programming, and Graph Optimization Problems" href="../16/chap16.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Computer Science and Programming
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I: Fundamentals of Computer Science and Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/intro_chap1.html">01. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/chap02.html">02. Python Basics, Branching, and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/chap03.html">03. Simple Numerical Algorithms I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/chap04.html">04. Abstraction, Decomposition, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/chap05.html">05. Tuples, Lists, Mutability, Aliasing, and Cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/chap06.html">06. Recursion and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/chap07.html">07. Modules, Packages, Exception, and Assertion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/chap08.html">08. Introduction to Object-Oriented Programming I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/chap09.html">09. Introduction to Object-Oriented Programming II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs/issues/new?title=Issue%20on%20page%20%2Fchapters/17/chap17.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/17/chap17.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Random Walks and Stochastic Programs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks"><strong>Random Walks</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-drunkard-s-walk"><strong>The Drunkard’s Walk</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-random-walks"><strong>Biased Random Walks</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#treacherous-fields"><strong>Treacherous fields</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-programs"><strong>Stochastic Programs</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-a-dice">Rolling a dice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-coins">Flip Coins</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-concept-of-random-variables"><strong>The Concept of Random Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf-probability-density-function-pdf">Probability Mass Function (PMF) &amp; Probability Density Function (PDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-and-variance">Expectation and Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-expectation-and-variance">Properties of expectation and variance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions"><strong>Distributions</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-distribution">Geometric Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-xxxx">Exercise XXXX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise XXXX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-distribution">Pascal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-example-of-poisson-distribution">A Small Example of Poisson Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-distribution">Exponential Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-gaussian">Normal Distribution (Gaussian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">Gamma Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function">Gamma function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-gamma-function">Properties of the gamma function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-mean-and-variance">Summary of Mean and Variance</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="random-walks-and-stochastic-programs">
+<h1>Random Walks and Stochastic Programs<a class="headerlink" href="#random-walks-and-stochastic-programs" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Knapsack problems</p></li>
+<li><p>The 0/1 knapsack problems</p></li>
+<li><p>Dynamic programming</p></li>
+<li><p>Graph theory</p></li>
+<li><p>Graph optimization problems</p></li>
+<li><p>Breadth-first search</p></li>
+<li><p>Depth-first search</p></li>
+<li><p>Dijkstra algorithm</p></li>
+</ul>
+</section>
+<section id="today">
+<h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ul>
+  <li>
+    Part I: Random Walk
+    <ul>
+      <li><a href="#tag1">The drunkard's walk</a></li>
+      <li><a href="#tag2">Biased random walks</a></li>
+      <li><a href="#tag3">Treacherous fields</a></li>
+    </ul>
+  </li>
+  <li>
+    Part II: Stochastic Programs
+    <ul>
+      <li><a href="#tag4">The concept of random variables</a></li>
+      <li><a href="#tag5">Distributions</a></li>
+        For discrete random variables
+        <ul>
+          <li><a href="#tag6">Bernoulli distribution</a></li>
+          <li><a href="#tag7">Geometric distribution</a></li>
+          <li><a href="#tag8">Binomial distribution</a></li>
+          <li><a href="#tag9">Pascal distribution</a></li>
+          <li><a href="#tag10">Poisson distribution</a></li>
+        </ul>
+        For continuous random variables
+        <ul>
+          <li><a href="#tag11">Uniform distribution</a></li>
+          <li><a href="#tag12">Exponential distribution</a></li>
+          <li><a href="#tag13">Normal distribution</a></li>
+          <li><a href="#tag14">Gamma distribution</a></li>
+        </ul>
+    </ul>
+  </li>
+</ul>
+</section>
+<section id="random-walks">
+<h2><strong>Random Walks</strong><a class="headerlink" href="#random-walks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In 1827, the Scottish botanist Robert Brown observed that pollen particles suspended in water seemed to float around at random.</p></li>
+<li><p>Random walks are widely used to model many different processes:</p>
+<ul>
+<li><p>Physical processes (e.g., diffusion)</p></li>
+<li><p>Biological processes (e.g., the kinetics of displacement of RNA from heteroduplexes by DNA)</p></li>
+<li><p>Social processess (e.g., movements of the stock market)</p></li>
+</ul>
+</li>
+<li><p>It provides us with a good example of how to use abstract data types and inheritance to structure programs in general and simulation models in particular.</p></li>
+</ul>
+<p><a id="tag1"></a></p>
+</section>
+<section id="the-drunkard-s-walk">
+<h2><strong>The Drunkard’s Walk</strong><a class="headerlink" href="#the-drunkard-s-walk" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A drunkard is standing in the middle of a field.</p></li>
+<li><p>Every second the drunkard takes one step in a random direction.</p></li>
+<li><p>What is his/her expected distance from the origin in 1000 seconds?</p></li>
+<li><p>If he/she takes many steps, is he/she likely to move ever farther from the origin or not?</p></li>
+</ul>
+<img align="center" height=200px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture17/assets/fig01.png">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scripts.part1</span> <span class="k">as</span> <span class="nn">p1</span>
+
+<span class="n">p1</span><span class="o">.</span><span class="n">test1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #1: Random Walk of Drunkard HoHoChen
+    UsualDrunk random walk of 10 steps
+        Mean = 2.871, Max = 6.3, Min = 0.0
+    UsualDrunk random walk of 100 steps
+        Mean = 9.785, Max = 27.5, Min = 0.0
+    UsualDrunk random walk of 1000 steps
+        Mean = 31.222, Max = 78.4, Min = 5.1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    UsualDrunk random walk of 10000 steps
+        Mean = 90.461, Max = 228.3, Min = 15.3
+==================== End of Test 1 ====================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">test2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #2: Random Walk of Drunkard YenYenChen
+</pre></div>
+</div>
+<img alt="../../_images/1ff3c7b05dd3e6a638b0d3c39e6f3e5e295eb333a9a1227082a5ff3869e99922.png" src="../../_images/1ff3c7b05dd3e6a638b0d3c39e6f3e5e295eb333a9a1227082a5ff3869e99922.png" />
+</div>
+</div>
+<p><a id="tag2"></a></p>
+</section>
+<section id="biased-random-walks">
+<h2><strong>Biased Random Walks</strong><a class="headerlink" href="#biased-random-walks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A drunkard with special behavior</p></li>
+<li><p>For example:</p>
+<ul>
+<li><p>A drunkard in the southern hemisphere who hates the heat is able to move twice as fast when his random movements take him in a southward direction, even in his drunken stupor.</p></li>
+<li><p>A TSMC employee who lives in the western coast of Taiwan wants to run away from his company. After drinking heavily, he is able to move twice as fast when his random movements take him in a eastward direction.</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+<img align="center" height=200px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture17/assets/fig02.png">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">test3</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #3: Random Walk of Drunkard YingYingChen
+    UsualDrunk random walk of 100 steps
+        Mean = 8.792, Max = 19.8, Min = 1.4
+    UsualDrunk random walk of 1000 steps
+        Mean = 26.654, Max = 76.5, Min = 5.7
+    HeatAvoidDrunk random walk of 100 steps
+        Mean = 24.946, Max = 46.3, Min = 4.0
+    HeatAvoidDrunk random walk of 1000 steps
+        Mean = 250.208, Max = 319.2, Min = 178.5
+    EastWardDrunk random walk of 100 steps
+        Mean = 67.692, Max = 86.5, Min = 46.0
+    EastWardDrunk random walk of 1000 steps
+        Mean = 667.322, Max = 726.0, Min = 594.9
+==================== End of Test 3 ====================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">test4</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #4: Random Walk of Drunkard ChihChihChen
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">p1</span><span class="o">.</span><span class="n">test4</span><span class="p">()</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\testFuncs.py:105,</span> in <span class="ni">test4</span><span class="nt">(numTrials, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">drunkKinds</span><span class="p">)):</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">steps</span><span class="p">)):</span>
+<span class="ne">--&gt; </span><span class="mi">105</span>         <span class="n">distances</span> <span class="o">=</span> <span class="n">simWalks</span><span class="p">(</span><span class="n">steps</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">numTrials</span><span class="p">,</span> <span class="n">drunkKinds</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span>         <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">)</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\utils.py:26,</span> in <span class="ni">simWalks</span><span class="nt">(numSteps, numTrials, dClass, name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">f</span> <span class="o">=</span> <span class="n">Field</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">f</span><span class="o">.</span><span class="n">addDrunk</span><span class="p">(</span><span class="n">drunkard</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">26</span>     <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">walk</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">drunkard</span><span class="p">,</span> <span class="n">numSteps</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="k">return</span> <span class="n">distances</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\utils.py:14,</span> in <span class="ni">walk</span><span class="nt">(field, target, numSteps)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">start</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getLoc</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numSteps</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">field</span><span class="o">.</span><span class="n">moveDrunk</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">return</span> <span class="n">start</span><span class="o">.</span><span class="n">distFrom</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">getLoc</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:48,</span> in <span class="ni">Field.moveDrunk</span><span class="nt">(self, drunk)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span> <span class="o">=</span> <span class="n">drunk</span><span class="o">.</span><span class="n">takeStep</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">currentLocation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">48</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span> <span class="o">=</span> <span class="n">currentLocation</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span><span class="p">)</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:16,</span> in <span class="ni">Location.move</span><span class="nt">(self, deltaX, deltaY)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="k">return</span> <span class="n">Location</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">+</span><span class="n">deltaX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">+</span><span class="n">deltaY</span><span class="p">)</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:12,</span> in <span class="ni">Location.__init__</span><span class="nt">(self, x, y)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">):</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the Final Location</span>
+
+<span class="n">p1</span><span class="o">.</span><span class="n">test5</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #5: Where is the Drunkard Peter?
+</pre></div>
+</div>
+<img alt="../../_images/bb1d0740bff49569388a6e44a1afc35908b9acc382dcb6a2b58d028b112a2772.png" src="../../_images/bb1d0740bff49569388a6e44a1afc35908b9acc382dcb6a2b58d028b112a2772.png" />
+</div>
+</div>
+<section id="iterator">
+<h3>Iterator<a class="headerlink" href="#iterator" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>If you are not familiar with this, please refer <a class="reference external" href="https://github.com/bruce88617/nycudopcs/blob/928926d9710ed209171dc26896906f12cb8acc45/Lectures/Lecture08/Lecture8.ipynb">here</a>.</p></li>
+<li><p>Sample code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">styleIterator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">styles</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">styles</span> <span class="o">=</span> <span class="n">styles</span>
+    
+    <span class="k">def</span> <span class="nf">nextStyle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">styles</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">styles</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The Trajectory of Walks</span>
+
+<span class="n">p1</span><span class="o">.</span><span class="n">test6</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #6: Trajectory of the Drunkard Peter
+</pre></div>
+</div>
+<img alt="../../_images/ac993c6162d4dcfb0fa225ee0b8d397e8017a2db3345e951d819ecf9efa50f36.png" src="../../_images/ac993c6162d4dcfb0fa225ee0b8d397e8017a2db3345e951d819ecf9efa50f36.png" />
+</div>
+</div>
+<p><a id="tag3"></a></p>
+</section>
+</section>
+<section id="treacherous-fields">
+<h2><strong>Treacherous fields</strong><a class="headerlink" href="#treacherous-fields" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>A field with wormholes</p></li>
+<li><p>For example:</p>
+  <img align="center" height=auto width=300px src="./assets/fig03.png">
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="o">.</span><span class="n">test7</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #7: Trajectory of Peter in a Mysterious Field
+</pre></div>
+</div>
+<img alt="../../_images/b6a6a0f04f12188930f63dcbcc3a193080f45edd4f9bc7f3cf24141dca02e749.png" src="../../_images/b6a6a0f04f12188930f63dcbcc3a193080f45edd4f9bc7f3cf24141dca02e749.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="stochastic-programs">
+<h2><strong>Stochastic Programs</strong><a class="headerlink" href="#stochastic-programs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A program is <strong><strong>deterministic</strong></strong> if whenever it is run on the same input, it produces the same output.</p></li>
+<li><p>If there is a program that is designed to simulate a dice game somewhere, it requires a <strong><strong>stochastic</strong></strong> implementation, otherwise it is a boring game.</p></li>
+<li><p>Most programming languages, including Python, include simple ways to write stochastic programs, i.e., programs that exploit randomness.</p></li>
+<li><p>Typically, a random number or a series of random bits is created via <strong>pseudo random number generator</strong> (PRNG), which generates random number (or bit) based on an initial value called <strong><strong>seed</strong></strong>.</p></li>
+</ul>
+<img align="center" height=200px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture17/assets/fig04.png">
+<section id="rolling-a-dice">
+<h3>Rolling a dice<a class="headerlink" href="#rolling-a-dice" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="c1"># Random seed</span>
+<span class="n">test1</span><span class="p">()</span>
+
+<span class="c1"># Fixed random see</span>
+<span class="n">test1</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rolling a fair dice 5 times
+    1 trials: 11132
+    2 trials: 32356
+    3 trials: 15445
+    4 trials: 61132
+    5 trials: 55465
+Rolling a fair dice 5 times
+    1 trials: 44135
+    2 trials: 44135
+    3 trials: 44135
+    4 trials: 44135
+    5 trials: 44135
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="flip-coins">
+<h3>Flip Coins<a class="headerlink" href="#flip-coins" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Suppose you are playing a coin flip game with Harvey Dent, and if heads comes up, Harvey wins. What is the probability that Harvey wins?</p></li>
+</ul>
+<img align="center" height=200px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture17/assets/fig05.png">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.utils</span> <span class="kn">import</span> <span class="n">flipCoin</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">currentResult</span> <span class="o">=</span> <span class="n">flipCoin</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">currentResult</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="n">currentResult</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1: T
+2: T
+3: T
+4: T
+5: T
+TTTTT
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>We can use a systematic process to derive the precise probability of some complex event based on knowing the probability of one or more simpler events.</p></li>
+<li><p>However, we don’t actually know the exact probability of a event (we don’t know whether the dice is fair, for example).</p></li>
+<li><p>Fortunately, if we have some data about the behavior of the dice, we can combine that data with our knowledge of probability to derive an estimate of the true probability. This concept is called <strong><strong>inferential statistics</strong></strong>.</p></li>
+<li><p>Before we start to introduce the concept of <strong><strong>inferential statistics</strong></strong>, let’s start with some fundamental mathematics.</p></li>
+</ul>
+<p><a id="tag4"></a></p>
+</section>
+</section>
+<section id="the-concept-of-random-variables">
+<h2><strong>The Concept of Random Variables</strong><a class="headerlink" href="#the-concept-of-random-variables" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>When analyzing a random experiment, we usually focus on certain numerical characteristics of the experiment. For example, in a baseball game, we might be interested in the number of runs, hits, home runs, strikeouts, and walks. If we consider the entire baseball game as a random experiment, then these numerical results provide information about the outcome of the experiment, and they are examples of random variables. In short, a random variable is a real-valued variable whose value is determined by an underlying random experiment.</p></li>
+<li><p>In essence, <strong>a random variable is a real-valued function that assigns a numerical value to each possible outcome of the random experiment</strong>. Taking the coin tossing example above, we can define the value of a random variable <span class="math notranslate nohighlight">\(X\)</span> to be <span class="math notranslate nohighlight">\(0\)</span> if the outcome is <code class="docutils literal notranslate"><span class="pre">&quot;T&quot;</span></code> and <span class="math notranslate nohighlight">\(1\)</span> otherwise. Hence, the random variable <span class="math notranslate nohighlight">\(X\)</span> is a function from the sample space <span class="math notranslate nohighlight">\(S = \{H, T\}\)</span> to the real numbers <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+X: S \to \R
+\]</div>
+<ul class="simple">
+<li><p>Since a random variable is a function that returns you a real value represented an event in the sample space, it means we will get different results if we measure it (different experiments). Therefore, we define <span class="math notranslate nohighlight">\(X_i\)</span> as the <span class="math notranslate nohighlight">\(i^{th}\)</span> measurement of the random variable <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+X_1 &amp;= H \\
+X_2 &amp;= T \\
+X_3 &amp;= H \\
+&amp; \vdots \\
+X_i &amp;= H
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>This means that we can also define another random variable <span class="math notranslate nohighlight">\(Y\)</span> to represent the summation of measurements <span class="math notranslate nohighlight">\(X_1 + X_2 + \cdots + X_i\)</span>. Taking an example of flipping a coin 5 times, we might be interested in how many heads we will have. In this case, the sample space <span class="math notranslate nohighlight">\(S\)</span> becomes <span class="math notranslate nohighlight">\(\{ TTTTT, TTTTH, \cdots, HHHHH \}\)</span>. And the range of random variable <span class="math notranslate nohighlight">\(Y\)</span>, shown by <span class="math notranslate nohighlight">\(R_Y\)</span>, is the set of possible values for <span class="math notranslate nohighlight">\(Y = X_1 + X_2 + \cdots + X_5 = \{0, 1, 2, 3, 4, 5 \}\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.utils</span> <span class="kn">import</span> <span class="n">flip</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">numH</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flip</span><span class="p">(</span><span class="n">numFlips</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exp. </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">numH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exp. 1: 4
+Exp. 2: 3
+Exp. 3: 1
+Exp. 4: 1
+Exp. 5: 4
+</pre></div>
+</div>
+</div>
+</div>
+<section id="probability-mass-function-pmf-probability-density-function-pdf">
+<h3>Probability Mass Function (PMF) &amp; Probability Density Function (PDF)<a class="headerlink" href="#probability-mass-function-pmf-probability-density-function-pdf" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is a <strong>discrete random variable</strong>, its range <span class="math notranslate nohighlight">\(R_X\)</span> is a countable set, meaning we can enumerate its elements. In other words, we can express <span class="math notranslate nohighlight">\(R_X\)</span> as <span class="math notranslate nohighlight">\(\{ x_1, x_2, x_3, ... \}\)</span>, where <span class="math notranslate nohighlight">\(x_1, x_2, x_3, ...\)</span> represent possible values of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>For a discrete random variable <span class="math notranslate nohighlight">\(X\)</span>, we are particularly interested in the probabilities of <span class="math notranslate nohighlight">\(X = x_k\)</span>. Here, the event <span class="math notranslate nohighlight">\(A = \{ X = x_k \}\)</span> consists of all outcomes <span class="math notranslate nohighlight">\(s\)</span> in the sample space <span class="math notranslate nohighlight">\(S\)</span> for which the corresponding value of <span class="math notranslate nohighlight">\(X = x_k\)</span>. More formally, this can be expressed as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+A = \{ s \in S \mid X(s) = x_k \}
+\]</div>
+<ul class="simple">
+<li><p>The probabilities of these events <span class="math notranslate nohighlight">\(P_X (x_k)\)</span> are described by the <strong>probability mass function (PMF)</strong> of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_X (x_k) = P(X = x_k) \text{, for } k = 1, 2, 3, ...
+\]</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> is a <strong>continuous random variable</strong>, then the probabilities of these events <span class="math notranslate nohighlight">\(f_X (x)\)</span> are described by the <strong>probability density function (PDF)</strong> of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f_X (x) = f(X = x) \text{, for } x \in \R
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.utils</span> <span class="kn">import</span> <span class="n">flip</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">numFlips</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">numH</span><span class="p">,</span> <span class="n">numT</span> <span class="o">=</span> <span class="n">flip</span><span class="p">(</span><span class="n">numFlips</span><span class="o">=</span><span class="n">numFlips</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">height</span><span class="o">=</span><span class="p">[</span><span class="n">numH</span><span class="p">,</span> <span class="n">numT</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;# of Flips = </span><span class="si">{:d}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numFlips</span><span class="p">),</span>
+        <span class="n">xticks</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+        <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f7ea03b6e891134db8a6cf93124044cb01e2443b58ddb8ebdf917efb23607438.png" src="../../_images/f7ea03b6e891134db8a6cf93124044cb01e2443b58ddb8ebdf917efb23607438.png" />
+</div>
+</div>
+</section>
+<section id="expectation-and-variance">
+<h3>Expectation and Variance<a class="headerlink" href="#expectation-and-variance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Consider a random variable <span class="math notranslate nohighlight">\(X\)</span>. We would like to define its average, e.g., its <strong>expected value</strong> or <strong>mean</strong>. The expected value is defined as the weighted average of the values in the range.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable with range <span class="math notranslate nohighlight">\(R_X = \{ x_1, x_2, x_3, ...\}\)</span>. The expected value of <span class="math notranslate nohighlight">\(X\)</span>, denoted by <span class="math notranslate nohighlight">\(\mathbb{E}[X]\)</span>, is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}[X] = \sum_{x_k \in R_X} x_k \cdot P(X = x_k) = \sum_{x_k \in R_X} x_k \cdot P_X(x_k)
+\]</div>
+<ul class="simple">
+<li><p>The variance of <span class="math notranslate nohighlight">\(X\)</span>, denoted by <span class="math notranslate nohighlight">\(\text{Var}(X)\)</span>, is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(X) = \mathbb{E} \big[ (X - \mu_X)^2 \big]
+\]</div>
+<ul class="simple">
+<li><p>For a continuous random variable <span class="math notranslate nohighlight">\(X\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \int_{-\infty}^{\infty} x f_X(x) dx \\
+\text{Var}(X) &amp;= \mathbb{E} \big[ (X - \mu_X)^2 \big] \\
+    &amp;= \int_{-\infty}^{\infty} (x - \mu_X)^2 f_X(x) dx \\
+    &amp;= \int_{-\infty}^{\infty} x^2 f_X(x) dx - \mu_X^2 \\
+    &amp;= \mathbb{E}[X^2] - (\mathbb{E}[X])^2
+\end{aligned}
+\end{split}\]</div>
+<section id="properties-of-expectation-and-variance">
+<h4>Properties of expectation and variance<a class="headerlink" href="#properties-of-expectation-and-variance" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Expectation is <strong>linear</strong>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\mathbb{E}[aX + b] = a \mathbb{E}[X] + b \text{, for all } a, b \in \R \\
+&amp;\mathbb{E}[X_1 + X_2 + \cdots + X_n] = \mathbb{E}[X_1] + \mathbb{E}[X_2] + \cdots + \mathbb{E}[X_n]
+\end{aligned}
+\end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Variance is <strong>not linear</strong>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(aX + b) = a^2 \text{Var}(X)
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>If <span class="math notranslate nohighlight">\(X_1 + X_2 + \cdots + X_n\)</span> are independent random variables and <span class="math notranslate nohighlight">\(X = X_1 + X_2 + \cdots + X_n\)</span>, then</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(X) = \text{Var}(X_1) + \text{Var}(X_2) + \cdots + \text{Var}(X_n)
+\]</div>
+<p><a id="tag5"></a></p>
+</section>
+</section>
+</section>
+<section id="distributions">
+<h2><strong>Distributions</strong><a class="headerlink" href="#distributions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Certain probability distributions appear so frequently in practice that they have been given special names. Each of these distributions is associated with a specific random experiment. Because these experiments effectively model many real-world phenomena, these distributions are widely used across various applications. For this reason, they are named and studied in detail.</p></li>
+<li><p>In this section, we will present the probability mass functions (PMFs) for these special random variables. However, instead of simply memorizing the PMFs, it is more important to understand the underlying random experiments that give rise to them.</p></li>
+</ul>
+<p><a id="tag6"></a></p>
+<section id="bernoulli-distribution">
+<h3>Bernoulli Distribution<a class="headerlink" href="#bernoulli-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A <strong>Bernoulli random variable</strong> is a random variable that can only take two possible values, usually <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>. This random variable models random experiments that have two possible outcomes, sometimes referred to as “success” and “failure.”</p></li>
+<li><p>For example:</p>
+<ol class="arabic simple">
+<li><p>You bought a lottery ticket. You either win the prize (reuslting in <span class="math notranslate nohighlight">\(X = 1\)</span>) or fail (<span class="math notranslate nohighlight">\(X = 0\)</span>).</p></li>
+<li><p>You met a lovely girl and you invited her for a dinner. She accepted your invitation (<span class="math notranslate nohighlight">\(X = 1\)</span>) or rejected (<span class="math notranslate nohighlight">\(X = 0\)</span>).</p></li>
+<li><p>Series tied and today is the game 7. Your team wins (<span class="math notranslate nohighlight">\(X = 1\)</span>) the series or loses (<span class="math notranslate nohighlight">\(X = 0\)</span>).</p></li>
+</ol>
+</li>
+<li><p>Formally, the <strong>Bernoulli distribution</strong> is defined as follows: A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>Bernoulli</strong> random variable with parameter <span class="math notranslate nohighlight">\(p\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Bernoulli (p)\)</span>, if its PMF is given by (<span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_X(x) = \begin{cases}
+    p &amp;\text{for } x = 1 \\
+    1 - p &amp;\text{for } x = 0 \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Bernoulli (p)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= p \\
+\text{Var}(X) &amp;= p \cdot (1-p)
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span> <span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">,</span><span class="n">p</span><span class="p">],</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$X \sim Bernoulli(0.4)$&quot;</span><span class="p">,</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+    <span class="n">xticks</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c675172da875fad25b5f7d7c8df44e5ccaccca810f2ca3999880e4d917dc5afe.png" src="../../_images/c675172da875fad25b5f7d7c8df44e5ccaccca810f2ca3999880e4d917dc5afe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test2</span>
+
+<span class="n">test2</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6b620ffc734e312dba1eb93cbe2bf7ac845a1e734cd59a34a6fda05c7ebe05e5.png" src="../../_images/6b620ffc734e312dba1eb93cbe2bf7ac845a1e734cd59a34a6fda05c7ebe05e5.png" />
+</div>
+</div>
+<p><a id="tag7"></a></p>
+</section>
+<section id="geometric-distribution">
+<h3>Geometric Distribution<a class="headerlink" href="#geometric-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The random experiment behind the <strong>geometric distribution</strong> is as follows. Suppose that we have a coin with <span class="math notranslate nohighlight">\(P(Head) = p\)</span>. I toss the coin until we observe the first heads. We define <span class="math notranslate nohighlight">\(X\)</span> as the total number of trials in this experiment. Then <span class="math notranslate nohighlight">\(X\)</span> is said to have geometric distribution with parameter <span class="math notranslate nohighlight">\(p\)</span>. In other words, it is usually thought of as describing the number of independent Bernoulli attempts required to achieve a first success (or a first failure). In this case, the range of <span class="math notranslate nohighlight">\(X\)</span> here is <span class="math notranslate nohighlight">\(R_X = \{1, 2, 3, ... \}\)</span>.</p></li>
+<li><p>For example: Looking at your past history, your chance of successfully getting a girl’s contact information on the street is <span class="math notranslate nohighlight">\(20\%\)</span>. Then the distribution of getting the first girl’s contact information after <span class="math notranslate nohighlight">\(k\)</span> attempts will be <strong>geometric distribution</strong>. The mathematicall description for this case is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_X(k) = P(X = k) = p \cdot (1-p)^{k-1} \text{, for } k = 1, 2, 3, ...
+\]</div>
+<ul class="simple">
+<li><p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>geometric</strong> random variable with parameter <span class="math notranslate nohighlight">\(p\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Geometric (p)\)</span>, if its PMF is given by (<span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_X(k) = \begin{cases}
+    p \cdot (1-p)^{k-1} &amp;\text{for } k = 1, 2, 3, ... \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Geometric (p)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \frac{1}{p} \\
+\text{Var}(X) &amp;= \frac{1-p}{p^2}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">P_k</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">P_k</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">k</span><span class="p">),</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="n">P_k</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$X \sim$&quot;</span> <span class="o">+</span> <span class="s2">&quot; Geometric(</span><span class="si">{:.2f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">),</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/af1bd1ba34c992098f6d9a1d591ff56b199d872561f75e495580deadbc619ab9.png" src="../../_images/af1bd1ba34c992098f6d9a1d591ff56b199d872561f75e495580deadbc619ab9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test3</span>
+
+<span class="n">test3</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6bb5f4ea4ebde5f6bc7246dc74464bee9d949ac1ba5cc7cdc0d353ed61067193.png" src="../../_images/6bb5f4ea4ebde5f6bc7246dc74464bee9d949ac1ba5cc7cdc0d353ed61067193.png" />
+</div>
+</div>
+</section>
+<section id="exercise-xxxx">
+<h3>Exercise XXXX<a class="headerlink" href="#exercise-xxxx" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>假設成功要到聯絡資訊的機率是 <span class="math notranslate nohighlight">\(5 \%\)</span>，請問 OOO 平均要嘗試多少次才能拿到聯絡資訊？請寫一個程式來模擬這個事件</p></li>
+</ul>
+<p><a id="tag8"></a></p>
+</section>
+<section id="binomial-distribution">
+<h3>Binomial Distribution<a class="headerlink" href="#binomial-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The random experiment behind the <strong>binomial distribution</strong> is as follows. Suppose that we have a coin with <span class="math notranslate nohighlight">\(P(Head) = p\)</span>. I toss the coin <span class="math notranslate nohighlight">\(n\)</span> times and define <span class="math notranslate nohighlight">\(X\)</span> to be the total number of heads that we observe. Then <span class="math notranslate nohighlight">\(X\)</span> is binomial with parameter <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(X \sim Binomial(n,p)\)</span>. In this case, the range of <span class="math notranslate nohighlight">\(X\)</span> here is <span class="math notranslate nohighlight">\(R_X = \{0, 1, 2, 3, ..., n\}\)</span>.</p></li>
+<li><p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>binomial</strong> random variable with parameter <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Binomial(n,p)\)</span>, if its PMF is given by (<span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_X(k) = \begin{cases}
+    \dbinom{n}{k} \cdot p^{k} \cdot (1-p)^{n-k} &amp;\text{for } k = 0, 1, 2, 3, ..., n \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Binomial (n,p)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= n \cdot p \\
+\text{Var}(X) &amp;= n \cdot p \cdot (1-p)
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scripts.part2.basicFuncs</span> <span class="kn">import</span> <span class="n">binCoeff</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">P_k</span> <span class="o">=</span> <span class="p">[</span><span class="n">binCoeff</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">P_k</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">k</span><span class="p">),</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="n">P_k</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$X \sim$&quot;</span> <span class="o">+</span> <span class="s2">&quot; Binomial(</span><span class="si">{:d}</span><span class="s2">, </span><span class="si">{:.1f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a121426144ccc4f408c907e9d224046128fc717e864a5d6643480ac89266185f.png" src="../../_images/a121426144ccc4f408c907e9d224046128fc717e864a5d6643480ac89266185f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test4</span>
+
+<span class="n">test4</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4ea84deecf2ec0d93fc0dc4234183e915294b0e249bd42cceeca1cc17d47f79a.png" src="../../_images/4ea84deecf2ec0d93fc0dc4234183e915294b0e249bd42cceeca1cc17d47f79a.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Exercise XXXX<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>請寫一個程式來模擬投擲一顆骰子10次出現4次6的機率分布狀況</p></li>
+</ul>
+<p><a id="tag9"></a></p>
+</section>
+<section id="pascal-distribution">
+<h3>Pascal Distribution<a class="headerlink" href="#pascal-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Pascal distribution</strong> is a generalization of the geometric distribution. It relates to the random experiment of repeated independent trials until observing <span class="math notranslate nohighlight">\(m\)</span> successes. Suppose that we have a coin with <span class="math notranslate nohighlight">\(P(Head) = p\)</span>. I toss the coin until we observe <span class="math notranslate nohighlight">\(m\)</span> heads, where <span class="math notranslate nohighlight">\(m \in \N\)</span>. We define <span class="math notranslate nohighlight">\(X\)</span> as the total number of trials in this experiment. Then <span class="math notranslate nohighlight">\(X\)</span> is said to have Pascal distribution with parameter <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(X \sim Pascal(m,p)\)</span>. In this case, the range of <span class="math notranslate nohighlight">\(X\)</span> here is <span class="math notranslate nohighlight">\(R_X = \{m, m+1, m+2, m+3, ...\}\)</span> and <span class="math notranslate nohighlight">\(Pascal(1, p) = Geometric(p)\)</span>.</p></li>
+<li><p>To derive the PMF of a <span class="math notranslate nohighlight">\(Pascal(m, p)\)</span> random variable <span class="math notranslate nohighlight">\(X\)</span>. We can use this fact:</p>
+<ol class="arabic simple">
+<li><p>We observe <span class="math notranslate nohighlight">\(m-1\)</span> heads in the first <span class="math notranslate nohighlight">\(k-1\)</span> trials. We define the probability of this event is <span class="math notranslate nohighlight">\(P(B)\)</span>.</p></li>
+<li><p>We then observe a heads in the <span class="math notranslate nohighlight">\(k^{\text{th}}\)</span> trial. We define the probability of this event is <span class="math notranslate nohighlight">\(P(C)\)</span>.</p></li>
+<li><p>Finally, the probability of observing <span class="math notranslate nohighlight">\(m\)</span> heads in the first <span class="math notranslate nohighlight">\(k\)</span> trials becomes <span class="math notranslate nohighlight">\(P(B) \cdot P(C)\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(B) &amp;= \dbinom{k-1}{m-1} \cdot p^{m-1} \cdot (1-p)^{\big((k-1)-(m-1)\big)} \\
+&amp;= \dbinom{k-1}{m-1} \cdot p^{m-1} \cdot (1-p)^{k-m} \\
+P(C) &amp;= p
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>Pascal</strong> random variable with parameter <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Pascal(m,p)\)</span>, if its PMF is given by (<span class="math notranslate nohighlight">\(0 &lt; p &lt; 1\)</span>)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_X(k) = \begin{cases}
+    \dbinom{k-1}{m-1} \cdot p^{m} \cdot (1-p)^{k-m} &amp;\text{for } k = m, m+1, m+2, m+3, ... \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Pascal (m,p)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \frac{m}{p} \\
+\text{Var}(X) &amp;= \frac{m \cdot (1-p)}{p^2}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scripts.part2.basicFuncs</span> <span class="kn">import</span> <span class="n">binCoeff</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">P_k</span> <span class="o">=</span> <span class="p">[</span><span class="n">binCoeff</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="o">**</span><span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">P_k</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">k</span><span class="p">),</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="n">P_k</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$X \sim$&quot;</span> <span class="o">+</span> <span class="s2">&quot; Pascal(</span><span class="si">{:d}</span><span class="s2">, </span><span class="si">{:.2f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7fb23539fdaee391111c5c4e7c0d610dc01bd19b1b6a2047bc3e09601d69d1de.png" src="../../_images/7fb23539fdaee391111c5c4e7c0d610dc01bd19b1b6a2047bc3e09601d69d1de.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test5</span>
+
+<span class="n">test5</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3e9d96e659ee707b9115654b264918f39412c47fe4c369adfba25731894df588.png" src="../../_images/3e9d96e659ee707b9115654b264918f39412c47fe4c369adfba25731894df588.png" />
+</div>
+</div>
+<p><a id="tag10"></a></p>
+</section>
+<section id="poisson-distribution">
+<h3>Poisson Distribution<a class="headerlink" href="#poisson-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The <strong>Poisson distribution</strong> is one of the most widely used probability distributions. It is usually used in scenarios where we are counting the occurrences of certain events in an interval of time or space. Consider the following:</p>
+<ol class="arabic simple">
+<li><p>In a short time interval <span class="math notranslate nohighlight">\(\Delta t\)</span>, the probability of an event occurring is proportional to <span class="math notranslate nohighlight">\(\Delta t\)</span>, i.e., <span class="math notranslate nohighlight">\(p = \lambda \Delta t\)</span>.</p></li>
+<li><p>The probability of it happening more than twice in a short period of time is negligible.</p></li>
+<li><p>In non-overlapping time periods, the number of times an event occurs is independent.</p></li>
+</ol>
+</li>
+<li><p>Let <span class="math notranslate nohighlight">\(p\)</span> represent the probability of an event occurring in a short time interval. Then the case of <span class="math notranslate nohighlight">\(k\)</span> events occuring in a certain time interval (we can regard it as <span class="math notranslate nohighlight">\(n\)</span> short time intervals, <span class="math notranslate nohighlight">\(n \Delta t\)</span>) follows the binomial distribution <span class="math notranslate nohighlight">\(X \sim Binomial(n, p = \lambda \Delta t)\)</span>, where <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span></p></li>
+<li><p>When <span class="math notranslate nohighlight">\(n \to \infty\)</span>, for any <span class="math notranslate nohighlight">\(k \in \{0, 1, 2, 3, ...\}\)</span>, we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\lim_{n \to \infty} P_X(k) = \frac{e^{-\lambda} \cdot \lambda^k}{k!}
+\]</div>
+<ul class="simple">
+<li><p>A random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>Poisson</strong> random variable with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Poisson(\lambda)\)</span>, if its range is <span class="math notranslate nohighlight">\(R_X = \{0, 1, 2, 3, ...\}\)</span>, and its PMF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_X(k) = \begin{cases}
+    \frac{e^{-\lambda} \cdot \lambda^k}{k!} &amp;\text{for } k \in R_X \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Poisson(\lambda)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \lambda \\
+\text{Var}(X) &amp;= \lambda
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scripts.part2.basicFuncs</span> <span class="kn">import</span> <span class="n">factI</span>
+
+
+<span class="n">lamb</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">P_k</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">lamb</span><span class="p">)</span><span class="o">*</span><span class="n">lamb</span><span class="o">**</span><span class="n">i</span> <span class="o">/</span> <span class="n">factI</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">P_k</span><span class="p">,</span> <span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">k</span><span class="p">),</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="n">P_k</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$X \sim$&quot;</span> <span class="o">+</span> <span class="s2">&quot; Poisson(</span><span class="si">{:.2f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lamb</span><span class="p">),</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">k</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4e39ced7c6b3c50a8d0311c2169e7cbd1d59187b0b0cb74466322079550967fb.png" src="../../_images/4e39ced7c6b3c50a8d0311c2169e7cbd1d59187b0b0cb74466322079550967fb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test6</span>
+
+<span class="n">test6</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/759e68cf3fca7efddd76fa9f8967ba5f9e1c57e4ac043b94a08cc5e7bea64326.png" src="../../_images/759e68cf3fca7efddd76fa9f8967ba5f9e1c57e4ac043b94a08cc5e7bea64326.png" />
+</div>
+</div>
+<section id="a-small-example-of-poisson-distribution">
+<h4>A Small Example of Poisson Distribution<a class="headerlink" href="#a-small-example-of-poisson-distribution" title="Link to this heading">#</a></h4>
+<p>The number of customers that a Taiwanese fried chicken vendor has in Friday night can be modeled by a Poisson distribution with an average of 1.5 person per minute.</p>
+<ol class="arabic simple">
+<li><p>What is the probability that no customer visits this vendor in an interval of 10 minutes?</p></li>
+<li><p>What is the probability that this vendor has more than 2 customers in an interval of 2 minutes?</p></li>
+</ol>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(X\)</span> be the number of customer visits this vendor in an interval of 10 minutes. Then <span class="math notranslate nohighlight">\(X\)</span> is a Poisson random variable with parameter <span class="math notranslate nohighlight">\(\lambda T = 1.5 \cdot 10 = 15\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(X = 0) = P_X(0) = \frac{e^{-\lambda} \lambda^0}{0!} = \frac{e^{-15} \cdot 15}{1} \approx 4.59 \times 10^{-6}
+\]</div>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(Y\)</span> be the number of customer visits this vendor in an interval of 2 minutes. Then <span class="math notranslate nohighlight">\(Y\)</span> is a Poisson random variable with parameter <span class="math notranslate nohighlight">\(\lambda T = 1.5 \cdot 2 = 3\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P(Y \gt 2) &amp;= 1 - P(Y \leq 2) \\
+    &amp;= 1 - \Big( P_Y(0) + P_Y(1) + P_Y(2) \Big) \\
+    &amp;= 1 - e^{-\lambda} - \frac{e^{-\lambda} \cdot \lambda}{1!} 
+    - \frac{e^{-\lambda} \cdot \lambda^{2}}{2!} \\
+    &amp;= 1 - e^{-3} - \frac{e^{-3} \cdot 3}{1!} - \frac{e^{-3} \cdot 3^{2}}{2!} \\
+    &amp;\approx 0.35
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">)</span><span class="o">*</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.588534807527386e-06
+0.3527681112177687
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="tag11"></a></p>
+</section>
+</section>
+<section id="uniform-distribution">
+<h3>Uniform Distribution<a class="headerlink" href="#uniform-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A continuous random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be an <strong>Uniform</strong> random variable over the interval <span class="math notranslate nohighlight">\([a, b]\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Uniform(a, b)\)</span>, if its PDF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_X(x) = \begin{cases}
+    \frac{1}{b-a} &amp; a &lt; x &lt; b \\
+    0 &amp; x &lt; a \text{ or } x &gt; b
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Uniform(a, b)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \frac{a+b}{2} \\
+\text{Var}(X) &amp;= \frac{(b-a)^2}{12}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test7</span>
+
+<span class="n">test7</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">a</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/67a2acfeb45415400ae59b020feb8408e1b721b3f41a57bdf758bb33a27df9c9.png" src="../../_images/67a2acfeb45415400ae59b020feb8408e1b721b3f41a57bdf758bb33a27df9c9.png" />
+</div>
+</div>
+<p><a id="tag12"></a></p>
+</section>
+<section id="exponential-distribution">
+<h3>Exponential Distribution<a class="headerlink" href="#exponential-distribution" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A continuous random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be an <strong>exponential</strong> random variable with parameter <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Exponential(\lambda)\)</span>, if its PDF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_X(x) = \begin{cases}
+    \lambda e^{-\lambda x} &amp; x &gt; 0 \\
+    0 &amp; \text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Exponential(\lambda)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \frac{1}{\lambda} \\
+\text{Var}(X) &amp;= \frac{1}{\lambda^2}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test8</span>
+
+<span class="n">test8</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/41ee0421deb77455263b0a2cfcd5b3a603000954d67bad9eced8026ff94fc69f.png" src="../../_images/41ee0421deb77455263b0a2cfcd5b3a603000954d67bad9eced8026ff94fc69f.png" />
+</div>
+</div>
+<p><a id="tag13"></a></p>
+</section>
+<section id="normal-distribution-gaussian">
+<h3>Normal Distribution (Gaussian)<a class="headerlink" href="#normal-distribution-gaussian" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A continuous random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>normal</strong> random variable with parameter <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma)\)</span>, if its PDF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f_X(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{ \bigg[ -\frac{(x - \mu)^2}{2 \sigma^2} \bigg] }
+\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Exponential(\lambda)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \mu \\
+\text{Var}(X) &amp;= \sigma^2
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Special case: a continuous random variable <span class="math notranslate nohighlight">\(Z\)</span> is said to be a <strong>standard normal</strong> random variable, shown as <span class="math notranslate nohighlight">\(Z \sim N(0, 1)\)</span>, if its PDF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f_Z(z) = \frac{1}{\sqrt{2 \pi}} \exp{ \bigg( -\frac{z^2}{2} \bigg) }
+\]</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X \sim N(\mu_X, \sigma_X^2)\)</span>, and <span class="math notranslate nohighlight">\(Y = aX + b\)</span>, where <span class="math notranslate nohighlight">\(a, b \in \R\)</span>, then</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y \sim N(\mu_Y, \sigma_Y^2) \text{, where} 
+\begin{cases}
+\mu_Y = a \mu_X + b \\
+\sigma_Y^2 = a^2 \sigma_X^2
+\end{cases}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test9</span>
+
+<span class="n">test9</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e354fd1cea986fd83681f278d894b5b33c79b34f8b66ee49d3cfa0f849bf5ebc.png" src="../../_images/e354fd1cea986fd83681f278d894b5b33c79b34f8b66ee49d3cfa0f849bf5ebc.png" />
+</div>
+</div>
+<p><a id="tag14"></a></p>
+</section>
+<section id="gamma-distribution">
+<h3>Gamma Distribution<a class="headerlink" href="#gamma-distribution" title="Link to this heading">#</a></h3>
+<section id="gamma-function">
+<h4>Gamma function<a class="headerlink" href="#gamma-function" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The <strong>gamma function</strong> <span class="math notranslate nohighlight">\(\Gamma(x)\)</span> is an extension of the factorial function to real (and complex) numbers. If <span class="math notranslate nohighlight">\(n \in \{1, 2, 3, ... \}\)</span>, then</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(n) = (n-1)!
+\]</div>
+<ul class="simple">
+<li><p>For any positive real number <span class="math notranslate nohighlight">\(\alpha\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(\alpha) = \int_0^{\infty} x^{\alpha - 1} e^{-x} \text{d}x.
+\]</div>
+<ul class="simple">
+<li><p>Using the change of variable <span class="math notranslate nohighlight">\(x = \lambda y\)</span>, we can show the following equation that is often useful when working with the gamma distribution:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(\alpha) = \lambda^{\alpha} \int_0^{\infty} y^{\alpha - 1} e^{-\lambda y} \text{d}y \text{, for } \alpha, \lambda &gt; 0.
+\]</div>
+<ul class="simple">
+<li><p>Also, using integration by parts it can be shown that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(\alpha + 1) = \alpha \Gamma(\alpha) \text{, for } \alpha &gt; 0.
+\]</div>
+</section>
+<section id="properties-of-the-gamma-function">
+<h4>Properties of the gamma function<a class="headerlink" href="#properties-of-the-gamma-function" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>For any positive real number <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\Gamma(\alpha) = \int_0^{\infty} x^{\alpha - 1} e^{-x} \text{d}x.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_0^{\infty} x^{\alpha - 1} e^{- \lambda x} \text{d}x = \frac{\Gamma (\alpha)}{\lambda^{\alpha}}.\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma(\alpha + 1) = \alpha \Gamma(\alpha).\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma(n) = (n-1)!\)</span>, for <span class="math notranslate nohighlight">\(n = 1, 2, 3, ...\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma(\frac{1}{2}) = \sqrt{\pi}.\)</span></p></li>
+</ol>
+</li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>A continuous random variable <span class="math notranslate nohighlight">\(X\)</span> is said to be a <strong>gamma</strong> random variable with parameter <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span> and <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>, shown as <span class="math notranslate nohighlight">\(X \sim Gamma(\alpha, \lambda)\)</span>, if its PDF is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_X(x) = \begin{cases}
+\frac{\lambda^{\alpha} x^{\alpha-1} e^{-\lambda x}}{\Gamma(\alpha)} &amp; x &gt; 0 \\
+0 &amp;\text{otherwise}
+\end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Expectation and variance of <span class="math notranslate nohighlight">\(X \sim Gamma(\alpha, \lambda)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X] &amp;= \frac{\alpha}{\lambda} \\
+\text{Var}(X) &amp;= \frac{\alpha}{\lambda^2}
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test10</span>
+
+<span class="n">test10</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/194e32dc3b0de6a20f7c3017079282389d016dde76213da3d715af46accc8fe0.png" src="../../_images/194e32dc3b0de6a20f7c3017079282389d016dde76213da3d715af46accc8fe0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="summary-of-mean-and-variance">
+<h3>Summary of Mean and Variance<a class="headerlink" href="#summary-of-mean-and-variance" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Distribution</p></th>
+<th class="head text-center"><p>Mean <span class="math notranslate nohighlight">\(\big( \mu_X = \mathbb{E}[ X ] \big)\)</span></p></th>
+<th class="head text-center"><p>Variance <span class="math notranslate nohighlight">\(\big( Var(X) = \mathbb{E} [ (X - \mu_X)^2 ] \big)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Bernoulli(p)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(p\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(p \cdot (1-p)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(Geometric(p)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{p}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1-p}{p^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Binomial(n, p)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(n \cdot p\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(n \cdot p \cdot (1-p)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(Pascal(m, p)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{m}{p}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{m \cdot (1-p)}{p^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Poisson(\lambda)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(Uniform(a, b)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{a+b}{2}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{(b-a)^2}{12}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Exponential(\lambda)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{\lambda}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{1}{\lambda^2}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(Normal(\mu, \sigma)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\sigma^2\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(Gamma(\alpha, \lambda)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{\alpha}{\lambda}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\frac{\alpha}{\lambda^2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters\17"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../16/chap16.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../18/chap18.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Limit Theorems and Monte Carlo Method</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walks"><strong>Random Walks</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-drunkard-s-walk"><strong>The Drunkard’s Walk</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-random-walks"><strong>Biased Random Walks</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterator">Iterator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#treacherous-fields"><strong>Treacherous fields</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-programs"><strong>Stochastic Programs</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-a-dice">Rolling a dice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flip-coins">Flip Coins</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-concept-of-random-variables"><strong>The Concept of Random Variables</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf-probability-density-function-pdf">Probability Mass Function (PMF) &amp; Probability Density Function (PDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation-and-variance">Expectation and Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-expectation-and-variance">Properties of expectation and variance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions"><strong>Distributions</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bernoulli-distribution">Bernoulli Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-distribution">Geometric Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-xxxx">Exercise XXXX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution">Binomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise XXXX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-distribution">Pascal Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution">Poisson Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-small-example-of-poisson-distribution">A Small Example of Poisson Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-distribution">Uniform Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-distribution">Exponential Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-distribution-gaussian">Normal Distribution (Gaussian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">Gamma Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-function">Gamma function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-the-gamma-function">Properties of the gamma function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-mean-and-variance">Summary of Mean and Variance</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chieh-En Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

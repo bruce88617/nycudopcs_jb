@@ -1,0 +1,1583 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Randomized Trials and Hypothesis Checking &#8212; Introduction to Computer Science and Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/20/chap20';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Concurrency and Parallelism" href="../../archives/IntroConcurrencyParallelism.html" />
+    <link rel="prev" title="Introduction to Statistical Inference" href="../19/chap19.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Computer Science and Programming
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I: Fundamentals of Computer Science and Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/intro_chap1.html">01. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/chap02.html">02. Python Basics, Branching, and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/chap03.html">03. Simple Numerical Algorithms I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/chap04.html">04. Abstraction, Decomposition, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/chap05.html">05. Tuples, Lists, Mutability, Aliasing, and Cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/chap06.html">06. Recursion and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/chap07.html">07. Modules, Packages, Exception, and Assertion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/chap08.html">08. Introduction to Object-Oriented Programming I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/chap09.html">09. Introduction to Object-Oriented Programming II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19/chap19.html">19. Introduction to Statistical Inference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Randomized Trials and Hypothesis Checking</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs/issues/new?title=Issue%20on%20page%20%2Fchapters/20/chap20.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/20/chap20.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Randomized Trials and Hypothesis Checking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-trial-of-vaccine">Randomized Trial of <strong>吃人夠夠 Vaccine</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#review-central-limit-theorem">Review: Central Limit Theorem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-probability">Check The Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-difference">Check the Difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#result-of-checking-the-difference">Result of Checking the Difference</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-1">Example 5.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setting-for-hypothesis-checking"><strong>General Setting for Hypothesis Checking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-2">Example 5.2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-the-mean"><strong>Hypothesis Testing for the Mean</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vaccine">吃人夠夠 vaccine</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-3">Example 5.3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-4">Example 5.4</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-5">Example 5.5</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-6">Example 5.6</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sided-and-two-sided-tests"><strong>One-sided and Two-sided Tests</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-values"><strong>P-values</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-and-two-sample-tests"><strong>One-sample and Two-sample Tests</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-tailed-and-two-sample-t-tests">Two-tailed and Two-sample <span class="math notranslate nohighlight">\(t\)</span>-tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="randomized-trials-and-hypothesis-checking">
+<h1>Randomized Trials and Hypothesis Checking<a class="headerlink" href="#randomized-trials-and-hypothesis-checking" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Point Estimation</p></li>
+<li><p>Maximum Likelihood Estimation</p></li>
+<li><p>Interval Estimation</p>
+<ul>
+<li><p>Interval Estimation with Known Variance</p></li>
+<li><p>Interval Estimation with Unknown Variance</p></li>
+</ul>
+</li>
+<li><p>Confidence Interval for Normal Samples</p></li>
+</ul>
+</section>
+<section id="today">
+<h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ul>
+  <li><a href="#tag1">General Setting for Hypothesis Checking</a></li>
+  <li><a href="#tag2">Hypothesis Testing for the Mean</a></li>
+  <li><a href="#tag3">One-sided and Two-sided Tests</a></li>
+  <li><a href="#tag4">P-values</a></li>
+  <li><a href="#tag5">One-sample and Two-sample tests</a></li>
+</ul>
+</section>
+<section id="introduction">
+<h2><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>Once upon a time…</p>
+<p>這個世界的某處，在一個亞熱帶的島嶼上有著一個國家，上面住著大概兩千萬左右的南方島國子民，一直以來過著呼呼嘿嘿安安穩穩的日子，直到近80年前的某一天，基於人道考量，他們接納了從島嶼西方那塊大陸湧入的上百萬難民，伴隨著他們而來的是一個名為吃人夠夠的病毒，這個病毒會抑制身體的生長激素，導致這個南方島國子民下一代的平均身高下降了15cm，來到了170cm，讓他們在跟其他民族交流的時候都得抬頭90度仰望對方，一直以來都讓這個國家的執政者非常地困擾。</p>
+<p>某一天，這個國家的領導人與政府機構突然收到了一項資訊，某位科學家宣稱，只要讓小朋友在青春期的時候，注射三劑他所開發的特殊疫苗，就可以有效抑制吃人夠夠病毒、促進身體成長、使身材變得更加高大，並附上對應的第三期臨床實驗結果。請問，如果你是這個國家的領導階層，你該怎麼判斷這個科學家提供之實驗結果是具有統計意義的呢？</p>
+</div></blockquote>
+<section id="randomized-trial-of-vaccine">
+<h3>Randomized Trial of <strong>吃人夠夠 Vaccine</strong><a class="headerlink" href="#randomized-trial-of-vaccine" title="Link to this heading">#</a></h3>
+<p>The scientist persuaded 200 teenagers who lived in this southern island country to participate in his randomized trial of 吃人夠夠 vaccine. The scientist then divided them randomly into two groups: treatment and control.</p>
+<p>Each member of <strong>treatment group</strong> received 3 doses of 吃人夠夠 vaccination. Members of the <strong>control group</strong> were told that they were being given 3 doses of 吃人夠夠 vaccination, but were instead given 3 doses of normal saline. By the time that these 200 teenagers were 20 years old, the scientist measured their body height and got this result.</p>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture20/assets/fig01.png">
+</center>
+<p>The scientist is elated about the result of his clinical trial, which shows that the mean body height of the treatment group is <span class="math notranslate nohighlight">\(172.83\)</span> cm, and that of the control group is <span class="math notranslate nohighlight">\(170.24\)</span> cm. However, a statistician points out that it was almost inevitable that one of the two groups would have a higher mean than the other, and <strong>perhaps the difference in means is merely a random occurrence</strong>. So, <strong>how does the scientist check the statistical significance of her/his trial</strong>?</p>
+<section id="review-central-limit-theorem">
+<h4>Review: Central Limit Theorem<a class="headerlink" href="#review-central-limit-theorem" title="Link to this heading">#</a></h4>
+<p>Given a set of sufficiently large samples drawn from the same population, <strong>the sample means will be approximately normally distributed</strong>.</p>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture20/assets/fig02.png">
+</center>
+<ol class="arabic simple">
+<li><p>This normal distribution will <strong>have a mean close to the means of the population</strong>.</p></li>
+<li><p>The variance of the sample means will be <strong>close to the variance of the population divided by the sample size</strong>.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}\mathbb{E} [\bar{X}] &amp;= \mathbb{E} [X] \\
+\text{Var} [\bar{X}] &amp;= \frac{\text{Var} [X]}{n}\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+</section>
+</section>
+<section id="check-the-probability">
+<h3>Check The Probability<a class="headerlink" href="#check-the-probability" title="Link to this heading">#</a></h3>
+<p>We can check that,</p>
+<ol class="arabic simple">
+<li><p>What is the probability of <strong>the sample mean (mean of treatment group) within the range of 95% confidence interval</strong>?</p></li>
+<li><p>What is the probability of <strong>the sample mean (mean of treatment group) equal to the population mean (mean of control group)</strong>?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scripts.basicFuncs</span> <span class="kn">import</span> <span class="n">gaussDist</span><span class="p">,</span> <span class="n">calProb</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./data/example1.npz&quot;</span><span class="p">)</span>
+<span class="n">treatmentHeights</span><span class="p">,</span> <span class="n">controlHeights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;treatmentHeights&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;controlHeights&quot;</span><span class="p">]</span>
+<span class="n">mTreat</span><span class="p">,</span> <span class="n">sTreat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">)</span>
+<span class="n">mControl</span><span class="p">,</span> <span class="n">sControl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">controlHeights</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">controlHeights</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Control Group, (Mean, STD) = (</span><span class="si">{:.02f}</span><span class="s2">, </span><span class="si">{:.02f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mControl</span><span class="p">,</span> <span class="n">sControl</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Treatment Group, (Mean, STD) = (</span><span class="si">{:.02f}</span><span class="s2">, </span><span class="si">{:.02f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mTreat</span><span class="p">,</span> <span class="n">sTreat</span><span class="p">))</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Treatmean group (mean = </span><span class="si">{:.02f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mTreat</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">controlHeights</span><span class="p">,</span> <span class="s1">&#39;b^&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Control group (mean = </span><span class="si">{:.02f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mControl</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Test of Vaccine&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Height on 20 yrs old&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">150</span><span class="p">,</span> <span class="mi">190</span><span class="p">])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussDist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">mControl</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sControl</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gaussian Dist. of Control Group&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">mTreat</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean of Treatment Group&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Fitting Distributions&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Height&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">140</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Control Group, (Mean, STD) = (170.34, 6.10)
+Treatment Group, (Mean, STD) = (172.13, 4.16)
+</pre></div>
+</div>
+<img alt="../../_images/f7855a8e02fe73ba4d7b2a96d8ebb8bb98d1fcafef48de052ab6740f8ee6118d.png" src="../../_images/f7855a8e02fe73ba4d7b2a96d8ebb8bb98d1fcafef48de052ab6740f8ee6118d.png" />
+</div>
+</div>
+<p>As a result, we found that,</p>
+<ol class="arabic simple">
+<li><p>It is difficult to analyze this if we directly check the position of treatment group in the probability density function of control group.</p></li>
+<li><p>How do we do this with reasonable approach?</p></li>
+</ol>
+</section>
+<section id="check-the-difference">
+<h3>Check the Difference<a class="headerlink" href="#check-the-difference" title="Link to this heading">#</a></h3>
+<p>In this case, what we want to check is whether the sample mean</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} = \frac{X_1 + X_2 + \dots + X_n}{n}
+\]</div>
+<p>is equal to a target value <span class="math notranslate nohighlight">\(\mu_0\)</span> or not, i.e., <span class="math notranslate nohighlight">\(\bar{X} = \mu_0\)</span> or <span class="math notranslate nohighlight">\(\bar{X} \neq \mu_0\)</span>.</p>
+<p>Therefore, a more appropriate approach is to check this based on <strong>the probability of this difference value occurring</strong>. For convenience, we define a new random variable <span class="math notranslate nohighlight">\(Z\)</span> as followed</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \frac{\bar{X} - \mu_0}{\sigma_{\bar{X}}} = \frac{\bar{X} - \mu_0}{\frac{\sigma_X}{\sqrt{n}}} = \frac{\bar{X} - \mu_0}{\frac{S}{\sqrt{n}}},
+\]</div>
+<p>where the random variable <span class="math notranslate nohighlight">\(Z\)</span> follows a standard normal distribution <span class="math notranslate nohighlight">\(Z \sim N(0, 1)\)</span>.</p>
+<section id="result-of-checking-the-difference">
+<h4>Result of Checking the Difference<a class="headerlink" href="#result-of-checking-the-difference" title="Link to this heading">#</a></h4>
+<p>By calculating <strong>the <span class="math notranslate nohighlight">\(z\)</span>-value (standard score)</strong>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \frac{\bar{X} - \mu_0}{\frac{S}{\sqrt{n}}} = \frac{172.13 - 170}{\frac{5.5}{\sqrt{100}}} = 3.865
+\]</div>
+<p>By substituting this result into a normal distribution with <span class="math notranslate nohighlight">\(\mu = 0\)</span> and <span class="math notranslate nohighlight">\(\sigma = 1\)</span>, we can get the probability of getting a sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> that is equal to <span class="math notranslate nohighlight">\(172.13\)</span> cm from <span class="math notranslate nohighlight">\(N(0, 1)\)</span> is about <span class="math notranslate nohighlight">\(0.00011\)</span>.</p>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture20/assets/fig04.png">
+</center>
+<p>Therefore, we can conclude that <strong>it is nearly impossible to get <span class="math notranslate nohighlight">\(100\)</span> samples with <span class="math notranslate nohighlight">\(172.13\)</span> sample mean from the original population</strong>. We can also <strong>claim that the 吃人夠夠 vaccine does have statistical significance</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="n">test1</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="mi">170</span><span class="p">,</span> <span class="n">pVar</span><span class="o">=</span><span class="mf">5.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z-value = 3.865
+Probability = 0.00011
+</pre></div>
+</div>
+<img alt="../../_images/b6aaec3a53f7f5531098045ce3a75d43a27326fede91f6da8dc54dfd5d7ecd02.png" src="../../_images/b6aaec3a53f7f5531098045ce3a75d43a27326fede91f6da8dc54dfd5d7ecd02.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="brief-summary">
+<h3>Brief Summary<a class="headerlink" href="#brief-summary" title="Link to this heading">#</a></h3>
+<p>What have we learned in this example?</p>
+<ol class="arabic simple">
+<li><p>Start a randomized trial for 吃人夠夠 vaccine and we have the data from the treatment and control groups.</p></li>
+<li><p>We <strong>assume that the mean height of treatment group should be 170 cm</strong>, same as the control group because they are from the same population.</p></li>
+<li><p>Calculate the <strong><span class="math notranslate nohighlight">\(z\)</span>-value (the standarized difference between sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> and target value <span class="math notranslate nohighlight">\(\mu_0\)</span>) and check the probability</strong> of getting a mean height that is equal to <span class="math notranslate nohighlight">\(172.13\)</span> cm.</p></li>
+<li><p><strong>Reject the assumption</strong> if that probability is low (<span class="math notranslate nohighlight">\(p = 0.00011\)</span>).</p></li>
+</ol>
+<br>
+<center><h4><font color="#FFFF00">The entire process is known as the "hypothesis checking."</font></h4></center>
+<hr class="docutils" />
+<section id="example-5-1">
+<h4>Example 5.1<a class="headerlink" href="#example-5-1" title="Link to this heading">#</a></h4>
+<p>We have a coin and we would like to check whether it is fair or not. Let <span class="math notranslate nohighlight">\(\theta\)</span> be the probability of head, <span class="math notranslate nohighlight">\(\theta = P(Head)\)</span>. We have two hypotheses:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span> (the <strong>null hypothesis</strong>): <span class="math notranslate nohighlight">\(\theta = \theta_0 = \frac{1}{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span> (the <strong>alternative hypothesis</strong>): <span class="math notranslate nohighlight">\(\theta \neq \theta_0\)</span>, i.e., <span class="math notranslate nohighlight">\(\theta \neq \frac{1}{2}\)</span></p></li>
+</ol>
+<p>Dr. Wei starts a trial by flipping this coin <span class="math notranslate nohighlight">\(n\)</span> times and getting <span class="math notranslate nohighlight">\(X\)</span> heads. This means that <span class="math notranslate nohighlight">\(X \sim Binomial(n, \theta)\)</span>. If <span class="math notranslate nohighlight">\(H_0\)</span> is true, then she knows that <span class="math notranslate nohighlight">\(X\)</span> will be close the <span class="math notranslate nohighlight">\(\frac{n}{2}\)</span>. Thus, she defines a threshold <span class="math notranslate nohighlight">\(t\)</span> and</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(|X - \frac{n}{2}| \leq t\)</span>, she accepts <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(|X - \frac{n}{2}| \gt t\)</span>, she accepts <span class="math notranslate nohighlight">\(H_1\)</span>.</p></li>
+</ol>
+<p>The question becomes, how does Dr. Wei define the threshold <span class="math notranslate nohighlight">\(t\)</span>? Intuitively, she would like to avoid a situation that the experimental result tells her accept <span class="math notranslate nohighlight">\(H_1\)</span> while <span class="math notranslate nohighlight">\(H_0\)</span> is true. That is</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( \text{Type I Error} \Big) = P \Big( |X - \frac{n}{2}| \gt t \Big| H_0 \text{ is true} \Big) \leq \alpha,
+\]</div>
+<p>where the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is called the level of significance.</p>
+<p>If <span class="math notranslate nohighlight">\(n\)</span> is large, by the CLT we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Y &amp;= \frac{X - n \theta_0}{\sqrt{n \theta_0 (1 - \theta_0)}} \\
+    &amp;= \frac{X - n/2}{\sqrt{n}/2} \sim N(0, 1)
+\end{aligned}
+\end{split}\]</div>
+<p>This result implies that, instead of looking at <span class="math notranslate nohighlight">\(X\)</span> directly, Dr. Wei should focus on <span class="math notranslate nohighlight">\(Y\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\implies P \Big( \text{Type I Error} \Big)
+    &amp;= P \Big( |X - \frac{n}{2}| \gt t \Big| H_0 \Big) \\
+    &amp;= P \Big( |\frac{X - \frac{n}{2}}{\sqrt{n}/2}| \gt \frac{t}{\sqrt{n}/2} \Big| H_0 \Big) \\
+    &amp;= P \Big( |Y| \gt \frac{2t}{\sqrt{n}} \Big| H_0 \Big) \\
+    \alpha &amp;= 1 - P \Big( -\frac{2t}{\sqrt{n}} \leq Y \leq \frac{2t}{\sqrt{n}} \Big)
+\end{aligned}
+\end{split}\]</div>
+<p>If we define <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{2t}{\sqrt{n}} &amp;= z_{0.025} = 1.96 \\
+    t &amp;= 0.98 \sqrt{n}.
+\end{aligned}
+\end{split}\]</div>
+<p>Finally, Dr. Wei concludes that we should accept <span class="math notranslate nohighlight">\(H_0\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[
+|X - \frac{n}{2}| \leq 0.98 \sqrt{n},
+\]</div>
+<p>otherwise reject <span class="math notranslate nohighlight">\(H_0\)</span> and accept <span class="math notranslate nohighlight">\(H_1\)</span>.</p>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mf">1.96</span><span class="p">],</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">],</span>
+    <span class="n">linestyles</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$z_</span><span class="si">{0.025}</span><span class="s2">$&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Rejection region, $R$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.96</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.96</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">10</span><span class="p">)),</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.96</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">10</span><span class="p">)),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mf">1.96</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mf">1.96</span><span class="p">,</span> <span class="mi">50</span><span class="p">)),</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.96</span><span class="p">,</span> <span class="mf">1.96</span><span class="p">,</span> <span class="mi">50</span><span class="p">)),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Acceptance Region, $A$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$P(Y \in A) = 0.95$&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$Z \sim N(0, 1)$&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/628fbac384ce01bb07a254cda0e7f93a22d15e47ec3dd0c4d81e4056e929faf8.png" src="../../_images/628fbac384ce01bb07a254cda0e7f93a22d15e47ec3dd0c4d81e4056e929faf8.png" />
+</div>
+</div>
+<p><a id="tag1"></a></p>
+</section>
+</section>
+</section>
+<section id="general-setting-for-hypothesis-checking">
+<h2><strong>General Setting for Hypothesis Checking</strong><a class="headerlink" href="#general-setting-for-hypothesis-checking" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(X_1 + X_2 + ... + X_n\)</span> be a random sample of interest. A <strong>statistic</strong> is a real-value function of the data. For example, the sample mean</p>
+<div class="math notranslate nohighlight">
+\[
+\theta = W(X_1 + X_2 + ... + X_n) = \frac{X_1 + X_2 + ... + X_n}{n}
+\]</div>
+<p>is a statistic. A <strong>test statistic</strong> is a statistic based on which we build our test.</p>
+<p>State a <strong>null hypothesis</strong>, <span class="math notranslate nohighlight">\(H_0\)</span> and an <strong>alternative hypothesis</strong>, <span class="math notranslate nohighlight">\(H_1\)</span>. The alternative hypothesis is a hypothesis that can be true only if the null hypothesis is false. To decide whether to choose <span class="math notranslate nohighlight">\(H_0\)</span> or <span class="math notranslate nohighlight">\(H_1\)</span>, we choose a test statistic <span class="math notranslate nohighlight">\(W\)</span>. We can define the set <span class="math notranslate nohighlight">\(A \in \R\)</span> as the set of possible values of <span class="math notranslate nohighlight">\(W\)</span> for which we would accept <span class="math notranslate nohighlight">\(H_0\)</span>. The set <span class="math notranslate nohighlight">\(A\)</span> is called <strong>acceptance region</strong>, while <span class="math notranslate nohighlight">\(R = \R - A\)</span> is said to be the <strong>rejection region</strong>.</p>
+<p>There are two possible errors that we can make.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(H_0\)</span> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(H_1\)</span> is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Accept <span class="math notranslate nohighlight">\(H_0\)</span></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p>Type II Error</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Accept <span class="math notranslate nohighlight">\(H_1\)</span></p></td>
+<td class="text-center"><p>Type I Error</p></td>
+<td class="text-center"><p>X</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Type I Error</strong>: reject <span class="math notranslate nohighlight">\(H_0\)</span> while <span class="math notranslate nohighlight">\(H_0\)</span> is true.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P \Big( \text{Type I Error} \big| \theta \Big) 
+    &amp;= P \Big( \text{Reject } H_0 \big| \theta \Big) \\
+    &amp;= P \Big( W \in R \big| \theta \Big) \text{, for } \theta \in S_0.
+\end{aligned}
+\end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(P \Big( \text{Type I Error} \Big) \leq \alpha\)</span> for all <span class="math notranslate nohighlight">\(\theta \in S_0\)</span>, then we say <strong>the test has significance level <span class="math notranslate nohighlight">\(\alpha\)</span></strong> or simply <strong>the test is a level <span class="math notranslate nohighlight">\(\alpha\)</span> test</strong>.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Type II Error</strong>: accept <span class="math notranslate nohighlight">\(H_0\)</span> while <span class="math notranslate nohighlight">\(H_0\)</span> is false.</p></li>
+</ol>
+<p>Since the alternative hypothesis <span class="math notranslate nohighlight">\(H_1\)</span> is usually a composite hypothesis (it may include more than one value of <span class="math notranslate nohighlight">\(\theta\)</span>), the probability is usually a function of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\beta (\theta) 
+    &amp;= P \Big( \text{Type II Error} \big| \theta \Big) \\
+    &amp;= P \Big( \text{Accept } H_0  \big| \theta \Big) \text{, for } \theta \in S_1.
+\end{aligned} 
+\end{split}\]</div>
+<hr class="docutils" />
+<section id="example-5-2">
+<h3>Example 5.2<a class="headerlink" href="#example-5-2" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> be the received signal. Suppose that we know</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = \begin{cases}
+    W, &amp; \text{ if no aircraft is present} \\
+    1 + W, &amp; \text{ if an aircraft is present}
+\end{cases}.
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(W \sim N(0, \sigma^2 = \frac{1}{9})\)</span>. We can write <span class="math notranslate nohighlight">\(X = \theta + W\)</span>, where <span class="math notranslate nohighlight">\(\theta = 0\)</span> if there is no aircraft and <span class="math notranslate nohighlight">\(\theta = 1\)</span> if there is an aircraft. So we define our hypotheses as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span> (null hypothesis): no aircraft is present</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span> (alternative hypothesis): an aircraft is present</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Write <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span> in terms of possible values of <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>Design a level <span class="math notranslate nohighlight">\(0.05\)</span> test (<span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>) to decide between <span class="math notranslate nohighlight">\(H_0\)</span> and <span class="math notranslate nohighlight">\(H_1\)</span>.</p></li>
+<li><p>Find the probability of type II error <span class="math notranslate nohighlight">\(\beta\)</span> for the above test. Note that this is the probability of missing a present aircraft.</p></li>
+<li><p>If we observe <span class="math notranslate nohighlight">\(X = 0.6\)</span>, is there enough evidence to reject <span class="math notranslate nohighlight">\(H_0\)</span> at significance level <span class="math notranslate nohighlight">\(\alpha = 0.01\)</span>?</p></li>
+<li><p>If we would like the probability of missing a present aircraft to be less than <span class="math notranslate nohighlight">\(5 \%\)</span>, what is the smallest significance level that we can achieve?</p></li>
+</ol>
+<hr class="docutils" />
+<p>Solution 5.2.1:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H_0: \theta = 0 \\
+H_1: \theta = 1
+\end{split}\]</div>
+<p>Solution 5.2.2:</p>
+<p>Under <span class="math notranslate nohighlight">\(H_0\)</span>, <span class="math notranslate nohighlight">\(X = 0 + W \sim N(0, \sigma^2 = \frac{1}{9})\)</span>, under <span class="math notranslate nohighlight">\(H_1\)</span>, <span class="math notranslate nohighlight">\(X = 1 + W \sim N(1, \sigma^2 = \frac{1}{9})\)</span>. If the observed value of <span class="math notranslate nohighlight">\(X\)</span> is less than <span class="math notranslate nohighlight">\(c\)</span>, we choose <span class="math notranslate nohighlight">\(H_0\)</span>, otherwise we choose <span class="math notranslate nohighlight">\(H_1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\alpha = P \Big( \text{Type I Error} \Big)
+    &amp;= P \Big( \text{Reject } H_0 \big| H_0 \Big) \\
+    &amp;= P \Big( X \gt c \big| H_0 \Big) \\
+    &amp;= P \Big( W \gt c \Big) \\
+    &amp;= 1 - P \Big( W \leq c \Big) \\
+    &amp;= 1 - \Phi (3 c)
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Phi (x)\)</span> is the cummulative density function (CDF) of standard normal <span class="math notranslate nohighlight">\(N(0, 1)\)</span>.</p>
+<p>For a level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> test,</p>
+<div class="math notranslate nohighlight">
+\[
+c = \frac{1}{3} \Phi^{-1}(1 - \alpha) = \frac{1}{3} \Phi^{-1}(0.95) \approx 0.548
+\]</div>
+<p>Solution 5.2.3:</p>
+<p>In this case, <span class="math notranslate nohighlight">\(H_1\)</span> is simple hypothesis (we only have one case: <span class="math notranslate nohighlight">\(\theta = 1\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\therefore \beta = P \Big( \text{Type II Error} \Big)
+    &amp;= P \Big( \text{Accept } H_0 \big| H_1 \Big) \\
+    &amp;= P \Big( X \lt c \big| H_1 \Big) \\
+    &amp;= P \Big( 1 + W \lt c \Big) \\
+    &amp;= P \Big( W \lt c - 1 \Big) \\
+    &amp;= \Phi \Big[ 3 (c - 1) \Big] \\
+\because c \approx 0.548 \\ 
+\therefore \beta \approx 0.088
+\end{aligned}
+\end{split}\]</div>
+<p>Solution 5.2.4:</p>
+<p>For a level <span class="math notranslate nohighlight">\(\alpha = 0.01\)</span> test,</p>
+<div class="math notranslate nohighlight">
+\[
+c = \frac{1}{3} \Phi^{-1}(1 - \alpha) = \frac{1}{3} \Phi^{-1}(0.99) \approx 0.775 \gt 0.6.
+\]</div>
+<p>We cannot reject <span class="math notranslate nohighlight">\(H_0\)</span> at significance level <span class="math notranslate nohighlight">\(\alpha = 0.01\)</span>.</p>
+<p>Solution 5.2.5:</p>
+<p>Missing a present aircraft means the type II error. So what we want is <span class="math notranslate nohighlight">\(\beta \leq 0.05\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\because \beta &amp;= \Phi \Big[ 3 (c - 1) \Big] \\
+\implies c &amp;= \frac{1}{3} \Phi^{-1}(\beta) + 1 \approx 0.452 \\
+\implies c &amp;\leq 0.452 \text{ for } \beta \leq 0.05
+\end{aligned}
+\end{split}\]</div>
+<p>In this case (<span class="math notranslate nohighlight">\(c \leq 0.452\)</span>), <span class="math notranslate nohighlight">\(P \Big( \text{Type I Error} \Big) \geq 1 - \Phi (3c) \approx 0.088\)</span>. So the smallest significance level we can achieve is <span class="math notranslate nohighlight">\(\alpha = 0.088\)</span>. This result also implies that the probabilities of type I error <span class="math notranslate nohighlight">\(\alpha\)</span> and type II error <span class="math notranslate nohighlight">\(\beta\)</span> is a trade-off.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.452</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">h0</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">h1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;PDF of $X$ under $H_0$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;PDF of $X$ under $H_1$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+    <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">ymax</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
+    <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$c = 0.452$&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">50</span><span class="p">)),</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">50</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\alpha = P(X \geq c | H_0) = 0.088$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="mi">50</span><span class="p">)),</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">c</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\beta = P(X \leq c | H_1) = 0.05$&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+    <span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span>
+    <span class="n">ylim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Relationship between $\alpha$ and $\beta$&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e47e21721b6f1983f918bb34d5e749be6ea72e87fd6bdda206bae49095316794.png" src="../../_images/e47e21721b6f1983f918bb34d5e749be6ea72e87fd6bdda206bae49095316794.png" />
+</div>
+</div>
+<p><a id="tag2"></a></p>
+</section>
+</section>
+<section id="hypothesis-testing-for-the-mean">
+<h2><strong>Hypothesis Testing for the Mean</strong><a class="headerlink" href="#hypothesis-testing-for-the-mean" title="Link to this heading">#</a></h2>
+<section id="vaccine">
+<h3>吃人夠夠 vaccine<a class="headerlink" href="#vaccine" title="Link to this heading">#</a></h3>
+<p>For our randomized trial of 吃人夠夠 vaccine, <strong>the null hypothesis would be the mean body height of treatment group is <span class="math notranslate nohighlight">\(170\)</span> cm</strong>, and <strong>the alternative hypothesis is the mean body height of treatment group is not <span class="math notranslate nohighlight">\(170\)</span> cm</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H_0 : \mu = 170 \\
+H_1 : \mu \neq 170
+\end{split}\]</div>
+<p>For our randomized trial of 吃人夠夠 vaccine, what we want to check is <strong>the mean body height of treatment group</strong>. Therefore, we use the sample mean to define our <strong>statistic</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}.
+\]</div>
+<p>If we know the variance of <span class="math notranslate nohighlight">\(X_i\)</span>’s <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2\)</span>, then we define our <strong>test statistic</strong> as the normalized sample mean (under <span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(\mu = \mu_0\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[
+W(X_1 + X_2 + ... + X_n) = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}.
+\]</div>
+<p>If we do not know the variance of <span class="math notranslate nohighlight">\(X_i\)</span>’s</p>
+<div class="math notranslate nohighlight">
+\[
+W(X_1 + X_2 + ... + X_n) = \frac{\bar{X} - \mu_0}{S / \sqrt{n}}.
+\]</div>
+<p>In any case, we will be able to find the distribution of <span class="math notranslate nohighlight">\(W\)</span>. This allows us to design our tests by calculating error probabilities.</p>
+<hr class="docutils" />
+<section id="example-5-3">
+<h4>Example 5.3<a class="headerlink" href="#example-5-3" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> be the body height of a random sample from the treatment group, which follows a normal distribution <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> (<span class="math notranslate nohighlight">\(\sigma\)</span> is known). Design a level <span class="math notranslate nohighlight">\(\alpha\)</span> test to choose between</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; H_0: \text{The mean body height of treatment group is equal to 170 cm, } \mu = \mu_0 = 170, \\
+&amp; H_1: \text{The mean body height of treatment group is not equal to 170 cm, } \mu \neq \mu_0.
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>We define our test statistic as follows</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+W(X_1, X_2, ..., X_n) = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
+\]</div>
+<ul class="simple">
+<li><p>As we know, our test statistic should be a standard normal distribution under <span class="math notranslate nohighlight">\(H_0\)</span>. Therefore, we can define a threshold <span class="math notranslate nohighlight">\(c\)</span>. If <span class="math notranslate nohighlight">\(|W| \leq c\)</span>, we accept <span class="math notranslate nohighlight">\(H_0\)</span>. To choose <span class="math notranslate nohighlight">\(c\)</span>, we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\alpha &amp;= P \Big( |W| &gt; c \big| H_0 \Big) \\
+    &amp;= 2 \cdot P \Big( W &gt; c \big| H_0 \Big) \text{  } \Big( \because N(0, 1) \text{ is symmetric} \Big) \\
+\implies \frac{\alpha}{2} &amp;= P \Big( W &gt; c \big| H_0 \Big) \\
+\implies c &amp;= 1 - \Phi^{-1}(\frac{\alpha}{2}) = z_{\frac{\alpha}{2}}
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>The result shows that we should accept <span class="math notranslate nohighlight">\(H_0\)</span> if</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Big| \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \Big| \leq c = z_{\frac{\alpha}{2}}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="example-5-4">
+<h4>Example 5.4<a class="headerlink" href="#example-5-4" title="Link to this heading">#</a></h4>
+<p>Find the probability of type II error <span class="math notranslate nohighlight">\(\beta\)</span> as a function of <span class="math notranslate nohighlight">\(\mu\)</span>. Recall that we assume the treatment group follows a normal distribution <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span>.</p>
+<ul class="simple">
+<li><p>We know that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\beta(\mu) &amp;= P \Big( \text{Type II Error} \big| H_1 \Big) \\
+    &amp;= P \Big( \text{Accept } H_0 \big| \mu \Big) \\
+    &amp;= P \Big( \Big| \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \Big| \lt z_{\frac{\alpha}{2}} \big| \mu \Big)
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(X_i \sim N(\mu, \sigma^2)\)</span>, the <span class="math notranslate nohighlight">\(\bar{X} \sim N(\mu, \frac{\sigma^2}{n})\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\therefore \beta(\mu) 
+    &amp;= P \Big( \Big| \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \Big| \lt z_{\frac{\alpha}{2}} \big| \mu \Big) \\
+    &amp;= P \Big( \mu_0 - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \leq \bar{X} 
+    \leq \mu_0 + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big) \\
+    &amp;= 1 - \Bigg[ P \Big( \bar{X} \lt \mu_0 - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big) 
+    + P \Big( \bar{X} \gt \mu_0 + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big) \Bigg] \\
+    &amp;= 1 - \Bigg[ P \Big( \bar{X} - \mu \lt (\mu_0 - \mu) - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big) 
+    + P \Big( \bar{X} - \mu \gt (\mu_0 - \mu) + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big) \Bigg] \\
+    &amp;= 1 - \Bigg[ P \Big( \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \lt \frac{(\mu_0 - \mu)}{\sigma / \sqrt{n}} - z_{\frac{\alpha}{2}} \Big) 
+    + P \Big( \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \gt \frac{(\mu_0 - \mu)}{\sigma / \sqrt{n}} + z_{\frac{\alpha}{2}} \Big) \Bigg] \\
+    &amp;= 1 - \Bigg[ \Phi \Big( \frac{(\mu_0 - \mu)}{\sigma / \sqrt{n}} - z_{\frac{\alpha}{2}} \Big) 
+    + 1 - \Phi \Big( \frac{(\mu_0 - \mu)}{\sigma / \sqrt{n}} + z_{\frac{\alpha}{2}} \Big)  \Bigg] \\
+    &amp;= \Phi \Big( \frac{\mu_0 - \mu}{\sigma / \sqrt{n}} + z_{\frac{\alpha}{2}} \Big)
+    - \Phi \Big( \frac{\mu_0 - \mu}{\sigma / \sqrt{n}} - z_{\frac{\alpha}{2}} \Big)
+\end{aligned}
+\end{split}\]</div>
+</section>
+<hr class="docutils" />
+<section id="example-5-5">
+<h4>Example 5.5<a class="headerlink" href="#example-5-5" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> be the body height of a random sample from the treatment group, which follows a normal distribution <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are unknown. Design a level <span class="math notranslate nohighlight">\(\alpha\)</span> test to choose between</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; H_0: \text{The mean body height of treatment group is equal to 170 cm, } \mu = \mu_0 = 170, \\
+&amp; H_1: \text{The mean body height of treatment group is not equal to 170 cm, } \mu \neq \mu_0.
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>We define our test statistic as follows</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+W(X_1, X_2, ..., X_n) = \frac{\bar{X} - \mu_0}{S / \sqrt{n}}
+\]</div>
+<ul class="simple">
+<li><p>The result shows that we should accept <span class="math notranslate nohighlight">\(H_0\)</span> if</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Big| \frac{\bar{X} - \mu_0}{S / \sqrt{n}} \Big| \leq c = t_{\frac{\alpha}{2}, n-1}
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="example-5-6">
+<h4>Example 5.6<a class="headerlink" href="#example-5-6" title="Link to this heading">#</a></h4>
+<p>For our randomized trial of 吃人夠夠 vaccine, the null hypothesis would be the mean body height of treatment group is <span class="math notranslate nohighlight">\(170\)</span> cm, and the alternative hypothesis is the mean body height of treatment group is not <span class="math notranslate nohighlight">\(170\)</span> cm.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+H_0 : \mu = 170 \\
+H_1 : \mu \neq 170
+\end{split}\]</div>
+<p>Based on the observed data, is there enough evidence to reject <span class="math notranslate nohighlight">\(H_0\)</span> at significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./data/example1.npz&quot;</span><span class="p">)</span>
+
+<span class="n">meanTreat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;treatmentHeights&quot;</span><span class="p">])</span>
+<span class="n">sTreat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;treatmentHeights&quot;</span><span class="p">])</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;treatmentHeights&quot;</span><span class="p">])</span>
+<span class="n">testStatistic</span> <span class="o">=</span> <span class="p">(</span><span class="n">meanTreat</span> <span class="o">-</span> <span class="mi">170</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sTreat</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">tValue</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of test statistic = </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">testStatistic</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t-value = </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tValue</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="n">testStatistic</span> <span class="o">&gt;</span> <span class="n">tValue</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We should reject the null hypothesis.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We should accept the null hypothesis.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value of test statistic = 5.107
+t-value = 1.984
+We should reject the null hypothesis.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id1">
+<h3>Brief Summary<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Case</p></th>
+<th class="head text-center"><p>Test Statistic</p></th>
+<th class="head text-center"><p>Acceptance Region</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( - z_{\frac{\alpha}{2}} \leq W \leq z_{\frac{\alpha}{2}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(n\)</span> is large, <span class="math notranslate nohighlight">\(X\)</span> is non-normal</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( - z_{\frac{\alpha}{2}} \leq W \leq z_{\frac{\alpha}{2}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span> unknown</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( - t_{\frac{\alpha}{2}, n-1} \leq W \leq t_{\frac{\alpha}{2}, n-1}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a id="tag3"></a></p>
+</section>
+</section>
+<section id="one-sided-and-two-sided-tests">
+<h2><strong>One-sided and Two-sided Tests</strong><a class="headerlink" href="#one-sided-and-two-sided-tests" title="Link to this heading">#</a></h2>
+<p>In the above examples, we have discussed the case of <strong>two-sided test</strong>, which means</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; H_0: \text{The mean body height of treatment group is equal to the control group, } \mu = \mu_0 \\
+&amp; H_1: \text{The mean body height of treatment group is not equal to the control group, } \mu \neq \mu_0.
+\end{aligned}
+\end{split}\]</div>
+<p>For a <strong>one-sided test</strong> like,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; H_0: \mu \leq \mu_0 \\
+&amp; H_1: \mu \gt \mu_0.
+\end{aligned}
+\end{split}\]</div>
+<p>We have</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Case</p></th>
+<th class="head text-center"><p>Test Statistic</p></th>
+<th class="head text-center"><p>Acceptance Region</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \leq z_{\alpha}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(n\)</span> is large, <span class="math notranslate nohighlight">\(X\)</span> is non-normal</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \leq z_{\alpha}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span> unknown</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \leq t_{\alpha, n-1}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; H_0: \mu \geq \mu_0 \\
+&amp; H_1: \mu \lt \mu_0.
+\end{aligned}
+\end{split}\]</div>
+<p>We have</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Case</p></th>
+<th class="head text-center"><p>Test Statistic</p></th>
+<th class="head text-center"><p>Acceptance Region</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \geq -z_{\alpha}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(n\)</span> is large, <span class="math notranslate nohighlight">\(X\)</span> is non-normal</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \geq -z_{\alpha}\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span> unknown</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(W = \frac{\bar{X}-\mu_0}{S/\sqrt{n}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\( W \geq -t_{\alpha, n-1}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scripts.basicFuncs</span> <span class="kn">import</span> <span class="n">gaussDist</span><span class="p">,</span> <span class="n">calProb</span>
+
+<span class="n">zValue</span> <span class="o">=</span> <span class="mf">1.96</span>
+<span class="n">pValue</span> <span class="o">=</span> <span class="n">calProb</span><span class="p">(</span><span class="n">zValue</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="n">zValue</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">zValue</span><span class="p">,</span> <span class="n">zValue</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">zValue</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussDist</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean = </span><span class="si">{}</span><span class="se">\n</span><span class="s2">STD = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="o">-</span><span class="n">zValue</span><span class="p">,</span> <span class="n">zValue</span><span class="p">],</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Z-value = </span><span class="si">{:.02f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zValue</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zValue</span><span class="p">,</span> <span class="n">gaussDist</span><span class="p">(</span><span class="n">zValue</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Probability = </span><span class="si">{:.02f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pValue</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">gaussDist</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">gaussDist</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">gaussDist</span><span class="p">(</span><span class="n">x3</span><span class="p">),</span> <span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rejection Region of Two-tailed Test&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>    <span class="c1"># upper left</span>
+
+<span class="n">zValue</span> <span class="o">=</span> <span class="mf">1.64</span>
+<span class="n">pValue</span> <span class="o">=</span> <span class="n">calProb</span><span class="p">(</span><span class="n">zValue</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="n">zValue</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">zValue</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussDist</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean = </span><span class="si">{}</span><span class="se">\n</span><span class="s2">STD = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">vlines</span><span class="p">([</span><span class="n">zValue</span><span class="p">],</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Z-value = </span><span class="si">{:.02f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zValue</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zValue</span><span class="p">,</span> <span class="n">gaussDist</span><span class="p">(</span><span class="n">zValue</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Probability = </span><span class="si">{:.02f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pValue</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">gaussDist</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">gaussDist</span><span class="p">(</span><span class="n">x3</span><span class="p">),</span> <span class="n">y2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Rejection Region of One-tailed Test&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>    <span class="c1"># upper left</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a70313d1a63ec807feb27c681f87298db02988c71804f81bb5edf6d1cd606f40.png" src="../../_images/a70313d1a63ec807feb27c681f87298db02988c71804f81bb5edf6d1cd606f40.png" />
+</div>
+</div>
+<p><a id="tag4"></a></p>
+</section>
+<section id="p-values">
+<h2><strong>P-values</strong><a class="headerlink" href="#p-values" title="Link to this heading">#</a></h2>
+<p>In the above discussions, we only reported an “accept” or a “reject” decision as the conclusion of a hypothesis test. However, we can provide more information using what we call <span class="math notranslate nohighlight">\(P\)</span>-values. In other words, we could indicate how close the decision was. More specifically, suppose we end up rejecting <span class="math notranslate nohighlight">\(H_0\)</span> at at significance level <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>. Then we could ask: “How about if we require significance level <span class="math notranslate nohighlight">\(\alpha = 0.01\)</span>?” Can we still reject <span class="math notranslate nohighlight">\(H_0\)</span>? More specifically, we can ask the following question:</p>
+<center>
+What is the lowest significance level α that results in rejecting the null hypothesis?
+</center>
+<p>The answer to the above question is called the <span class="math notranslate nohighlight">\(P\)</span>-value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">norm</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;./data/example1.npz&quot;</span><span class="p">)</span>
+<span class="n">treatmentHeights</span><span class="p">,</span> <span class="n">controlHeights</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;treatmentHeights&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;controlHeights&quot;</span><span class="p">]</span>
+<span class="n">mTreat</span><span class="p">,</span> <span class="n">sTreat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">treatmentHeights</span><span class="p">)</span>
+<span class="n">testStatistic</span> <span class="o">=</span> <span class="p">(</span><span class="n">mTreat</span> <span class="o">-</span> <span class="mi">170</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sTreat</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">tValue</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pValue</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">testStatistic</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The P-Value of 吃人夠夠 Vaccine = </span><span class="si">{:.10f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pValue</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The P-Value of 吃人夠夠 Vaccine = 0.0000001638
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="tag5"></a></p>
+</section>
+<section id="one-sample-and-two-sample-tests">
+<h2><strong>One-sample and Two-sample Tests</strong><a class="headerlink" href="#one-sample-and-two-sample-tests" title="Link to this heading">#</a></h2>
+<p>Thus far in this lecture, we have looked only at <strong>one-sample tests</strong>, i.e., only the treatment group is taken into consideration during the test.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\begin{matrix}
+H_0 : \mu = 170 \\
+H_a : \mu \neq 170
+\end{matrix}\end{split}\\\text{ or }\\\begin{split}\begin{matrix}
+H_0 : \mu \gt 170 \\
+H_a : \mu \leq 170
+\end{matrix}
+\end{split}\end{aligned}\end{align} \]</div>
+<p>In general (or in our data), there are treatment and control groups. What we are interesting is whether <strong>the difference in means of these two groups</strong> is statistically significant or not.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\begin{matrix}
+H_0 : \mu_{treat} = \mu_{control} \\
+H_a : \mu_{treat} \neq \mu_{control}
+\end{matrix}\end{split}\\\text{ or }\\\begin{split}\begin{matrix}
+H_0 : \mu_{treat} \gt \mu_{control} \\
+H_a : \mu_{treat} \leq \mu_{control}
+\end{matrix}
+\end{split}\end{aligned}\end{align} \]</div>
+<center><h4><font color="#FFFF00">This is known as the two-sample test.</font></h4></center><section id="two-tailed-and-two-sample-t-tests">
+<h3>Two-tailed and Two-sample <span class="math notranslate nohighlight">\(t\)</span>-tests<a class="headerlink" href="#two-tailed-and-two-sample-t-tests" title="Link to this heading">#</a></h3>
+<p>Let’s assume that <strong>the treatment and control groups are independent</strong>. Usually we have several situations. Here we only discuss these 2:</p>
+<ol class="arabic simple">
+<li><p>The sample sizes are equal (<span class="math notranslate nohighlight">\(𝑛_1 = 𝑛_2 = N\)</span>) and these two distributions have the same variance (<span class="math notranslate nohighlight">\(s_1 = s_2 = s\)</span>).</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+t &amp;= \frac{\mu_1 - \mu_2}{s_p \cdot \sqrt{\frac{2}{N}}} \\
+s_p &amp;= \sqrt{\frac{s_1^2 + s_2^2}{2}} \\
+s_i &amp;= \sqrt{\frac{1}{n_i-1} \sum^{n_i}_{j=1}{(X_j - \bar{X})^2}}
+\end{aligned}
+\end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>The sample sizes are unequal and these two distributions have the similar variance (<span class="math notranslate nohighlight">\(\frac{1}{2} \lt \frac{s_1}{s_2} \lt 2\)</span>).</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+t &amp;= \frac{\mu_1 - \mu_2}{s_p \cdot \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} \\
+s_p &amp;= \sqrt{\frac{(n_1 -1) \cdot s_1^2 + (n_2 -1) \cdot s_2^2}{n_1 + n_2 -2}}
+\end{aligned}
+\end{split}\]</div>
+<center><h4><font color="#FFFF00">Clearly, the trial of 吃人夠夠 vaccine is the second one.</font></h4></center>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture20/assets/fig12.png">
+</center>
+<p>According to <strong>the result of two-tailed two-sample <span class="math notranslate nohighlight">\(t\)</span>-test</strong>, we are going to reject the null hypothesis and accept the alternative hypothesis with confidence <span class="math notranslate nohighlight">\(98.3 \%\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test6</span>
+
+<span class="n">test6</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-value = 2.401
+Probability = 0.017
+</pre></div>
+</div>
+<img alt="../../_images/38bbbd35940539e8e88c9775b82b79497897d9e03620bd79b0808aa72d2ee3b1.png" src="../../_images/38bbbd35940539e8e88c9775b82b79497897d9e03620bd79b0808aa72d2ee3b1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scipy results</span>
+
+<span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test7</span>
+
+<span class="n">test7</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-sample T-statistic = 5.081270655581135
+1-sample p-value = 1.770143341225191e-06
+TtestResult(statistic=5.081270655581135, pvalue=1.770143341225191e-06, df=99)
+2-sample T-statistic = 2.4014790438801255
+2-sample p-value = 0.01737771481892233
+TtestResult(statistic=2.4014790438801255, pvalue=0.01737771481892233, df=174.75813798695754)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>The flowchart of hypothesis checking:</p>
+<ol class="arabic simple">
+<li><p>Have data.</p></li>
+<li><p>Do you know the parameters of population? Go <span class="math notranslate nohighlight">\(t\)</span>-test if unknown.</p></li>
+<li><p>State the null hypothesis <span class="math notranslate nohighlight">\(𝐻_0\)</span> and alternative hypothesis <span class="math notranslate nohighlight">\(𝐻_𝑎\)</span> (one-tailed or two-tailed? one-sample or two-sample?). Set a confidence threshold <span class="math notranslate nohighlight">\(\alpha\)</span>.</p></li>
+<li><p>Calculate the standard score (<span class="math notranslate nohighlight">\(z\)</span>-value or <span class="math notranslate nohighlight">\(t\)</span>-value) of the test statistic.</p></li>
+<li><p>Claim that we can reject the null hypothesis with confidence <span class="math notranslate nohighlight">\(\alpha\)</span> if the standard score is in the rejection region and accept the alternative hypothesis with confidence <span class="math notranslate nohighlight">\(1 − \alpha\)</span>.</p></li>
+</ol>
+<br>
+<center><h4><font color="#FFFF00">This is an introductory course.<br>
+Please take the courses of Statistics for more details.</font></h4></center></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters\20"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../19/chap19.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Statistical Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../archives/IntroConcurrencyParallelism.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Concurrency and Parallelism</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#randomized-trial-of-vaccine">Randomized Trial of <strong>吃人夠夠 Vaccine</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#review-central-limit-theorem">Review: Central Limit Theorem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-probability">Check The Probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-difference">Check the Difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#result-of-checking-the-difference">Result of Checking the Difference</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-1">Example 5.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-setting-for-hypothesis-checking"><strong>General Setting for Hypothesis Checking</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-2">Example 5.2</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing-for-the-mean"><strong>Hypothesis Testing for the Mean</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vaccine">吃人夠夠 vaccine</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-3">Example 5.3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-4">Example 5.4</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-5">Example 5.5</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5-6">Example 5.6</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sided-and-two-sided-tests"><strong>One-sided and Two-sided Tests</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-values"><strong>P-values</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-sample-and-two-sample-tests"><strong>One-sample and Two-sample Tests</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-tailed-and-two-sample-t-tests">Two-tailed and Two-sample <span class="math notranslate nohighlight">\(t\)</span>-tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chieh-En Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

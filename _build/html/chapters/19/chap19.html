@@ -1,0 +1,1785 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Statistical Inference &#8212; Introduction to Computer Science and Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/19/chap19';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Randomized Trials and Hypothesis Checking" href="../20/chap20.html" />
+    <link rel="prev" title="Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Computer Science and Programming
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I: Fundamentals of Computer Science and Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/intro_chap1.html">01. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/chap02.html">02. Python Basics, Branching, and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/chap03.html">03. Simple Numerical Algorithms I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/chap04.html">04. Abstraction, Decomposition, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/chap05.html">05. Tuples, Lists, Mutability, Aliasing, and Cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/chap06.html">06. Recursion and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/chap07.html">07. Modules, Packages, Exception, and Assertion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/chap08.html">08. Introduction to Object-Oriented Programming I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/chap09.html">09. Introduction to Object-Oriented Programming II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">19. Introduction to Statistical Inference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20/chap20.html">20. Randomized Trials and Hypothesis Checking</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs/issues/new?title=Issue%20on%20page%20%2Fchapters/19/chap19.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/19/chap19.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Statistical Inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-sampling">Random Sampling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-random-samples">Properties of Random Samples:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimation"><strong>Point Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-estimators">Evaluation of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">1. Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-1-bias-of-sample-mean">Example 4.1: Bias of Sample Mean</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">2. Mean Squared Error (MSE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-2-mse-of-sample-mean-and-one-sample">Example 4.2: MSE of Sample Mean and One Sample</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimators-for-variance">Point Estimators for Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation"><strong>Maximum Likelihood Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-3-a-bag-with-3-balls">Example 4.3: A Bag with 3 Balls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-maximum-likelihood-estimation-mle">Definition of Maximum Likelihood Estimation (MLE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-4-mle-1-unknown-parameter-to-estimate">Example 4.4: MLE, 1 unknown parameter to estimate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">Exercise 4.1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-5-mle-2-unknown-parameters-to-estimate">Example 4.5: MLE, 2 unknown parameters to estimate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interval-estimation"><strong>Interval Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-interval-estimation">Definition of Interval Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-6-interval-estimation">Example 4.6: Interval Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotal-quantity-pivot">Pivotal Quantity (Pivot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotal-method-for-finding-confidence-interval">Pivotal Method for Finding Confidence Interval</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-7-pivotal-method">Example 4.7: Pivotal Method</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary-interval-estimation-with-known-variance">Brief Summary: Interval Estimation with <strong>Known Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-8-interval-estimation-with-known-variance-sigma-2">Example 4.8: Interval Estimation with Known Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interval-estimation-with-unknown-variance">Interval Estimation with <strong>Unknown Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-9-interval-estimation-using-upper-bound-of-variance-sigma-max">Example 4.9: Interval Estimation using Upper Bound of Variance <span class="math notranslate nohighlight">\(\sigma_{max}\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary-interval-estimation-with-unknown-variance">Brief Summary: Interval Estimation with <strong>Unknown Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-10-how-large-does-n-need-to-be">Example 4.10: How Large Does <span class="math notranslate nohighlight">\(n\)</span> Need to Be?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Brief Summary: Interval Estimation with <strong>Unknown Variance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-normal-samples"><strong>Confidence Intervals for Normal Samples</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-2-distribution-chi-squared-distribution">The <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution (Chi-Squared Distribution)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-the-chi-2-distribution">Why Do We Need the <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-t-distribution-student-s-t-distribution">The <span class="math notranslate nohighlight">\(t\)</span>-Distribution (Student’s <span class="math notranslate nohighlight">\(t\)</span>-Distribution)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-confidence-intervals-for-normal-samples-n-is-not-large">Summary: Confidence Intervals for Normal Samples (<span class="math notranslate nohighlight">\(n\)</span> is not large)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-variance-sigma-2-is-known">When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>known</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-variance-sigma-2-is-unknown">When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>unknown</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-11-dr-hsiao-s-banana-farm">Example 4.11: Dr. Hsiao’s Banana Farm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-statistical-inference">
+<h1>Introduction to Statistical Inference<a class="headerlink" href="#introduction-to-statistical-inference" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Limit Theorems</p></li>
+<li><p>Monte Carlo Method</p>
+<ul>
+<li><p>Area Estimation</p></li>
+<li><p>Univariate Integration</p></li>
+<li><p>Multi-variate Integration</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="today">
+<h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ul>
+    <li><a href="#tag1">Point Estimation</a></li>
+    <li><a href="#tag2">Maximum Likelihood Estimation</a></li>
+    <li><a href="#tag3">Interval Estimation</a></li>
+    <ul>
+        <li><a href="#tag4">Interval Estimation with Known Variance</a></li>
+        <li><a href="#tag5">Interval Estimation with Unknown Variance</a></li>
+    </ul>
+    <li><a href="#tag6">Confidence Interval for Normal Samples</a></li>
+</ul>
+</section>
+<section id="introduction">
+<h2><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In real life, we often work with data influenced by randomness, and we need to extract meaningful information and make conclusions based on that data. This randomness can arise from various sources. Here are two examples:</p>
+<ol class="arabic simple">
+<li><p>Suppose we want to analyze a baseball player’s batting performance over a season. Since we cannot observe every possible scenario in which they might face a pitcher, we rely on a sample of past at-bats to estimate their batting average. The randomness in this case comes from the selection of at-bats, as different pitchers, game conditions, and player performance fluctuations affect the outcomes. Additionally, a player’s form may change over time due to factors like fatigue or injuries, introducing another layer of randomness.</p></li>
+<li><p>Another example occurs when tracking the flight of a baseball after it is hit. While we can predict its trajectory using physics, external factors such as wind speed, air resistance, and spin can alter its path in unpredictable ways. Here, the randomness comes from environmental conditions affecting the ball’s motion.</p></li>
+</ol>
+<p>Situations like these are common in many fields. The study of how to handle and analyze such randomness falls under the domain of statistical inference.</p>
+<p><strong>Statistical inference</strong> encompasses a set of techniques used to derive conclusions from data influenced by random variation.</p>
+<p>Clearly, we use our knowledge of probability theory when we work on statistical inference problems. However, the biggest difference here is that we need to work with <strong>real data</strong>. For example,</p>
+<blockquote>
+<div><p>Let <span class="math notranslate nohighlight">\(X\)</span> represent a candidate’s approval rating in a poll (expressed as a percentage), assuming <span class="math notranslate nohighlight">\(X\)</span> follows a normal distribution with mean <span class="math notranslate nohighlight">\(\mu = 50\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 = 25\)</span>. Find the probability that the candidate’s approval rating exceeds 60%, i.e., <span class="math notranslate nohighlight">\(P(X &gt; 60)\)</span>.</p>
+</div></blockquote>
+<p>In real life, we might not know the distribution of <span class="math notranslate nohighlight">\(X\)</span>, so we need to collect data, and from the data we should be able to estimate <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>, and conclude whether <span class="math notranslate nohighlight">\(X\)</span> follows a normal distribution or not.</p>
+<img align="center" height=500px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture19/assets/fig01.png">
+<section id="random-sampling">
+<h3>Random Sampling<a class="headerlink" href="#random-sampling" title="Link to this heading">#</a></h3>
+<p>When collecting data, we often make several measurements (observations) on a random variable, for example, investigating the height distribution of adult males in Taiwan. To do this, we define random variables <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> as follows: We choose a random sample of size <span class="math notranslate nohighlight">\(n\)</span> with replacement from the population and let <span class="math notranslate nohighlight">\(X_i\)</span> be the height of the <span class="math notranslate nohighlight">\(i^{th}\)</span> chosen male.</p>
+<ol class="arabic simple">
+<li><p>We choose a male uniformly at random from the population and let <span class="math notranslate nohighlight">\(X_1\)</span> be the height of that male. Here, every male in the population has the same chance of being chosen.</p></li>
+<li><p>Again, we choose a male uniformly (and independently from the first male) at random from the population and let <span class="math notranslate nohighlight">\(X_2\)</span> be the height of that male. As usual, every male in the population has the same chance of being chosen.</p></li>
+<li><p>In general, <span class="math notranslate nohighlight">\(X_i\)</span> is the height of the <span class="math notranslate nohighlight">\(i^{th}\)</span> male that is chosen uniformly and independently from the population.</p></li>
+</ol>
+<p>About <strong>with and without</strong> replacement:</p>
+<blockquote>
+<div><p>We often do the sampling without replacement in practice, i.e., we do not allow one person to be chosen twice. However, if the population is large, then the probability of choosing one person twice is extremely low, and it can be shown that the results obtained from sampling with replacement are very close to the results obtained using sampling without replacement. The big advantage of sampling with replacement (the above procedure) is that <span class="math notranslate nohighlight">\(X_i\)</span>’s will be independent and this makes the analysis much simpler.</p>
+</div></blockquote>
+<p>If we would like to estimate the average height in the population, we may define an estimator as</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\Theta} = \frac{X_1 + X_2 + X_3 + ... + X_n}{n},
+\]</div>
+<p>which means that <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span> is a random variable because it depends on the random sample (variables) <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span>.</p>
+<p>The collection of random variables <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> is said to be a <strong>random sample</strong> of size <span class="math notranslate nohighlight">\(n\)</span> if they are <strong>independent and identically distributed (i.i.d.)</strong>.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> are independent random variables.</p></li>
+<li><p>They have the same distribution,</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x) \text{, for all } x \in \R.
+\]</div>
+<p>In the above example, the random variable <span class="math notranslate nohighlight">\(\hat{\Theta} = \frac{X_1 + X_2 + X_3 + ... + X_n}{n}\)</span> is called a <strong>point estimator</strong> for the average height of males in the population, and we can obtain <span class="math notranslate nohighlight">\(\hat{\Theta} = \hat{\theta}\)</span>. Here, <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is called an <strong>estimate</strong> of the average height of males in the population. In general, a point estimator is a function of the random sample <span class="math notranslate nohighlight">\(\hat{\Theta} = h(X_1, X_2, X_3, ..., X_n)\)</span> that is used to estimate an unknown quantity.</p>
+<section id="properties-of-random-samples">
+<h4>Properties of Random Samples:<a class="headerlink" href="#properties-of-random-samples" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from the same distribution, we assume:</p>
+<ol class="arabic simple">
+<li><p>The <span class="math notranslate nohighlight">\(X_i\)</span>’s are independent.</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in \R\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \mathbb{E}[X] = \mu &lt; \infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(0 &lt; \text{Var}(X_i) = \text{Var}(X) = \sigma^2 &lt; \infty\)</span>.</p></li>
+</ol>
+<p>Sample mean: $<span class="math notranslate nohighlight">\(\bar{X} = \frac{X_1 + X_2 + X_3 + ... + X_n}{n}.\)</span>$ Recall that:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}[\bar{X}] = \mu\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{Var}(\bar{X}) = \frac{\text{Var}(X)}{n} = \frac{\sigma^2}{n}\)</span></p></li>
+<li><p>Weak law of large numbers (WLLN):</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\lim_{n \to \infty} P(|\bar{X} - \mu| \leq \epsilon = 0).
+\]</div>
+<ol class="arabic simple" start="4">
+<li><p>Central limit theorem: the random variable</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+Z_n = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} = \frac{X_1 + X_2 + X_3 + ... + X_n - n \mu}{\sigma \sqrt{n}}
+\]</div>
+<p>converges to the standard normal random variable <span class="math notranslate nohighlight">\(N(0,1)\)</span> as <span class="math notranslate nohighlight">\(n \to \infty\)</span>.</p>
+<p><a id="tag1"></a></p>
+</section>
+</section>
+</section>
+<section id="point-estimation">
+<h2><strong>Point Estimation</strong><a class="headerlink" href="#point-estimation" title="Link to this heading">#</a></h2>
+<p>Assuming <span class="math notranslate nohighlight">\(\theta\)</span> is an unknown parameter to be estimated, for example, the expected value of a random variable <span class="math notranslate nohighlight">\(\theta = \mathbb{E}[X]\)</span>. An important assumption here is that <span class="math notranslate nohighlight">\(\theta\)</span> is a deterministic (non-random) quantity. To estimate <span class="math notranslate nohighlight">\(\theta\)</span>, we can define a point estimator <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span> that is a function of the random sample, i.e., $<span class="math notranslate nohighlight">\(\hat{\Theta} = h(X_1, X_2, X_3, ..., X_n).\)</span>$</p>
+<section id="evaluation-of-estimators">
+<h3>Evaluation of Estimators<a class="headerlink" href="#evaluation-of-estimators" title="Link to this heading">#</a></h3>
+<p>Before we start to introduce how to use point estimator for the estimation of a random variable, we need some quantities to evaluate the performance of estimators (i.e., how good they are?).</p>
+<section id="bias">
+<h4>1. Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h4>
+<p>The bias of an estimator <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span>, <span class="math notranslate nohighlight">\(B(\hat{\Theta})\)</span>, is how far <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span> on average is from the real value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+B(\hat{\Theta}) = \mathbb{E}[\hat{\Theta}] - \theta
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(B(\hat{\Theta}) = 0\)</span>, we say that <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span> is an <strong>unbiased estimator</strong> of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<hr class="docutils" />
+<section id="example-4-1-bias-of-sample-mean">
+<h5>Example 4.1: Bias of Sample Mean<a class="headerlink" href="#example-4-1-bias-of-sample-mean" title="Link to this heading">#</a></h5>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample. Then <span class="math notranslate nohighlight">\(\hat{\Theta} = \bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\theta = \mathbb{E}[X_i]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+B(\hat{\Theta}) &amp;= \mathbb{E}[\hat{\Theta}] - \theta \\
+    &amp;= \mathbb{E}[\bar{X}] - \theta \\
+    &amp;= \frac{\mathbb{E}[X_1] + \mathbb{E}[X_2] + ... + \mathbb{E}[X_n]}{n} - \theta \\
+    &amp;= \frac{n \cdot \mathbb{E}[X_i]}{n} - \theta\\
+    &amp;= \mathbb{E}[X_i] - \theta \\
+    &amp;= 0.
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="mean-squared-error-mse">
+<h4>2. Mean Squared Error (MSE)<a class="headerlink" href="#mean-squared-error-mse" title="Link to this heading">#</a></h4>
+<p>From the above example, we can conclude that both <span class="math notranslate nohighlight">\(\hat{\Theta}_1 = \bar{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{\Theta}_2 = X_i\)</span> are unbiased estimator of <span class="math notranslate nohighlight">\(\theta\)</span>. Nevertheless, <span class="math notranslate nohighlight">\(\hat{\Theta}_2\)</span> is clearly not as good as <span class="math notranslate nohighlight">\(\hat{\Theta}_1\)</span>. Therefore, we need other measures to ensure that an estimator is a “good” estimator. A very common measure is the <strong>mean squared error</strong> defined by $<span class="math notranslate nohighlight">\(MSE(\hat{\Theta}) = \mathbb{E} \big[ (\hat{\Theta} - \theta)^2 \big].\)</span>$</p>
+<p>Note that <span class="math notranslate nohighlight">\(\hat{\Theta} - \theta\)</span> is the error that we make when we estimate <span class="math notranslate nohighlight">\(\theta\)</span> by <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span>. Thus, the MSE is a measure of the distance between <span class="math notranslate nohighlight">\(\theta\)</span> by <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span>. A smaller MSE is generally indicative of a better estimator.</p>
+<hr class="docutils" />
+<section id="example-4-2-mse-of-sample-mean-and-one-sample">
+<h5>Example 4.2: MSE of Sample Mean and One Sample<a class="headerlink" href="#example-4-2-mse-of-sample-mean-and-one-sample" title="Link to this heading">#</a></h5>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a distribution with mean <span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \theta\)</span>, and variance <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2\)</span>. Consider the following two estimators for <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{\Theta}_1 = \bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\Theta}_2 = X_i\)</span>.</p></li>
+</ol>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(n &gt; 1\)</span>, we have <span class="math notranslate nohighlight">\(MSE(\hat{\Theta}_2) &gt; MSE(\hat{\Theta}_1)\)</span>.</p></li>
+<li><p>For <span class="math notranslate nohighlight">\(MSE(\hat{\Theta}_2)\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+MSE(\hat{\Theta}_2) &amp;= \mathbb{E} \big[ (\hat{\Theta}_2 - \theta)^2 \big] \\
+    &amp;= \mathbb{E} \big[ (X_i - \mathbb{E} [X_i])^2 \big] \\
+    &amp;= \text{Var}(X_i) \\
+    &amp;= \sigma^2.
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>To find <span class="math notranslate nohighlight">\(MSE(\hat{\Theta}_1)\)</span>, we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+MSE(\hat{\Theta}_1) &amp;= \mathbb{E} \big[ (\hat{\Theta}_1 - \theta)^2 \big] \\
+    &amp;= \mathbb{E} \big[ (\bar{X} - \theta)^2 \big] \\
+    &amp;= \text{Var}(\bar{X} - \theta) + \big( \mathbb{E}[\bar{X} - \theta] \big)^2 
+        \text{ } \big( \because \mathbb{E}[Y^2] = \text{Var}(Y) + (\mathbb{E}[Y])^2 \big) \\
+    &amp;= \text{Var}(\bar{X}) \\
+    &amp;= \frac{\sigma^2}{n}.
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Therefore, we conclude that:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{\Theta}_1 = \bar{X}\)</span> is probably a better estimator for the value of <span class="math notranslate nohighlight">\(\theta\)</span> (the expected value) since it has smaller MSE.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(\hat{\Theta}_1, \hat{\Theta}_2, ..., \hat{\Theta}_i, ...\)</span> be a sequence of point estimators of <span class="math notranslate nohighlight">\(\theta\)</span>. <span class="math notranslate nohighlight">\(MSE(\hat{\Theta}_i) \to 0\)</span> as <span class="math notranslate nohighlight">\(i \to \infty\)</span>.</p></li>
+</ol>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="n">test1</span><span class="p">(</span><span class="n">n1</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">numExp</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n = 10:
+    Bias = -0.0054039
+    MSE = 0.0000292
+n = 1:
+    Bias = -0.1114039
+    MSE = 0.0124108
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="brief-summary">
+<h4>Brief Summary<a class="headerlink" href="#brief-summary" title="Link to this heading">#</a></h4>
+<p><span class="math notranslate nohighlight">\(\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}\)</span> is a better and reasonable point estimator for the mean <span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \theta\)</span>.</p>
+</section>
+</section>
+<section id="point-estimators-for-variance">
+<h3>Point Estimators for Variance<a class="headerlink" href="#point-estimators-for-variance" title="Link to this heading">#</a></h3>
+<p>To estimate the variance of a distribution <span class="math notranslate nohighlight">\(\sigma^2 = \mathbb{E} \big[ (X - \mu)^2 \big]\)</span>, we have known that the variance itself is the mean of the random variable <span class="math notranslate nohighlight">\(Y = (X - \mu)^2\)</span>. This suggests the following estimator for the variance</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}^2 = \frac{1}{n} \sum_{k=1}^{n} (X_k - \mu)^2.
+\]</div>
+<p>By linearity of expectation, <span class="math notranslate nohighlight">\(\hat{\sigma}^2\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>. However, in practice we often do not know the value of <span class="math notranslate nohighlight">\(\mu\)</span>. Thus, <strong>we have to replace <span class="math notranslate nohighlight">\(\mu\)</span> by our estimate of the <span class="math notranslate nohighlight">\(\mu\)</span> (i.e., the sample mean)</strong>, to obtain the following estimator for <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\bar{S}^2 &amp;= \frac{1}{n} \sum_{k=1}^{n} (X_k - \bar{X})^2 \\
+    &amp;= \frac{1}{n} \Bigg( \sum_{k=1}^{n} X_k^2 - n \bar{X}^2 \Bigg).
+\end{aligned}
+\end{split}\]</div>
+<p>Intuitively, we are curious about what is the bias of our estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+B(\bar{S}^2) = \mathbb{E}[\bar{S}^2] - \sigma^2
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a distribution with mean <span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \theta\)</span>, and variance <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2\)</span>. We have</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}\because 
+\mathbb{E}[\bar{X}^2] &amp;= (\mathbb{E}[\bar{X}])^2 + \text{Var}(\bar{X}) \\
+    &amp;= \mu^2 + \frac{\sigma^2}{n}. \\\end{split}\\\begin{split}\implies 
+\mathbb{E}[\bar{S}^2] &amp;= \frac{1}{n} \Bigg( \sum_{k=1}^{n} \mathbb{E}[X_k^2] - n \mathbb{E}[\bar{X}^2] \Bigg) \\
+    &amp;= \frac{1}{n} \Bigg( \sum_{k=1}^{n} \Big( \mu^2 + \sigma^2 \Big) - n \Big( \mu^2 + \frac{\sigma^2}{n} \Big) \Bigg) \\
+    &amp;= \frac{1}{n} \Bigg( n \Big( \mu^2 + \sigma^2 \Big) - n \Big( \mu^2 + \frac{\sigma^2}{n} \Big) \Bigg) \\
+    &amp;= \frac{n-1}{n} \sigma^2. \\\end{split}\\\begin{split}\therefore 
+B(\bar{S}^2) &amp;= \mathbb{E}[\bar{S}^2] - \sigma^2 \\
+    &amp;= - \frac{\sigma^2}{n}.\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<p>We conclude that <span class="math notranslate nohighlight">\(\bar{S}^2\)</span> is a biased estimator of the variance. Nevertheless, note that if <span class="math notranslate nohighlight">\(n \to \infty\)</span>, then <span class="math notranslate nohighlight">\(B(\bar{S}^2) \to 0\)</span>.</p>
+<p>Also, we can obtain an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span> by multiplying <span class="math notranslate nohighlight">\(\bar{S}^2\)</span> by <span class="math notranslate nohighlight">\(\frac{n}{n-1}\)</span>, as the <strong>sample variance</strong> <span class="math notranslate nohighlight">\(S\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+S^2 = \frac{1}{n-1} \sum_{k=1}^{n} (X_k - \bar{X})^2 
+    = \frac{1}{n-1} \Bigg( \sum_{k=1}^{n} X_k^2 - n \bar{X}^2 \Bigg).
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test2</span>
+
+<span class="n">test2</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">numTrials</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Experiment = 2:
+    Theoretical value of Variance = 0.0833333
+    Result of biased estimator of variance = 0.4400000
+    Result of unbiased estimator of variance = 0.4888889
+Number of Experiment = 100:
+    Theoretical value of Variance = 0.0833333
+    Result of biased estimator of variance = 4.4000000
+    Result of unbiased estimator of variance = 4.8888889
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="tag2"></a></p>
+</section>
+</section>
+<section id="maximum-likelihood-estimation">
+<h2><strong>Maximum Likelihood Estimation</strong><a class="headerlink" href="#maximum-likelihood-estimation" title="Link to this heading">#</a></h2>
+<p>So far, we have discussed estimating the mean and variance of a distribution. Now, we would like to introduce a systematic way of parameter estimation, called the <strong>Maximum Likelihood Estimation (MLE)</strong>. Before we start to introduce the idea behind MLE, let us first look at an example.</p>
+<hr class="docutils" />
+<section id="example-4-3-a-bag-with-3-balls">
+<h3>Example 4.3: A Bag with 3 Balls<a class="headerlink" href="#example-4-3-a-bag-with-3-balls" title="Link to this heading">#</a></h3>
+<p>We have a bag that contains <span class="math notranslate nohighlight">\(3\)</span> balls. Each ball is either red or blue, but we have no information in addition to this. Thus, the number of blue balls <span class="math notranslate nohighlight">\(\theta\)</span> might be 0, 1, 2, or 3. You are allowed to choose 4 balls at random from the bag with replacement. We define the random variables <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(X_3\)</span>, and <span class="math notranslate nohighlight">\(X_4\)</span> as follows</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X_i = \begin{cases} 
+    1 &amp;\text{if the } i^{\text{th}} \text{ chosen ball is blue} \\ 
+    0 &amp;\text{if the } i^{\text{th}} \text{ chosen ball is red} 
+\end{cases}.
+\end{split}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(X_i\)</span>’s are i.i.d. and <span class="math notranslate nohighlight">\(X_i \sim Bernoulli(\frac{\theta}{3})\)</span>. After doing my experiment, we observe the following values for <span class="math notranslate nohighlight">\(X_i\)</span>’s. $<span class="math notranslate nohighlight">\((x_1, x_2, x_3, x_4) = (1, 0, 1, 1).\)</span>$</p>
+<ol class="arabic simple">
+<li><p>For each possible value of <span class="math notranslate nohighlight">\(\theta\)</span>, find the probability of the observed sample, <span class="math notranslate nohighlight">\((x_1, x_2, x_3, x_4) = (1, 0, 1, 1)\)</span>.</p></li>
+<li><p>For which value of <span class="math notranslate nohighlight">\(\theta\)</span> is the probability of the observed sample is the largest?</p></li>
+</ol>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(X_i \sim Bernoulli(\frac{\theta}{3})\)</span>, we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_{X_i}(x) = \begin{cases}
+    \frac{\theta}{3} &amp;\text{for } x = 1 \\
+    1 - \frac{\theta}{3} &amp;\text{for } x = 0 \\
+\end{cases}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Therefore, the joint PMF of <span class="math notranslate nohighlight">\(X_1\)</span>, <span class="math notranslate nohighlight">\(X_2\)</span>, <span class="math notranslate nohighlight">\(X_3\)</span>, and <span class="math notranslate nohighlight">\(X_4\)</span> can be written as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P_{X_1, X_2, X_3, X_4}(x_1, x_2, x_3, x_4) &amp;= P_{X_1}(x_1)P_{X_2}(x_2)P_{X_3}(x_3)P_{X_4}(x_4) \\
+\implies P_{X_1, X_2, X_3, X_4}(1, 0, 1, 1) &amp;= \frac{\theta}{3} \cdot \Big( 1 - \frac{\theta}{3} \Big) 
+\cdot \frac{\theta}{3} \cdot \frac{\theta}{3} \\
+    &amp;= \Big( \frac{\theta}{3} \Big)^3 \Big( 1 - \frac{\theta}{3} \Big).
+\end{aligned}
+\end{split}\]</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(\theta\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(P_{X_1, X_2, X_3, X_4}(1, 0, 1, 1; \theta)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0.0247</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>0.0988</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>From the table we see that the probability of the observed data is maximized for <span class="math notranslate nohighlight">\(\theta = 2\)</span>. This means that the observed data is most likely to occur for <span class="math notranslate nohighlight">\(\theta = 2\)</span>. For this reason, we may choose <span class="math notranslate nohighlight">\(\hat{\theta} = 2\)</span> as our estimate of <span class="math notranslate nohighlight">\(\theta\)</span>. This is called the <strong>Maximum Likelihood Estimation (MLE)</strong> of <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="definition-of-maximum-likelihood-estimation-mle">
+<h3>Definition of Maximum Likelihood Estimation (MLE)<a class="headerlink" href="#definition-of-maximum-likelihood-estimation-mle" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a distribution with a parameter <span class="math notranslate nohighlight">\(\theta\)</span>. Suppose that we have observed <span class="math notranslate nohighlight">\(X_1 = x_1, X_2 = x_2, ..., X_n = x_n\)</span>.</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(X_i\)</span>’s are discrete, the the likelihood function is defined as $<span class="math notranslate nohighlight">\(L(x_1, x_2, ..., x_n; \theta) = P_{X_1, X_2, ..., X_n}(x_1, x_2, ..., x_n; \theta)\)</span>$.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_i\)</span>’s are jointly continuous, the the likelihood function is defined as $<span class="math notranslate nohighlight">\(L(x_1, x_2, ..., x_n; \theta) = f_{X_1, X_2, ..., X_n}(x_1, x_2, ..., x_n; \theta)\)</span>$.</p></li>
+</ol>
+<p>In some problems, it is easier to work with the <strong>log likelihood function</strong> given by</p>
+<div class="math notranslate nohighlight">
+\[
+\ln L(x_1, x_2, ..., x_n; \theta).
+\]</div>
+<p>A <strong>Maximum Likelihood Estimation (MLE)</strong> of <span class="math notranslate nohighlight">\(\theta\)</span>, shown by <span class="math notranslate nohighlight">\(\hat{\theta}_{ML}\)</span> is a value of <span class="math notranslate nohighlight">\(\theta\)</span> that maximizes the likelihood function. Also, you should notice that the estimator <span class="math notranslate nohighlight">\(\hat{\Theta}_{ML} = \hat{\Theta}_{ML}(X_1, X_2, ..., X_n)\)</span> is a random variable whose value when <span class="math notranslate nohighlight">\(X_1 = x_1, X_2 = x_2, ..., X_n = x_n\)</span> is given by <span class="math notranslate nohighlight">\(\hat{\theta}_{ML}\)</span>.</p>
+<hr class="docutils" />
+<section id="example-4-4-mle-1-unknown-parameter-to-estimate">
+<h4>Example 4.4: MLE, 1 unknown parameter to estimate<a class="headerlink" href="#example-4-4-mle-1-unknown-parameter-to-estimate" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(X_i \sim Binomial(m, \theta)\)</span> and we have observed <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span>. Find the maximum likelihood estimator of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+L(x_1, x_2, ..., x_n; \theta) 
+    &amp;= P_{X_1, X_2, ..., X_n}(x_1, x_2, ..., x_n; \theta) \\
+    &amp;= \prod_{k=1}^{n} P_{X_k}(x_k; \theta) \\
+    &amp;= \prod_{k=1}^{n} \binom{m}{x_k} \theta^{x_k} \cdot (1 - \theta)^{m - x_k} \\
+    &amp;= \Bigg[ \prod_{k=1}^{n} \binom{m}{x_k} \Bigg] \cdot \theta^{\sum_{k=1}^{n} x_k} \cdot (1 - \theta)^{\sum_{k=1}^{n}(m - x_k)} \\
+    &amp;= \text{constant} \cdot \theta^{s} \cdot (1 - \theta)^{mn - s} \text{, let } s = \sum_{k=1}^{n} x_k
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Therefore, we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{\theta}_{ML} = \frac{1}{mn} \sum_{k=1}^{n} x_k.
+\]</div>
+<ul class="simple">
+<li><p>This suggests that the MLE can be written as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{\Theta}_{ML} = \frac{1}{mn} \sum_{k=1}^{n} X_k.
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="exercise-4-1">
+<h4>Exercise 4.1<a class="headerlink" href="#exercise-4-1" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(X_i \sim Exponential(\theta)\)</span> and we have observed <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span>. Find the maximum likelihood estimator of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<hr class="docutils" />
+<p>In general, <span class="math notranslate nohighlight">\(\theta\)</span> could be a vector of parameters, and we can apply the same methodology to obtain the MLE. For example, if we have <span class="math notranslate nohighlight">\(k\)</span> unknown parameters <span class="math notranslate nohighlight">\(\theta_1, \theta_2, ..., \theta_k\)</span>, then we need to maximize the likelihood function</p>
+<div class="math notranslate nohighlight">
+\[
+L(x_1, x_2, ..., x_n; \theta_1, \theta_2, ..., \theta_k)
+\]</div>
+<p>to obtain the maximum likelihood estimators <span class="math notranslate nohighlight">\(\hat{\Theta}_1, \hat{\Theta}_2, ..., \hat{\Theta}_k\)</span>.</p>
+</section>
+<section id="example-4-5-mle-2-unknown-parameters-to-estimate">
+<h4>Example 4.5: MLE, 2 unknown parameters to estimate<a class="headerlink" href="#example-4-5-mle-2-unknown-parameters-to-estimate" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(X_i \sim N(\theta_1, \theta_2)\)</span> and we have observed <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+f_{X_i}(x_i; \theta_1, \theta_2) = \frac{1}{\sqrt{2 \pi \theta_2}} e^{- \frac{(x_i - \theta_1)^2}{2 \theta_2}}
+\]</div>
+<p>Find the maximum likelihood estimators of <span class="math notranslate nohighlight">\(\theta_1\)</span> and <span class="math notranslate nohighlight">\(\theta_2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+L(x_1, x_2, ..., x_n; \theta_1, \theta_2) 
+    &amp;= \prod_{k=1}^{n} f_{X_k}(x_k; \theta_1, \theta_2) \\
+    &amp;= \prod_{k=1}^{n} \frac{1}{\sqrt{2 \pi \theta_2}} e^{- \frac{(x_i - \theta_1)^2}{2 \theta_2}} \\
+    &amp;= (2 \pi \theta_2)^{- \frac{n}{2}} \cdot \exp \Bigg[ - \sum_{k=1}^{n} \frac{(x_i - \theta_1)^2}{2 \theta_2} \Bigg] \\
+\implies \ln L(\mathbf{x}; \theta_1, \theta_2) 
+    &amp;= - \frac{n}{2} \ln (2 \pi) - \frac{n}{2} \ln \theta_2 - \frac{1}{2 \theta_2} \sum_{k=1}^{n} (x_i - \theta_1)^2
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>To find the maximum value, we have the derivatives with respect to <span class="math notranslate nohighlight">\(\theta_1\)</span> and <span class="math notranslate nohighlight">\(\theta_2\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\partial}{\partial \theta_1} \ln L(\mathbf{x}; \theta_1, \theta_2)
+    &amp;= \frac{1}{\theta_2} \sum_{k=1}^{n} (x_i - \theta_1) = 0 \\
+\frac{\partial}{\partial \theta_2} \ln L(\mathbf{x}; \theta_1, \theta_2)
+    &amp;= - \frac{n}{2 \theta_2} + \frac{1}{2 \theta_2^2} \sum_{k=1}^{n} (x_i - \theta_1)^2 = 0 
+\end{aligned}.
+\end{split}\]</div>
+<ul class="simple">
+<li><p>By solving the above equations, we obtain the following maximum likelihood estimators for <span class="math notranslate nohighlight">\(\theta_1\)</span> and <span class="math notranslate nohighlight">\(\theta_2\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat{\theta}_1 &amp;= \frac{1}{n} \sum_{k=1}^{n} x_i \\
+\hat{\theta}_2 &amp;= \frac{1}{n} \sum_{k=1}^{n} (x_i - \hat{\theta}_1)^2
+\end{aligned}.
+\end{split}\]</div>
+<p><a id="tag3"></a></p>
+</section>
+</section>
+</section>
+<section id="interval-estimation">
+<h2><strong>Interval Estimation</strong><a class="headerlink" href="#interval-estimation" title="Link to this heading">#</a></h2>
+<p>So far, we have discussed point estimation for <span class="math notranslate nohighlight">\(\theta\)</span>. The point estimator <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> alone does not give much information about <span class="math notranslate nohighlight">\(\theta\)</span>, which means we do not know how close <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is to the real <span class="math notranslate nohighlight">\(\theta\)</span>. Therefore, we will introduce the concept of <strong>interval estimation</strong>. In this approach, instead of giving just one value <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> as the estimation for <span class="math notranslate nohighlight">\(\theta\)</span>, we will produce an interval that is likely to include the true value of <span class="math notranslate nohighlight">\(\theta\)</span>. That means, instead of saying
+$<span class="math notranslate nohighlight">\(
+\hat{\theta} = 94.00,
+\)</span>$</p>
+<p>we might report the interval</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\theta}_l, \hat{\theta}_h] = [93.13, 94.87],
+\]</div>
+<p>which we hope includes the real value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>In interval estimation, there are two important concepts.</p>
+<ol class="arabic simple">
+<li><p>One is the length of the reported interval, <span class="math notranslate nohighlight">\(\hat{\theta}_h - \hat{\theta}_l\)</span>, which shows the precision with which we can estimate <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>The second one is the confidence level that shows how confident we are about the interval. The confidence level is the probability that the interval that we construct includes the real value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="definition-of-interval-estimation">
+<h3>Definition of Interval Estimation<a class="headerlink" href="#definition-of-interval-estimation" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a distribution with a parameter <span class="math notranslate nohighlight">\(\theta\)</span> that is to be estimated. An <strong>interval estimator with confidence level</strong> <span class="math notranslate nohighlight">\(1 - \alpha\)</span> consists of two estimators <span class="math notranslate nohighlight">\(\hat{\Theta}_l (X_1, X_2, X_3, ..., X_n)\)</span> and <span class="math notranslate nohighlight">\(\hat{\Theta}_h (X_1, X_2, X_3, ..., X_n)\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( \hat{\Theta}_l \leq \theta \leq \hat{\Theta}_h \Big) \geq 1 - \alpha,
+\]</div>
+<p>for every possible value of <span class="math notranslate nohighlight">\(\theta\)</span>. Equivalently, we say that <span class="math notranslate nohighlight">\([\hat{\theta}_l, \hat{\theta}_h]\)</span> is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> <strong>confidence interval</strong> for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<hr class="docutils" />
+<section id="example-4-6-interval-estimation">
+<h4>Example 4.6: Interval Estimation<a class="headerlink" href="#example-4-6-interval-estimation" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a normal distribution <span class="math notranslate nohighlight">\(N(\theta, 1)\)</span>. Find <span class="math notranslate nohighlight">\(95 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<hr class="docutils" />
+<p>We start with a point estimator <span class="math notranslate nohighlight">\(\hat{\Theta}\)</span> for <span class="math notranslate nohighlight">\(\theta\)</span>. Because <span class="math notranslate nohighlight">\(\theta\)</span> is the mean of distribution, we can use the sample mean</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\Theta} = \bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(X_i \sim N(\theta, 1)\)</span> and the <span class="math notranslate nohighlight">\(X_i\)</span>’s are independent, we conclude that</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} \sim N(\theta, \frac{1}{n}).
+\]</div>
+<p>By normalizing <span class="math notranslate nohighlight">\(\bar{X}\)</span>, we can get a random variable</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \frac{\bar{X} - \theta}{\frac{1}{\sqrt{n}}} = \sqrt{n} (\bar{X} - \theta)
+\]</div>
+<p>has a <span class="math notranslate nohighlight">\(N(0, 1)\)</span> distribution and <strong>its distribution does NOT depend on the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span></strong>. Therefore, we have</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( -1.96 \leq \sqrt{n} (\bar{X} - \theta) \leq 1.96 \Big) = 0.95,
+\]</div>
+<p>which is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( \bar{X} - \frac{1.96}{\sqrt{n}} \leq \theta \leq \bar{X} + \frac{1.96}{\sqrt{n}} \Big) = 0.95.
+\]</div>
+<p>Therefore, we can report the interval</p>
+<div class="math notranslate nohighlight">
+\[
+[\hat{\theta}_l, \hat{\theta}_h] = \Big[ \bar{X} - \frac{1.96}{\sqrt{n}}, \bar{X} + \frac{1.96}{\sqrt{n}} \Big]
+\]</div>
+<p>as our <span class="math notranslate nohighlight">\(95 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<hr class="docutils" />
+<p><a id="tag4"></a></p>
+</section>
+</section>
+<section id="pivotal-quantity-pivot">
+<h3>Pivotal Quantity (Pivot)<a class="headerlink" href="#pivotal-quantity-pivot" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a distribution with a parameter <span class="math notranslate nohighlight">\(\theta\)</span> that is to be estimated. The random variable <span class="math notranslate nohighlight">\(Q\)</span> is said to be a <strong>pivot</strong> or a <strong>pivotal quantity</strong>, if it has the following properties:</p>
+<ol class="arabic simple">
+<li><p>It is a function of the observed data <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> and the unknown parameter <span class="math notranslate nohighlight">\(\theta\)</span>, but it does not depend on any other unknown parameters:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+Q = Q(X_1, X_2, X_3, ..., X_n, \theta).
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>The probability distribution of <span class="math notranslate nohighlight">\(Q\)</span> does not depend on <span class="math notranslate nohighlight">\(\theta\)</span> or any other unknown parameters (such as <span class="math notranslate nohighlight">\(Q = \sqrt{n} (\bar{X} - \theta) \sim N(0, 1)\)</span> in the above example).</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="pivotal-method-for-finding-confidence-interval">
+<h3>Pivotal Method for Finding Confidence Interval<a class="headerlink" href="#pivotal-method-for-finding-confidence-interval" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Find a pivotal quantity <span class="math notranslate nohighlight">\(Q(X_1, X_2, X_3, ..., X_n, \theta)\)</span>.</p></li>
+<li><p>Find an interval <span class="math notranslate nohighlight">\([q_l, q_h]\)</span> for <span class="math notranslate nohighlight">\(Q\)</span> such that</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+P(q_l \leq Q \leq q_h) = 1 - \alpha.
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Using algebraic manipulations, convert the above equation to an equation of the form</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+P(\hat{\Theta}_l \leq \theta \leq \hat{\Theta}_h) = 1 - \alpha.
+\]</div>
+<hr class="docutils" />
+<section id="example-4-7-pivotal-method">
+<h4>Example 4.7: Pivotal Method<a class="headerlink" href="#example-4-7-pivotal-method" title="Link to this heading">#</a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from a normal distribution with known variance <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2\)</span>, and unknown mean <span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \theta\)</span>. Find a <span class="math notranslate nohighlight">\(1 - \alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>. Assume that <span class="math notranslate nohighlight">\(n\)</span> is large.</p>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(\because \theta = \mathbb{E}[X_i]\)</span>, a natural choice of finding the confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span> is using the sample mean</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(\because n \to \infty\)</span>, we can conclude that</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \frac{\bar{X} - \theta}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1).
+\]</div>
+<p>In particular, <span class="math notranslate nohighlight">\(Q\)</span> is a function of <span class="math notranslate nohighlight">\(X_i\)</span>’s and <span class="math notranslate nohighlight">\(\theta\)</span>, and its distribution does not depend on <span class="math notranslate nohighlight">\(\theta\)</span> or any other unknown parameters. Thus, a <span class="math notranslate nohighlight">\((1 - \alpha)\)</span> interval for standard normal random variable <span class="math notranslate nohighlight">\(Q\)</span> can be stated as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; P \Big( -z_{\frac{\alpha}{2}} \leq Q \leq z_{\frac{\alpha}{2}} \Big) = 1 - \alpha \\
+\implies 
+&amp; P \Bigg( -z_{\frac{\alpha}{2}} \leq \frac{\bar{X} - \theta}{\frac{\sigma}{\sqrt{n}}} \leq z_{\frac{\alpha}{2}} \Bigg) = 1 - \alpha \\
+\implies
+&amp; P \Bigg( \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} 
+    \leq \theta 
+    \leq \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Bigg) = 1 - \alpha 
+\end{aligned}
+\end{split}\]</div>
+<p>We conclude that <span class="math notranslate nohighlight">\(\Big[ \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}}, \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big]\)</span> is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="brief-summary-interval-estimation-with-known-variance">
+<h3>Brief Summary: Interval Estimation with <strong>Known Variance</strong><a class="headerlink" href="#brief-summary-interval-estimation-with-known-variance" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Assumptions</p></td>
+<td class="text-left"><p>A random sample <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> is given from a distribution with known variance <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2 &lt; \infty\)</span>; <span class="math notranslate nohighlight">\(n\)</span> is large.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Parameter to be estimated</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\theta = \mathbb{E}[X_i]\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Confidence interval</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Big[ \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}}, \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Big]\)</span> is approximately a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="example-4-8-interval-estimation-with-known-variance-sigma-2">
+<h4>Example 4.8: Interval Estimation with Known Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span><a class="headerlink" href="#example-4-8-interval-estimation-with-known-variance-sigma-2" title="Link to this heading">#</a></h4>
+<p>Dr. Hsiao is measuring a quantity <span class="math notranslate nohighlight">\(\theta\)</span>. Although we have no idea what he is measuring, it is for sure that there is a random error in each of his measurement. Thus he decide to take <span class="math notranslate nohighlight">\(n\)</span> measurements and report the average of the measurements as the estimated value of <span class="math notranslate nohighlight">\(\theta\)</span>. Here, <span class="math notranslate nohighlight">\(n\)</span> is assumed to be large enough so that the CLT applies. If <span class="math notranslate nohighlight">\(X_i\)</span> is the value that is obtained in the <span class="math notranslate nohighlight">\(i^{th}\)</span> measurement, we assume that</p>
+<div class="math notranslate nohighlight">
+\[
+X_i = \theta + E_i,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_i\)</span> is the error in the <span class="math notranslate nohighlight">\(i^{th}\)</span> measurement and <span class="math notranslate nohighlight">\(E_i\)</span>’s are i.i.d. with <span class="math notranslate nohighlight">\(\mathbb{E}[E_i] = 0\)</span> and <span class="math notranslate nohighlight">\(\text{Var}(E_i) = 8.7\)</span> square units. Finally, Dr. Hsiao reports the average of the measurements</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} = \frac{X_1 + X_2 + ... + X_n}{n}.
+\]</div>
+<p>How many measurements does Dr. Hsiao need to make until he is <span class="math notranslate nohighlight">\(90 \%\)</span> sure that the final error is less than 0.25 units? In other words, what should the value of n be such that</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( \theta - 0.25 \leq \bar{X} \leq \theta + 0.25 \Big) \geq 0.90 \text{ ?}
+\]</div>
+<hr class="docutils" />
+<p>First, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[X_i] &amp;= \theta + \mathbb{E}[E_i] = \theta, \\
+\text{Var}(X_i) &amp;= \text{Var}(E_i) = 8.7, \\
+\alpha &amp;= 0.1.
+\end{aligned}
+\end{split}\]</div>
+<p>To find the interval <span class="math notranslate nohighlight">\([\bar{X} - 0.25, \bar{X} + 0.25]\)</span>, we need</p>
+<div class="math notranslate nohighlight">
+\[
+z_{0.05} \cdot \frac{\sigma}{\sqrt{n}} \leq 0.25
+\]</div>
+<p>Therefore, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+1.645 \cdot \frac{8.7}{\sqrt{n}} &amp;\leq 0.25 \\
+n &amp; \geq (1.645 \cdot 8.7 \cdot 4)^2 \approx 3277
+\end{aligned}
+\end{split}\]</div>
+<hr class="docutils" />
+<p><a id="tag5"></a></p>
+</section>
+</section>
+<section id="interval-estimation-with-unknown-variance">
+<h3>Interval Estimation with <strong>Unknown Variance</strong><a class="headerlink" href="#interval-estimation-with-unknown-variance" title="Link to this heading">#</a></h3>
+<p>Now suppose that <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> is a random sample from a distribution with <strong>unknown variance</strong> <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2\)</span>. Our goal is to find a <span class="math notranslate nohighlight">\(1 - \alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta = \mathbb{E}[X_i]\)</span>. Assume that <span class="math notranslate nohighlight">\(n\)</span> is large. By above discussion, we can say</p>
+<div class="math notranslate nohighlight">
+\[
+P \Bigg( \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \leq \theta \leq \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Bigg) = 1 - \alpha .
+\]</div>
+<p>However, there is a problem here. We do not know the value of <span class="math notranslate nohighlight">\(\sigma\)</span>. How do we deal with this issue? There are two general approaches: we can either find an upper bound for <span class="math notranslate nohighlight">\(\sigma\)</span>, or we can estimate <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<ol class="arabic simple">
+<li><p><strong>An upper bound for <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong>: Suppose that we can show that <span class="math notranslate nohighlight">\(\sigma \leq \sigma_{max}\)</span>, where <span class="math notranslate nohighlight">\(\sigma_{max} &lt; \infty\)</span> is a real number. Then the interval</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma_{max}}{\sqrt{n}}, \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma_{max}}{\sqrt{n}} \Bigg]
+\]</div>
+<p>is still a valid <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Estimate <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong>: Since <span class="math notranslate nohighlight">\(n\)</span> is large, we should be able to find a relatively good estimate for <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Then we can use that to find an approximate <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+</ol>
+<hr class="docutils" />
+<section id="example-4-9-interval-estimation-using-upper-bound-of-variance-sigma-max">
+<h4>Example 4.9: Interval Estimation using Upper Bound of Variance <span class="math notranslate nohighlight">\(\sigma_{max}\)</span><a class="headerlink" href="#example-4-9-interval-estimation-using-upper-bound-of-variance-sigma-max" title="Link to this heading">#</a></h4>
+<p>We would like to estimate the portion of people who plan to vote for Candidate A in an upcoming election. It is assumed that the number of voters is large, and <span class="math notranslate nohighlight">\(\theta\)</span> is the portion of voters who plan to vote for Candidate A. We define the random variable <span class="math notranslate nohighlight">\(X\)</span> as follows. A voter is chosen uniformly at random among all voters and we ask her/him: “Do you plan to vote for Candidate A?” If she/he says “yes,” then <span class="math notranslate nohighlight">\(X=1\)</span>, otherwise <span class="math notranslate nohighlight">\(X=0\)</span>. Then, $<span class="math notranslate nohighlight">\(X \sim Bernoulli(\theta).\)</span>$</p>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from this distribution, which means that the <span class="math notranslate nohighlight">\(X_i\)</span>’s are i.i.d. and <span class="math notranslate nohighlight">\(X_i \sim Bernoulli(\theta).\)</span> In other words, we randomly select <span class="math notranslate nohighlight">\(n\)</span> voters (with replacement) and we ask each of them if they plan to vote for Candidate A. Find a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence level for <span class="math notranslate nohighlight">\(\theta\)</span> based on <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span>.</p>
+<hr class="docutils" />
+<p>First, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\because X \sim Bernoulli(\theta) &amp;= \binom{n}{x} \theta^x (1 - \theta)^{n-x} \\
+\therefore \mathbb{E}[X_i] &amp;= \theta \\
+    \text{Var}(X_i) &amp;= \sigma^2 = \theta(1 - \theta). 
+\end{aligned}
+\end{split}\]</div>
+<p>To find <span class="math notranslate nohighlight">\(\sigma\)</span>, we need to know <span class="math notranslate nohighlight">\(\theta\)</span>. But <span class="math notranslate nohighlight">\(\theta\)</span> is the parameter that we would like to estimate in the first place. By the above discussion, we know that if we can find an upper bound for <span class="math notranslate nohighlight">\(\sigma\)</span>, we can use it to build a confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>. Fortunately, it is easy to find an upper bound for <span class="math notranslate nohighlight">\(\sigma\)</span> in this problem. Let</p>
+<div class="math notranslate nohighlight">
+\[
+f(\theta) = \theta(1 - \theta) \text{, for } \theta \in [0, 1].
+\]</div>
+<p>We have the maximum value for <span class="math notranslate nohighlight">\(f(\theta)\)</span> at <span class="math notranslate nohighlight">\(\theta = \frac{1}{2}\)</span>. So</p>
+<div class="math notranslate nohighlight">
+\[
+f(\theta) \leq f(\frac{1}{2}) = \frac{1}{4} \text{, for } \theta \in [0, 1].
+\]</div>
+<p>We conclude that</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma_{max} = \frac{1}{2}
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \bar{X} - \frac{z_{\frac{\alpha}{2}}}{2 \sqrt{n}}, \bar{X} + \frac{z_{\frac{\alpha}{2}}}{2 \sqrt{n}} \Bigg]
+\]</div>
+<p>is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="brief-summary-interval-estimation-with-unknown-variance">
+<h3>Brief Summary: Interval Estimation with <strong>Unknown Variance</strong><a class="headerlink" href="#brief-summary-interval-estimation-with-unknown-variance" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Assumptions</p></td>
+<td class="text-left"><p>A random sample <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> is given from a <span class="math notranslate nohighlight">\(Bernoulli(\theta)\)</span>; <span class="math notranslate nohighlight">\(n\)</span> is large.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Parameter to be estimated</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\theta\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Confidence interval</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\Bigg[ \bar{X} - \frac{z_{\frac{\alpha}{2}}}{2 \sqrt{n}}, \bar{X} + \frac{z_{\frac{\alpha}{2}}}{2 \sqrt{n}} \Bigg]\)</span> is approximately a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="example-4-10-how-large-does-n-need-to-be">
+<h4>Example 4.10: How Large Does <span class="math notranslate nohighlight">\(n\)</span> Need to Be?<a class="headerlink" href="#example-4-10-how-large-does-n-need-to-be" title="Link to this heading">#</a></h4>
+<p>There are two candidates in a presidential election: William Lai and Winnie Xi. Let <span class="math notranslate nohighlight">\(\theta\)</span> be the portion of people who plan to vote for William Lai. Our goal is to find a confidence interval for <span class="math notranslate nohighlight">\(\theta\)</span>. Specifically, we choose a random sample (with replacement) of <span class="math notranslate nohighlight">\(n\)</span> voters and ask them if they plan to vote for William Lai. Our goal is to estimate the <span class="math notranslate nohighlight">\(\theta\)</span> such that the margin of error is <span class="math notranslate nohighlight">\(3 \%\)</span>. Assume a <span class="math notranslate nohighlight">\(95 \%\)</span> confidence level. That is, we would like to choose <span class="math notranslate nohighlight">\(n\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+P \Big( \bar{X} - 0.03 \leq \theta \leq \bar{X} + 0.03 \Big) \geq 0.95,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{X}\)</span> is the portion of people in our random sample that say they plan to vote for William Lai. How large does <span class="math notranslate nohighlight">\(n\)</span> need to be?</p>
+<hr class="docutils" />
+<p>We have,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\alpha &amp;= 0.05, \\
+z_{0.025} &amp;= 1.96, \\
+\frac{z_{0.025}}{2 \sqrt{n}} &amp;\leq 0.03 \\
+\implies n &amp;\geq \Big( \frac{1.96}{2 \times 0.03} \Big)^2 \approx 1068.
+\end{aligned}
+\end{split}\]</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3>Brief Summary: Interval Estimation with <strong>Unknown Variance</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The above scenario is a special case (<span class="math notranslate nohighlight">\(Bernoulli(\theta)\)</span>) for which we could come up with a point estimator for <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Can we have a more general estimator for <span class="math notranslate nohighlight">\(\sigma^2\)</span> that we can use for any distribution? We have already discussed such a point estimator and we called it the sample variance:</p>
+<div class="math notranslate nohighlight">
+\[
+S^2 = \frac{1}{n-1} \sum_{k=1}^{n} (X_k - \bar{X})^2 = \frac{1}{n-1} \Bigg( \sum_{k=1}^{n} X_k^2 - n \bar{X}^2 \Bigg).
+\]</div>
+<p>Using the sample variance <span class="math notranslate nohighlight">\(S^2\)</span>, we can have an estimate for <span class="math notranslate nohighlight">\(\sigma^2\)</span>. If <span class="math notranslate nohighlight">\(n\)</span> is large, this estimate is likely to be close to the real value of <span class="math notranslate nohighlight">\(\sigma^2\)</span>. So let us summarize this discussion:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Assumptions</p></td>
+<td class="text-left"><p>A random sample <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> is given from a distribution with unknown variance <span class="math notranslate nohighlight">\(\text{Var}(X_i) = \sigma^2 &lt; \infty\)</span>; <span class="math notranslate nohighlight">\(n\)</span> is large.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Parameter to be estimated</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\theta = \mathbb{E}[X_i]\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Confidence interval</p></td>
+<td class="text-left"><p>If <span class="math notranslate nohighlight">\(S\)</span> is the sample standard deviation, then the interval $<span class="math notranslate nohighlight">\(\Bigg[ \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{S}{\sqrt{n}}, \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{S}{\sqrt{n}} \Bigg]\)</span><span class="math notranslate nohighlight">\( is approximately a \)</span>(1 - \alpha) \times 100 % <span class="math notranslate nohighlight">\( confidence interval for \)</span>\theta$.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><a id="tag6"></a></p>
+</section>
+</section>
+<section id="confidence-intervals-for-normal-samples">
+<h2><strong>Confidence Intervals for Normal Samples</strong><a class="headerlink" href="#confidence-intervals-for-normal-samples" title="Link to this heading">#</a></h2>
+<p>In the above discussion, we assumed <span class="math notranslate nohighlight">\(n\)</span> to be large so that we could use the CLT. An interesting aspect of the confidence intervals that we obtained was that they often did not depend on the details of the distribution from which we obtained the random sample. That is, the confidence intervals only depended on statistics such as <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(S^2\)</span>.</p>
+<p><strong>What if <span class="math notranslate nohighlight">\(n\)</span> is not large?</strong></p>
+<p>In this case, we cannot use the CLT, so we need to use the probability distribution from which the random sample is obtained. A very important case is when we have a sample <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> from a normal distribution. In this section, we would like to discuss <strong>how to find interval estimators for the mean and the variance of a normal distribution</strong>. Before doing so, we need to introduce two probability distributions that are related to the normal distribution. These distributions are useful when finding interval estimators for the mean and the variance of a normal distribution.</p>
+<section id="the-chi-2-distribution-chi-squared-distribution">
+<h3>The <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution (Chi-Squared Distribution)<a class="headerlink" href="#the-chi-2-distribution-chi-squared-distribution" title="Link to this heading">#</a></h3>
+<p>We know that if <span class="math notranslate nohighlight">\(Z_1, Z_2, Z_3, ..., Z_n\)</span> are independent standard normal random variables <span class="math notranslate nohighlight">\(\Big( Z_i = \frac{X_i - \mu}{\sigma} \sim N(0, 1) \Big)\)</span>, then the random variable</p>
+<div class="math notranslate nohighlight">
+\[
+A = Z_1 + Z_2 + Z_3 + ...+ Z_n
+\]</div>
+<p>is also normal <span class="math notranslate nohighlight">\(\Big( A \sim N(0, n) \Big)\)</span>. If there is a random variable <span class="math notranslate nohighlight">\(Y\)</span>, which is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+Y = Z_1^2 + Z_2^2 + Z_3^2 + ... + Z_n^2.
+\]</div>
+<p>Then <span class="math notranslate nohighlight">\(Y\)</span> is said to have a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n\)</span> <strong>degrees of freedom</strong></p>
+<div class="math notranslate nohighlight">
+\[
+Y \sim \chi^2(n).
+\]</div>
+<p>In fact, a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n\)</span> <strong>degrees of freedom</strong> is same as a gamma distribution with parameters <span class="math notranslate nohighlight">\(\alpha = \frac{n}{2}\)</span> and <span class="math notranslate nohighlight">\(\lambda = \frac{1}{2}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+Y \sim Gamma \Big( \frac{n}{2}, \frac{1}{2} \Big),
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Gamma(x; \alpha, \lambda) = \begin{cases}
+    \frac{\lambda^{\alpha} x^{\alpha - 1} e^{-\lambda x}}{\Gamma(\alpha)} &amp;\text{x &gt; 0} \\
+    0 &amp;\text{otherwise}
+    \end{cases}.
+\end{split}\]</div>
+<p>For simplicity, the PDF of <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution</p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y) = \frac{1}{2^{\frac{n}{2}} \Gamma(\frac{n}{2})} y^{\frac{n}{2} - 1} e^{-\frac{y}{2}} \text{, for } y &gt; 0.
+\]</div>
+<p>Properties:</p>
+<ol class="arabic simple">
+<li><p>The expected value and variance of <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom are</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\mathbb{E}[Y] &amp;= n, \\
+\text{Var}(Y) &amp;= 2n.
+\end{aligned}
+\end{split}\]</div>
+<ol class="arabic simple" start="2">
+<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \N\)</span>, we define <span class="math notranslate nohighlight">\(\chi_{p,n}^2\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(Y &gt; \chi_{p,n}^2) = p,\)</span> where <span class="math notranslate nohighlight">\(Y \sim \chi^2(n)\)</span>. To calculate the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test3</span>
+
+<span class="n">test3</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">numSamples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-squared(p=0.05, n=7) = 14.07
+</pre></div>
+</div>
+<img alt="../../_images/1be9ed673b91be15b5ec7740a967824b4a7cefb28f6929c243d8f11d15444b92.png" src="../../_images/1be9ed673b91be15b5ec7740a967824b4a7cefb28f6929c243d8f11d15444b92.png" />
+</div>
+</div>
+<section id="why-do-we-need-the-chi-2-distribution">
+<h4>Why Do We Need the <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution?<a class="headerlink" href="#why-do-we-need-the-chi-2-distribution" title="Link to this heading">#</a></h4>
+<p>In some practical cases, we need to <strong>estimate a confidence interval of the variance</strong> of a distribution with unknown mean <span class="math notranslate nohighlight">\(\mu\)</span> and unknown variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Let <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> be i.i.d. <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> random variables and <span class="math notranslate nohighlight">\(S^2\)</span> be the sample variance for this random sample. By standarizing the random sample <span class="math notranslate nohighlight">\(X_i\)</span>’s, it is more convenient to estimate the variance</p>
+<div class="math notranslate nohighlight">
+\[
+Z_i = \frac{X_i - \mu}{\sigma} \sim N(0, 1).
+\]</div>
+<p>To calculate the variance of this standarized random sample <span class="math notranslate nohighlight">\(Z\)</span>, we define a random variable <span class="math notranslate nohighlight">\(Y = Z_1^2 + Z_2^2 + ... Z_n^2\)</span> and we have</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \sum_{i=1}^{n} Z_i^2 = \frac{1}{\sigma^2} \sum_{i=1}^{n} (X_i - \mu)^2
+\]</div>
+<p>Because we do not know the mean <span class="math notranslate nohighlight">\(\mu\)</span> of <span class="math notranslate nohighlight">\(X\)</span>, we have to estimate <span class="math notranslate nohighlight">\(\mu\)</span> by using the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+Y = \frac{1}{\sigma^2} \sum_{i=1}^{n} (X_i - \mu)^2 
+    &amp;= \frac{1}{\sigma^2} \sum_{i=1}^{n} (X_i - \bar{X})^2 \\
+    &amp;= \frac{n - 1}{\sigma^2} \cdot \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})^2 \\
+    &amp;= \frac{(n - 1) \cdot S^2}{\sigma^2}.
+\end{aligned}
+\end{split}\]</div>
+<p>By the above discussion, we know that</p>
+<div class="math notranslate nohighlight">
+\[
+Y   = \frac{(n - 1) \cdot S^2}{\sigma^2} = \sum_{i=1}^{n} \Big( \frac{X_i - \bar{X}}{\sigma} \Big)^2
+\]</div>
+<p>has a <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom, i.e., <span class="math notranslate nohighlight">\(Y \sim \chi^2(n-1)\)</span>.<br />
+This result implies that we can derive the probability of the random variable <span class="math notranslate nohighlight">\(Y = \frac{(n - 1) \cdot S^2}{\sigma^2}\)</span> within this region even though we have an unknown variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+P \Bigg( \chi^2_{\frac{\alpha}{2}, n-1} \leq \frac{(n - 1) \cdot S^2}{\sigma^2} \leq \chi^2_{1-\frac{\alpha}{2}, n-1} \Bigg) = 1-\alpha
+\]</div>
+<p>By using some algebraic methods, we can get this result</p>
+<div class="math notranslate nohighlight">
+\[
+P \Bigg( \frac{(n-1) \cdot S^2}{\chi^2_{1-\frac{\alpha}{2}, n-1}} 
+    \leq \sigma^2 
+    \leq \frac{(n-1) \cdot S^2}{\chi^2_{\frac{\alpha}{2}, n-1}} \Bigg) = 1-\alpha
+\]</div>
+<p>Finally, we can report that <span class="math notranslate nohighlight">\(\Bigg[ \frac{(n-1) \cdot S^2}{\chi^2_{1-\frac{\alpha}{2}, n-1}}, \frac{(n-1) \cdot S^2}{\chi^2_{\frac{\alpha}{2}, n-1}} \Bigg]\)</span> is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-t-distribution-student-s-t-distribution">
+<h3>The <span class="math notranslate nohighlight">\(t\)</span>-Distribution (Student’s <span class="math notranslate nohighlight">\(t\)</span>-Distribution)<a class="headerlink" href="#the-t-distribution-student-s-t-distribution" title="Link to this heading">#</a></h3>
+<p>As we have discussed, <strong>we would like to estimate the mean of a distribution with unknown variance</strong>. Again, let <span class="math notranslate nohighlight">\(X_1, X_2, ..., X_n\)</span> be i.i.d. <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> random variables and <span class="math notranslate nohighlight">\(S^2\)</span> be the sample variance for this random sample. To estimate <span class="math notranslate nohighlight">\(\mu\)</span>, it is more precise to use <span class="math notranslate nohighlight">\(\bar{X}\)</span> as our estimation as we have mentioned before and we would like to estimate the difference between our estimation <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} - \mu
+\]</div>
+<p>Intuitively, since <span class="math notranslate nohighlight">\(\bar{X}\)</span> is also a random variable from a normal distribution <span class="math notranslate nohighlight">\(N(\mu, \frac{\sigma^2}{n})\)</span>, we can standarize it</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\bar{X} - \mu}{\sqrt{\text{Var}(\bar{X})}} = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0, 1),
+\]</div>
+<p>which is equivalent to the random variable <span class="math notranslate nohighlight">\(Z \sim N(0, 1)\)</span>. However, with an unknown variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, we have to estimate the variance by using the sample variance <span class="math notranslate nohighlight">\(S^2\)</span>. Thus, we define a new random variance <span class="math notranslate nohighlight">\(T\)</span> as shown in the following equation</p>
+<div class="math notranslate nohighlight">
+\[
+T = \frac{\bar{X} - \mu}{\frac{S}{\sqrt{n}}}. 
+\]</div>
+<p>To derive the distribution of random variable <span class="math notranslate nohighlight">\(T\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+T &amp;= \frac{\bar{X} - \mu}{\frac{S}{\sqrt{n}}} \\
+    &amp;= \frac{\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}}{\frac{S/\sqrt{n}}{\sigma/\sqrt{n}}} \\
+    &amp;= \frac{Z}{\sqrt{\frac{(n-1) S^2}{(n-1) \sigma^2}}} \\
+    &amp;= \frac{Z}{\sqrt{\chi_{n-1}^{2}/(n-1)}} \\
+\end{aligned}
+\end{split}\]</div>
+<p>which is the ratio of standard normal distribution to <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom. As a result, we define this ratio as the <span class="math notranslate nohighlight">\(t\)</span>-distribution and conclude that the random variable <span class="math notranslate nohighlight">\(T\)</span> has a <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom.</p>
+<p>The PDF of <span class="math notranslate nohighlight">\(t\)</span>-distribution is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+f_T(t, \nu) = \frac{\Gamma \big(\frac{\nu + 1}{2} \big)}{\sqrt{\pi \nu} \Gamma (\frac{\nu}{2})} \Big( 1 + \frac{t^2}{\nu} \Big)^{-\frac{(\nu+1)}{2}}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu\)</span> represents the degrees of freedom.</p>
+<p>Properties:</p>
+<ol class="arabic simple">
+<li><p>The expected value of <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom <span class="math notranslate nohighlight">\(\mathbb{E}[T] = 0\)</span>, for <span class="math notranslate nohighlight">\(n &gt; 0\)</span>. But <span class="math notranslate nohighlight">\(\mathbb{E}[T]\)</span> is undefined for <span class="math notranslate nohighlight">\(n = 1\)</span>.</p></li>
+<li><p>The variance of <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom <span class="math notranslate nohighlight">\(\text{Var}(T) = \frac{n}{n-2}\)</span>, for <span class="math notranslate nohighlight">\(n &gt; 2\)</span>. But <span class="math notranslate nohighlight">\(\text{Var}(T)\)</span> is undefined for <span class="math notranslate nohighlight">\(n = 1, 2\)</span>.</p></li>
+<li><p>As <span class="math notranslate nohighlight">\(n \to \infty\)</span>, <span class="math notranslate nohighlight">\(T(n) \to N(0, 1)\)</span>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \N\)</span>, we define <span class="math notranslate nohighlight">\(t_{p,n}\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(T &gt; t_{p,n}) = p.\)</span> Since the <span class="math notranslate nohighlight">\(t\)</span>-distribution has a symmetric PDF, we have $<span class="math notranslate nohighlight">\(t_{1-p,n} = -t_{p,n}\)</span><span class="math notranslate nohighlight">\( To calculate the \)</span>t$-distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test4</span>
+
+<span class="n">test4</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mf">5.487</span><span class="p">,</span> <span class="n">numSamples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1d2c8f198db9642fd73b19ad8c5aa94f47f74ab3bf82f461892d793588815f71.png" src="../../_images/1d2c8f198db9642fd73b19ad8c5aa94f47f74ab3bf82f461892d793588815f71.png" />
+</div>
+</div>
+<p>By the above discussion, we know that</p>
+<div class="math notranslate nohighlight">
+\[
+T = \frac{\bar{X} - \mu}{\frac{S}{\sqrt{n}}}. 
+\]</div>
+<p>has a <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom, i.e., <span class="math notranslate nohighlight">\(T \sim t(n-1)\)</span>.<br />
+This result implies that we can derive the probability of the random variable <span class="math notranslate nohighlight">\(T = \frac{\bar{X} - \mu}{S / \sqrt{n}}\)</span> within this region even though we have an unknown variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+P \Bigg( -t_{\frac{\alpha}{2}, n-1} \leq \frac{\bar{X} - \mu}{S / \sqrt{n}} \leq t_{\frac{\alpha}{2}, n-1} \Bigg) = 1-\alpha
+\]</div>
+<p>By using some algebraic methods, we can get this result</p>
+<div class="math notranslate nohighlight">
+\[
+P \Bigg( \bar{X} - t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}}
+    \leq \mu 
+    \leq \bar{X} + t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}} \Bigg) = 1-\alpha
+\]</div>
+<p>Finally, we can report that <span class="math notranslate nohighlight">\(\Bigg[ \bar{X} - t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}}, \bar{X} + t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}} \Bigg]\)</span> is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span> even though we have an unknown variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and <span class="math notranslate nohighlight">\(n\)</span> is not large (where the CLT cannot be applied).</p>
+</section>
+<hr class="docutils" />
+<section id="summary-confidence-intervals-for-normal-samples-n-is-not-large">
+<h3>Summary: Confidence Intervals for Normal Samples (<span class="math notranslate nohighlight">\(n\)</span> is not large)<a class="headerlink" href="#summary-confidence-intervals-for-normal-samples-n-is-not-large" title="Link to this heading">#</a></h3>
+<section id="when-variance-sigma-2-is-known">
+<h4>When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>known</strong><a class="headerlink" href="#when-variance-sigma-2-is-known" title="Link to this heading">#</a></h4>
+<p>We can use the random variable <span class="math notranslate nohighlight">\(Q = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}\)</span> to estimate <span class="math notranslate nohighlight">\(\mu\)</span>. As we have discussed earlier, <span class="math notranslate nohighlight">\(Q\)</span> follows a standard normal distribution</p>
+<div class="math notranslate nohighlight">
+\[
+Q = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1).
+\]</div>
+<p>Thus, we can get</p>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \bar{X} - z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}}, \bar{X} + z_{\frac{\alpha}{2}} \cdot \frac{\sigma}{\sqrt{n}} \Bigg]
+\]</div>
+<p>is approximately a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+</section>
+<section id="when-variance-sigma-2-is-unknown">
+<h4>When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>unknown</strong><a class="headerlink" href="#when-variance-sigma-2-is-unknown" title="Link to this heading">#</a></h4>
+<p>We can use the random variable <span class="math notranslate nohighlight">\(T = \frac{\bar{X} - \mu}{S / \sqrt{n}}\)</span> to estimate <span class="math notranslate nohighlight">\(\mu\)</span>, where <span class="math notranslate nohighlight">\(S^2\)</span> represents the sample variance. As we have discussed earlier, <span class="math notranslate nohighlight">\(T\)</span> follows the <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom</p>
+<div class="math notranslate nohighlight">
+\[
+T = \frac{\bar{X} - \mu}{\frac{S}{\sqrt{n}}} \sim T(n-1).
+\]</div>
+<p>Thus, we can get</p>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \bar{X} - t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}}, \bar{X} + t_{\frac{\alpha}{2}, n-1} \cdot \frac{S}{\sqrt{n}} \Bigg]
+\]</div>
+<p>is approximately a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \% \)</span> confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>Also, we can use the random variable <span class="math notranslate nohighlight">\(Y = \frac{(n - 1) \cdot S^2}{\sigma^2}\)</span> to estimate <span class="math notranslate nohighlight">\(\sigma^2\)</span>. As we have discussed earlier, <span class="math notranslate nohighlight">\(Y\)</span> follows the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \frac{(n - 1) \cdot S^2}{\sigma^2} \sim \chi^2(n-1).
+\]</div>
+<p>And we can report that</p>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \frac{(n-1) \cdot S^2}{\chi^2_{1-\frac{\alpha}{2}, n-1}}, \frac{(n-1) \cdot S^2}{\chi^2_{\frac{\alpha}{2}, n-1}} \Bigg]
+\]</div>
+<p>is a <span class="math notranslate nohighlight">\((1 - \alpha) \times 100 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="example-4-11-dr-hsiao-s-banana-farm">
+<h4>Example 4.11: Dr. Hsiao’s Banana Farm<a class="headerlink" href="#example-4-11-dr-hsiao-s-banana-farm" title="Link to this heading">#</a></h4>
+<p>Dr. Hsiao is measuring something again. Different from the last time, we do know that he wants to know the growth of his banana farm. After careful and random measurements, he obtained the length of 20 bananas as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+16.48, 23.68, 23.81, 10.18, 24.88, 11.17, 8.16, 16.54, 19.76, 22.43, \\
+26.76, 20.72, 15.93, 20.37, 14.27, 17.16, 23.69, 23.94, 12.44, 6.48
+\end{split}\]</div>
+<p>Assuming that the length is normally distributed with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, please find the <span class="math notranslate nohighlight">\(95 \%\)</span> confidence intervals for <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<ul class="simple">
+<li><p>Using the data we obtain</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\bar{X} &amp;= 17.94 \\
+S^2 &amp;= 36.05
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(n = 20, \alpha = 0.05\)</span>, we can calculate the following values</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+t_{0.025, 19} &amp;\approx 2.093 \\
+\chi_{0.975, 19}^2 &amp;\approx 32.852 \\
+\chi_{0.025, 19}^2 &amp;\approx 8.907
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Therefore, the <span class="math notranslate nohighlight">\(95 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ 17.94 - 2.093 \cdot \sqrt{\frac{36.05}{20}}, 17.94 + 2.093 \cdot \sqrt{\frac{36.05}{20}} \Bigg] = [15.13, 20.75]
+\]</div>
+<ul class="simple">
+<li><p>And the <span class="math notranslate nohighlight">\(95 \%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\sigma^2\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Bigg[ \frac{19 \cdot 36.05}{32.852}, \frac{19 \cdot 36.05}{8.907} \Bigg] = [20.85, 76.91]
+\]</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">16.48</span><span class="p">,</span> <span class="mf">23.68</span><span class="p">,</span> <span class="mf">23.81</span><span class="p">,</span> <span class="mf">10.18</span><span class="p">,</span> <span class="mf">24.88</span><span class="p">,</span> <span class="mf">11.17</span><span class="p">,</span> <span class="mf">8.16</span><span class="p">,</span> <span class="mf">16.54</span><span class="p">,</span> <span class="mf">19.76</span><span class="p">,</span> <span class="mf">22.43</span><span class="p">,</span> 
+<span class="mf">26.76</span><span class="p">,</span> <span class="mf">20.72</span><span class="p">,</span> <span class="mf">15.93</span><span class="p">,</span> <span class="mf">20.37</span><span class="p">,</span> <span class="mf">14.27</span><span class="p">,</span> <span class="mf">17.16</span><span class="p">,</span> <span class="mf">23.69</span><span class="p">,</span> <span class="mf">23.94</span><span class="p">,</span> <span class="mf">12.44</span><span class="p">,</span> <span class="mf">6.48</span><span class="p">])</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">sampleMean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">sampleVar</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">data</span> <span class="o">-</span> <span class="n">sampleMean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">tValue</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">chiValue1</span> <span class="o">=</span><span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">chiValue2</span> <span class="o">=</span><span class="n">chi2</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confidence Interval for Mean = [</span><span class="si">{:.2f}</span><span class="s2">, </span><span class="si">{:.2f}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="n">sampleMean</span> <span class="o">-</span> <span class="n">tValue</span><span class="o">*</span><span class="p">(</span><span class="n">sampleVar</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">sampleMean</span> <span class="o">+</span> <span class="n">tValue</span><span class="o">*</span><span class="p">(</span><span class="n">sampleVar</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confidence Interval for Variance = [</span><span class="si">{:.2f}</span><span class="s2">, </span><span class="si">{:.2f}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sampleVar</span><span class="o">/</span><span class="n">chiValue1</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sampleVar</span><span class="o">/</span><span class="n">chiValue2</span>
+        <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confidence Interval for Mean = [15.13, 20.75]
+Confidence Interval for Variance = [20.85, 76.91]
+</pre></div>
+</div>
+</div>
+</div>
+<details><summary>Random samples for example 4.11</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">19.48</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">5.43</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<p>For more information, please visit the <a class="reference external" href="https://www.probabilitycourse.com/">Introduction to Probability, Statistics and Random Processes</a>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters\19"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../18/chap18.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Limit Theorems and Monte Carlo Method</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../20/chap20.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Randomized Trials and Hypothesis Checking</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-sampling">Random Sampling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-random-samples">Properties of Random Samples:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimation"><strong>Point Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-estimators">Evaluation of Estimators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">1. Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-1-bias-of-sample-mean">Example 4.1: Bias of Sample Mean</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-squared-error-mse">2. Mean Squared Error (MSE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-2-mse-of-sample-mean-and-one-sample">Example 4.2: MSE of Sample Mean and One Sample</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-estimators-for-variance">Point Estimators for Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-likelihood-estimation"><strong>Maximum Likelihood Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-3-a-bag-with-3-balls">Example 4.3: A Bag with 3 Balls</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-maximum-likelihood-estimation-mle">Definition of Maximum Likelihood Estimation (MLE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-4-mle-1-unknown-parameter-to-estimate">Example 4.4: MLE, 1 unknown parameter to estimate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-1">Exercise 4.1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-5-mle-2-unknown-parameters-to-estimate">Example 4.5: MLE, 2 unknown parameters to estimate</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interval-estimation"><strong>Interval Estimation</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-of-interval-estimation">Definition of Interval Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-6-interval-estimation">Example 4.6: Interval Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotal-quantity-pivot">Pivotal Quantity (Pivot)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotal-method-for-finding-confidence-interval">Pivotal Method for Finding Confidence Interval</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-7-pivotal-method">Example 4.7: Pivotal Method</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary-interval-estimation-with-known-variance">Brief Summary: Interval Estimation with <strong>Known Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-8-interval-estimation-with-known-variance-sigma-2">Example 4.8: Interval Estimation with Known Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interval-estimation-with-unknown-variance">Interval Estimation with <strong>Unknown Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-9-interval-estimation-using-upper-bound-of-variance-sigma-max">Example 4.9: Interval Estimation using Upper Bound of Variance <span class="math notranslate nohighlight">\(\sigma_{max}\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary-interval-estimation-with-unknown-variance">Brief Summary: Interval Estimation with <strong>Unknown Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-10-how-large-does-n-need-to-be">Example 4.10: How Large Does <span class="math notranslate nohighlight">\(n\)</span> Need to Be?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Brief Summary: Interval Estimation with <strong>Unknown Variance</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-intervals-for-normal-samples"><strong>Confidence Intervals for Normal Samples</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chi-2-distribution-chi-squared-distribution">The <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution (Chi-Squared Distribution)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-the-chi-2-distribution">Why Do We Need the <span class="math notranslate nohighlight">\(\chi^2\)</span> Distribution?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-t-distribution-student-s-t-distribution">The <span class="math notranslate nohighlight">\(t\)</span>-Distribution (Student’s <span class="math notranslate nohighlight">\(t\)</span>-Distribution)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-confidence-intervals-for-normal-samples-n-is-not-large">Summary: Confidence Intervals for Normal Samples (<span class="math notranslate nohighlight">\(n\)</span> is not large)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-variance-sigma-2-is-known">When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>known</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#when-variance-sigma-2-is-unknown">When variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is <strong>unknown</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-11-dr-hsiao-s-banana-farm">Example 4.11: Dr. Hsiao’s Banana Farm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chieh-En Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

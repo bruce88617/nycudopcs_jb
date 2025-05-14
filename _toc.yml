@@ -43,6 +43,19 @@ parts:
       title: 14. Data Analysis and More Data Visualization with Python I
     - file: chapters/15/chap15.ipynb
       title: 15. Data Analysis and More Data Visualization with Python II
+    - file: chapters/16/chap16.ipynb
+      title: 16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems
+  
+  - caption: "Part III: Data Science with Python"
+    chapters:
+    - file: chapters/17/chap17.ipynb
+      title: 17. Random Walks and Stochastic Programs
+    - file: chapters/18/chap18.ipynb
+      title: 18. Limit Theorems and Monte Carlo Method
+    - file: chapters/19/chap19.ipynb
+      title: 19. Introduction to Statistical Inference
+    - file: chapters/20/chap20.ipynb
+      title: 20. Randomized Trials and Hypothesis Checking
   
   - caption: "Archives"
     chapters:

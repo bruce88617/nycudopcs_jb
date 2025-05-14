@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/15/chap15';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to Concurrency and Parallelism" href="../../archives/IntroConcurrencyParallelism.html" />
+    <link rel="next" title="Knapsack Problems, Dynamic Programming, and Graph Optimization Problems" href="../16/chap16.html" />
     <link rel="prev" title="Data Analysis and More Data Visualization with Python I" href="../14/chap14.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,8 +155,8 @@
       
     
     
-    <img src="../../_static/nycu_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
-    <script>document.write(`<img src="../../_static/nycu_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
   
   
 </a></div>
@@ -201,6 +201,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
@@ -549,67 +555,33 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s2">&quot;./data/data_nycudopcs.xlsx&quot;</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">sheet_name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>108A
+   item       HW#1       HW#2       HW#3       HW#4       HW#5       HW#6  \
+0  mean  72.129032  93.161290  85.580645  81.290323  84.645161  90.774194   
+1   std  33.206166  42.563754  33.557686  36.577947  25.508885  12.637800   
 
-<span class="nn">File O:\Envs\nycudopcs\Lib\site-packages\pandas\io\excel\_base.py:504,</span> in <span class="ni">read_excel</span><span class="nt">(io, sheet_name, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skiprows, nrows, na_values, keep_default_na, na_filter, verbose, parse_dates, date_parser, date_format, thousands, decimal, comment, skipfooter, storage_options, dtype_backend, engine_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">io</span><span class="p">,</span> <span class="n">ExcelFile</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>     <span class="n">should_close</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="ne">--&gt; </span><span class="mi">504</span>     <span class="n">io</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span>         <span class="n">io</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span>         <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">507</span>         <span class="n">engine</span><span class="o">=</span><span class="n">engine</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span>         <span class="n">engine_kwargs</span><span class="o">=</span><span class="n">engine_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">509</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">510</span> <span class="k">elif</span> <span class="n">engine</span> <span class="ow">and</span> <span class="n">engine</span> <span class="o">!=</span> <span class="n">io</span><span class="o">.</span><span class="n">engine</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">512</span>         <span class="s2">&quot;Engine should not be specified when passing &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">513</span>         <span class="s2">&quot;an ExcelFile - ExcelFile already has the engine set&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">514</span>     <span class="p">)</span>
+        HW#7       HW#8       HW#9      HW#10      Final      Grade  
+0  78.612903  57.741935  79.451613  69.129032  59.245161  78.064516  
+1  32.023614  35.719246  31.258960  37.397631  38.194026  19.753372  
+====================================================================================================
+111A
+   item       HW#1       HW#2       HW#3       HW#4       HW#5       HW#6  \
+0  mean  83.613636  83.340909  87.613636  79.568182  80.931818  90.340909   
+1   std  21.750398  31.591832  20.517963  13.855396  25.082559  25.911247   
 
-<span class="nn">File O:\Envs\nycudopcs\Lib\site-packages\pandas\io\excel\_base.py:1563,</span> in <span class="ni">ExcelFile.__init__</span><span class="nt">(self, path_or_buffer, engine, storage_options, engine_kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1561</span>     <span class="n">ext</span> <span class="o">=</span> <span class="s2">&quot;xls&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1562</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1563</span>     <span class="n">ext</span> <span class="o">=</span> <span class="n">inspect_excel_format</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1564</span>         <span class="n">content_or_path</span><span class="o">=</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span>
-<span class="g g-Whitespace">   </span><span class="mi">1565</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1566</span>     <span class="k">if</span> <span class="n">ext</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1567</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1568</span>             <span class="s2">&quot;Excel file format cannot be determined, you must specify &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1569</span>             <span class="s2">&quot;an engine manually.&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1570</span>         <span class="p">)</span>
+        HW#7        HW#8       HW#9      HW#10      Final      Grade  
+0  77.250000  101.522727  98.227273  96.750000  61.325758  84.894848  
+1  12.970674   29.941407  55.223379  37.473169  32.289988  15.606122  
+====================================================================================================
+112A
+   item       HW#1       HW#2       HW#3       HW#4       HW#5       HW#6  \
+0  mean  87.209302  78.837209  78.372093  78.372093  52.325581  62.093023   
+1   std  32.317295  26.543702  27.618165  27.253679  43.470691  41.017310   
 
-<span class="nn">File O:\Envs\nycudopcs\Lib\site-packages\pandas\io\excel\_base.py:1419,</span> in <span class="ni">inspect_excel_format</span><span class="nt">(content_or_path, storage_options)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1416</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1417</span>     <span class="n">content_or_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">content_or_path</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1419</span> <span class="k">with</span> <span class="n">get_handle</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1420</span>     <span class="n">content_or_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">,</span> <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span> <span class="n">is_text</span><span class="o">=</span><span class="kc">False</span>
-<span class="g g-Whitespace">   </span><span class="mi">1421</span> <span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1422</span>     <span class="n">stream</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">handle</span>
-<span class="g g-Whitespace">   </span><span class="mi">1423</span>     <span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="nn">File O:\Envs\nycudopcs\Lib\site-packages\pandas\io\common.py:872,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">865</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">868</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">869</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">870</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">871</span>         <span class="c1"># Binary mode</span>
-<span class="ne">--&gt; </span><span class="mi">872</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">873</span>     <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">875</span> <span class="c1"># Convert BytesIO or file objects passed with an encoding</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;./data/data_nycudopcs.xlsx&#39;
+        HW#7        HW#8       HW#9       HW#10      Final      Grade  
+0  89.302326  128.255814  50.000000  107.906977  66.364341  80.646512  
+1  18.308903   37.319147  43.588989   50.097911  30.683727  19.716038  
+====================================================================================================
 </pre></div>
 </div>
 </div>
@@ -663,6 +635,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0fd223d056be93976780963a20e4ebcbd4b019dd4d69fbc75d5a792dc45755eb.png" src="../../_images/0fd223d056be93976780963a20e4ebcbd4b019dd4d69fbc75d5a792dc45755eb.png" />
 </div>
 </div>
 </section>
@@ -732,6 +707,9 @@ document.write(`
 <span class="n">plotGrade</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/6856182a7a759c4388e0ba9db81f56652adc0752813d66b1f28095863fb87200.png" src="../../_images/6856182a7a759c4388e0ba9db81f56652adc0752813d66b1f28095863fb87200.png" />
 </div>
 </div>
 </section>
@@ -824,6 +802,9 @@ document.write(`
 <span class="n">plotBarV</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a85ff2ceaa32db0fad61e00a18d34773e10dd85efee237db58aed1cd8e4105a2.png" src="../../_images/a85ff2ceaa32db0fad61e00a18d34773e10dd85efee237db58aed1cd8e4105a2.png" />
 </div>
 </div>
 </section>
@@ -919,6 +900,9 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/969d7c96945492a6207543d0167840af72d7c52f48c41c64472fe4a0bc9d3948.png" src="../../_images/969d7c96945492a6207543d0167840af72d7c52f48c41c64472fe4a0bc9d3948.png" />
 </div>
 </div>
 </section>
@@ -1017,6 +1001,9 @@ f(x, y) = (1- \frac{x}{2} + x^3 + y^5) \cdot \exp{-(x^2 +y^2)}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2467dbb01be8f7a6995cf24d9ce5829fe59d0c94da0d322c63f433b687c3dcf6.png" src="../../_images/2467dbb01be8f7a6995cf24d9ce5829fe59d0c94da0d322c63f433b687c3dcf6.png" />
+</div>
 </div>
 </section>
 <hr class="docutils" />
@@ -1086,6 +1073,9 @@ f(x, y) = 8 \cdot x \cdot y \cdot \exp{ \lbrace (x^2 + y^2) \rbrace }
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/22cac0b5081403ad411050270115acf1d9284ca729e0e83b5891dad4cce7420b.png" src="../../_images/22cac0b5081403ad411050270115acf1d9284ca729e0e83b5891dad4cce7420b.png" />
 </div>
 </div>
 <section id="the-batted-ball-of-mlb">
@@ -1558,11 +1548,11 @@ f(x, y) = 8 \cdot x \cdot y \cdot \exp{ \lbrace (x^2 + y^2) \rbrace }
       </div>
     </a>
     <a class="right-next"
-       href="../../archives/IntroConcurrencyParallelism.html"
+       href="../16/chap16.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Concurrency and Parallelism</p>
+        <p class="prev-next-title">Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

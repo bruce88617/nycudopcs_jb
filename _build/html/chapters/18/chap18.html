@@ -1,0 +1,1371 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Limit Theorems and Monte Carlo Method &#8212; Introduction to Computer Science and Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/18/chap18';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to Concurrency and Parallelism" href="../../archives/IntroConcurrencyParallelism.html" />
+    <link rel="prev" title="Random Walks and Stochastic Programs" href="../17/chap17.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Computer Science and Programming
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I: Fundamentals of Computer Science and Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/intro_chap1.html">01. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/chap02.html">02. Python Basics, Branching, and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/chap03.html">03. Simple Numerical Algorithms I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/chap04.html">04. Abstraction, Decomposition, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/chap05.html">05. Tuples, Lists, Mutability, Aliasing, and Cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/chap06.html">06. Recursion and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/chap07.html">07. Modules, Packages, Exception, and Assertion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/chap08.html">08. Introduction to Object-Oriented Programming I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/chap09.html">09. Introduction to Object-Oriented Programming II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16/chap16.html">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Limit Theorems and Monte Carlo Method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs/issues/new?title=Issue%20on%20page%20%2Fchapters/18/chap18.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/18/chap18.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Limit Theorems and Monte Carlo Method</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experiment">An Experiment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-s-problem">Pascal’s Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned-in-the-pascal-s-problem">What have we learned in the Pascal’s problem?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-estimation"><span class="math notranslate nohighlight">\(\pi\)</span> Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned-in-the-pi-estimation">What have we learned in the <span class="math notranslate nohighlight">\(\pi\)</span> Estimation?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limit-theorems"><strong>Limit Theorems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers">Law of large numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-of-sample-means-the-means-of-the-samples">The Expectation of Sample Means (The Means of the Samples)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-the-sample-means">The Variance of the Sample Means</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem (CLT)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-method"><strong>Monte Carlo method</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-estimation">1. Area Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-integration">2. Univariate Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1-monte-carlo-integration">Exercise 3.1: Monte Carlo Integration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration-multi-variate">3. Monte Carlo Integration (multi-variate)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variate-monte-carlo-integration-on-rectangular-domain">3.1 Multi-variate Monte Carlo Integration on Rectangular Domain</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variate-monte-carlo-integration-on-non-rectangular-domain">3.2 Multi-variate Monte Carlo Integration on Non-rectangular Domain</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-2-multi-variate-monte-carlo-integration">Exercise 3.2: Multi-variate Monte Carlo Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-monte-carlo-method">Summary of Monte Carlo Method</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="limit-theorems-and-monte-carlo-method">
+<h1>Limit Theorems and Monte Carlo Method<a class="headerlink" href="#limit-theorems-and-monte-carlo-method" title="Link to this heading">#</a></h1>
+<section id="last-time">
+<h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Part I: Random Walk</p>
+<ul>
+<li><p>The drunkard’s walk</p></li>
+<li><p>Biased random walks</p></li>
+<li><p>Treacherous fields</p></li>
+</ul>
+</li>
+<li><p>Part II: Stochastic Programs</p>
+<ul>
+<li><p>The concept of random variables</p></li>
+<li><p>Distributions</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="today">
+<h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ul>
+    <li><a href="#tag1">Limit Theorems</a></li>
+    <li><a href="#tag2">Monte Carlo Method</a></li>
+    <ul>
+        <li><a href="#tag3">Area Estimation</a></li>
+        <li><a href="#tag4">Univariate Integration</a></li>
+        <li><a href="#tag5">Multi-variate Integration</a></li>
+    </ul>
+</ul>
+</section>
+<section id="introduction">
+<h2><strong>Introduction</strong><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<section id="an-experiment">
+<h3>An Experiment<a class="headerlink" href="#an-experiment" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Assuming <span class="math notranslate nohighlight">\(X \sim Uniform(0,1)\)</span>, we would like to know the sample mean <span class="math notranslate nohighlight">\(\bar{X} = \frac{X_1 + X_2 + \dots + X_n}{n}\)</span> and its variance <span class="math notranslate nohighlight">\(\text{Var}(\bar{X})\)</span> under different value of <span class="math notranslate nohighlight">\(n\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\bar{X} &amp;= \frac{X_1 + X_2 + \dots + X_n}{n} \\
+\text{Var}(\bar{X}) &amp;= \text{Var} \big( \frac{X_1 + X_2 + \dots + X_n}{n} \big)
+\end{aligned}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uniform distribution&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">numSamples</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]:</span>
+        <span class="n">sampleMeans</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="c1"># Generate random samples</span>
+            <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+            <span class="n">samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">numSamples</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span>
+            <span class="n">sampleMeans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of Sample = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numSamples</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Theoretical: (Mean, Var) = (</span><span class="si">{:.2f}</span><span class="s2">, </span><span class="si">{:.4f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">b</span><span class="o">+</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">12</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Sample: (Mean, Var) = (</span><span class="si">{:.2f}</span><span class="s2">, </span><span class="si">{:.4f}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sampleMeans</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">sampleMeans</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Sample = 1
+    Theoretical: (Mean, Var) = (0.50, 0.0833)
+    Sample: (Mean, Var) = (0.47, 0.0955)
+Number of Sample = 10
+    Theoretical: (Mean, Var) = (0.50, 0.0833)
+    Sample: (Mean, Var) = (0.50, 0.0092)
+Number of Sample = 100
+    Theoretical: (Mean, Var) = (0.50, 0.0833)
+    Sample: (Mean, Var) = (0.50, 0.0008)
+Number of Sample = 1000
+    Theoretical: (Mean, Var) = (0.50, 0.0833)
+    Sample: (Mean, Var) = (0.50, 0.0001)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>What have we learned in this simulation?</p>
+<ul>
+<li><p>As the number of samples increases, <strong>the value of sample mean tempts to converge</strong> and <strong>its variance decreases</strong>.</p></li>
+<li><p>We already know the truth that <span class="math notranslate nohighlight">\(\mathbb{E}[X] = 0.5\)</span> for <span class="math notranslate nohighlight">\(X \sim Uniform(0, 1)\)</span>.</p></li>
+<li><p>After this simulation, we can confirm that this is truth.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="pascal-s-problem">
+<h3>Pascal’s Problem<a class="headerlink" href="#pascal-s-problem" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Reputedly, Pascal’s interest in the field that came to know as probability theory began when a friend asked him a question:</p>
+<blockquote>
+<div><p>Is it profitable to bet that one can get a double 6 within 24 rolls of a pair of dice?</p>
+</div></blockquote>
+</li>
+<li><p>To solve this problem, we have</p>
+<ol class="arabic simple">
+<li><p>The probability of rolling a double 6 is <span class="math notranslate nohighlight">\(\frac{1}{36}\)</span>.</p></li>
+<li><p>The probability of not rolling a double 6 on the first roll is <span class="math notranslate nohighlight">\(1 - \frac{1}{36} = \frac{35}{36}\)</span>.</p></li>
+<li><p>Therefore the probability of not rolling a double 6 in 24 consecutive times is <span class="math notranslate nohighlight">\((\frac{35}{36})^{24} \approx 0.49\)</span></p></li>
+</ol>
+</li>
+<li><p>Also, we can write a stochastic program to simulate this game.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="n">test1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Simulation of Pascal&#39;s Game
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Probability of winning = 0.4958
+</pre></div>
+</div>
+<img alt="../../_images/67503ed7800ac60783c6eecdbec0bf951af54c0c9b1cbcd4313b8f66c7f4641c.png" src="../../_images/67503ed7800ac60783c6eecdbec0bf951af54c0c9b1cbcd4313b8f66c7f4641c.png" />
+</div>
+</div>
+<section id="what-have-we-learned-in-the-pascal-s-problem">
+<h4>What have we learned in the Pascal’s problem?<a class="headerlink" href="#what-have-we-learned-in-the-pascal-s-problem" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>As the number of trials increases, <strong>the winning probability tempts to converge</strong>.</p></li>
+<li><p>According to our derivation, the probability of not rolling a double <span class="math notranslate nohighlight">\(6\)</span> in <span class="math notranslate nohighlight">\(24\)</span> consecutive times is <span class="math notranslate nohighlight">\((\frac{35}{36})^{24} \approx 0.4914\)</span>.</p></li>
+</ol>
+<ul class="simple">
+<li><p>After this simulation, we can confirm that this is truth.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pi-estimation">
+<h3><span class="math notranslate nohighlight">\(\pi\)</span> Estimation<a class="headerlink" href="#pi-estimation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>One of the most historical achievement in mathematics is the estimation of the mathematical constant, <span class="math notranslate nohighlight">\(\pi\)</span>. The approximation reached an accuracy within <span class="math notranslate nohighlight">\(0.04%\)</span> of the true value before the beginning of the Common Era. Nowadays, the current record of approximation error is within 100 trillion (<span class="math notranslate nohighlight">\(10^{14}\)</span>) digits.</p></li>
+<li><p>Long before computers were invented, the French mathematicians <a class="reference external" href="https://en.wikipedia.org/wiki/Georges-Louis_Leclerc,_Comte_de_Buffon">Buffon (1707-1788)</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Pierre-Simon_Laplace">Laplace (1749-1827)</a> proposed using a stochastic simulation to estimate the value of <span class="math notranslate nohighlight">\(\pi\)</span>.</p></li>
+<li><p>Today, we are going to use the computer to solve this issue.</p></li>
+</ul>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig01.png">
+</center>
+<ul class="simple">
+<li><p>To solve this, let’s assume <span class="math notranslate nohighlight">\(P_0 (x,y)\)</span> is a point sampled from <span class="math notranslate nohighlight">\(R = [-1,1] \times [-1,1]\)</span>. What we are interesting is the probability that <span class="math notranslate nohighlight">\(P_0\)</span> is in the circle?</p>
+<ol class="arabic simple">
+<li><p>The area of the square is <span class="math notranslate nohighlight">\(A_1 = 4\)</span>.</p></li>
+<li><p>The area of the circle is <span class="math notranslate nohighlight">\(A_2 = \pi \cdot 1^2 = \pi\)</span>.</p></li>
+<li><p>The probability that <span class="math notranslate nohighlight">\(P_0\)</span> is in the circle is <span class="math notranslate nohighlight">\(\frac{A_2}{A_1} = \frac{\pi}{4}\)</span>.</p></li>
+<li><p>Let’s assume we have <span class="math notranslate nohighlight">\(N\)</span> points which are uniformly sampled from <span class="math notranslate nohighlight">\(R = [-1,1] \times [-1,1]\)</span>. And we found that <span class="math notranslate nohighlight">\(m\)</span> points are in the circle. We can estimate the value of <span class="math notranslate nohighlight">\(\pi\)</span> based on <span class="math notranslate nohighlight">\(\pi \approx \frac{4m}{N}\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Also, we can write a stochastic program to simulate this estimation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test2</span>
+
+<span class="n">test2</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">toPrint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.280000, STD = 1.536750, numData = 1
+Est. = 3.160000, STD = 1.065082, numData = 2
+Est. = 3.160000, STD = 0.902441, numData = 4
+Est. = 3.085714, STD = 0.671277, numData = 7
+Est. = 3.147500, STD = 0.433150, numData = 16
+Est. = 3.147500, STD = 0.292286, numData = 32
+Est. = 3.149206, STD = 0.234491, numData = 63
+Est. = 3.130709, STD = 0.141417, numData = 127
+Est. = 3.127031, STD = 0.101374, numData = 256
+Est. = 3.150000, STD = 0.068634, numData = 512
+Est. = 3.136328, STD = 0.049861, numData = 1024
+Est. = 3.138867, STD = 0.035002, numData = 2048
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144195, STD = 0.024529, numData = 4095
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144578, STD = 0.017188, numData = 8191
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.144398, STD = 0.012648, numData = 16383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 3.141299, STD = 0.009148, numData = 32768
+</pre></div>
+</div>
+<img alt="../../_images/8fb6331a567539e2c5f84c8e3d0879223ba637924f6b6a76c9829e47cd6cca29.png" src="../../_images/8fb6331a567539e2c5f84c8e3d0879223ba637924f6b6a76c9829e47cd6cca29.png" />
+</div>
+</div>
+<section id="what-have-we-learned-in-the-pi-estimation">
+<h4>What have we learned in the <span class="math notranslate nohighlight">\(\pi\)</span> Estimation?<a class="headerlink" href="#what-have-we-learned-in-the-pi-estimation" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>As the number of data increases, <strong>the estimated value tempts to converge</strong> and <strong>the standard deviation of estimations is decreasing</strong>.</p></li>
+<li><p>According to our simulation, we can only get a <strong>“close”</strong> result of <span class="math notranslate nohighlight">\(\pi\)</span>, which means that we will never acquire an correct answer.</p></li>
+</ol>
+<hr class="docutils" />
+<p><a id="tag1"></a></p>
+</section>
+</section>
+</section>
+<section id="limit-theorems">
+<h2><strong>Limit Theorems</strong><a class="headerlink" href="#limit-theorems" title="Link to this heading">#</a></h2>
+<section id="law-of-large-numbers">
+<h3>Law of large numbers<a class="headerlink" href="#law-of-large-numbers" title="Link to this heading">#</a></h3>
+<section id="the-expectation-of-sample-means-the-means-of-the-samples">
+<h4>The Expectation of Sample Means (The Means of the Samples)<a class="headerlink" href="#the-expectation-of-sample-means-the-means-of-the-samples" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Why can we acquire an estimation that is more and more accurate as the number of data increasing?</p></li>
+<li><p>For <strong>independent and identically distributed (i. i. d.)</strong> random variables <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>, the <strong>sample mean</strong> <span class="math notranslate nohighlight">\(\bar{X}\)</span> is defined as</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\bar{X} = \frac{X_1 + X_2 + \dots + X_n}{n}
+\]</div>
+<ul class="simple">
+<li><p>Since the <span class="math notranslate nohighlight">\(X_i\)</span>’s are random variables, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is also a random variable. Thus we have</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}\mathbb{E} [\bar{X}] &amp;= \frac{\mathbb{E} [X_1] + \mathbb{E} [X_2] + \dots + \mathbb{E} [X_n]}{n} \\
+&amp;= \frac{n \cdot \mathbb{E} [X]}{n} = \mathbb{E} [X]\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p>The above equation means that, as the number of sample increasing, <strong>the expectation of sample means</strong> is equal to <strong>the expectation of the population mean</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="the-variance-of-the-sample-means">
+<h4>The Variance of the Sample Means<a class="headerlink" href="#the-variance-of-the-sample-means" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Also, the variance of the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is given by</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}\text{Var} [\bar{X}] &amp;= \frac{ \text{Var} [X_1 + X_2 + \dots + X_n] }{n^2} \\
+&amp;= \frac{ \text{Var}[X_1] + \text{Var}[X_2] + \dots + \text{Var}[X_n] }{n^2} \\
+&amp;= \frac{ n \cdot \text{Var}[X] }{n^2} = \frac{\text{Var}[X]}{n}\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p>This means that, as the number of sample increasing, <strong>the variance of the sample means</strong> is equal to <strong>the variance of the population divided by the sample size, n</strong>.</p></li>
+<li><p>Therefore, we get the <strong>weak law of large numbers (WLLN)</strong>. For any <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\lim_{n \to \infty} P(|\bar{X} - \mu| \geq \epsilon) = 0
+\]</div>
+</section>
+</section>
+<section id="the-central-limit-theorem-clt">
+<h3>The Central Limit Theorem (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Given a set of sufficiently large samples drawn from the same population, <strong>the sample means will be approximately normally distributed</strong>, i.e., the distribution of sample means will be a normal distribution.</p></li>
+<li><p>This normal distribution will <strong>have a mean close to the mean of the population</strong>.</p></li>
+<li><p>The variance of the sample means will be <strong>close to the variance of the population divided by the sample size</strong>.</p></li>
+</ul>
+<hr class="docutils" />
+<p><a id="tag2"></a></p>
+</section>
+</section>
+<section id="monte-carlo-method">
+<h2><strong>Monte Carlo method</strong><a class="headerlink" href="#monte-carlo-method" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A numerical approach for acquiring <strong>an approximate solution</strong> of a problem that is <strong>difficult to solve its analytical solution</strong>.</p></li>
+<li><p>It is an approximate solution based on the law of large numbers. This implies that it can only provide a close enough solution, not correct answer.</p></li>
+<li><p>General flowchart:</p>
+<ol class="arabic simple">
+<li><p>Define a domain of possible inputs.</p></li>
+<li><p>Generate inputs randomly from a probability distribution over the domain.</p></li>
+<li><p>Perform a deterministic computation on the inputs.</p></li>
+<li><p>Aggregate the results.</p></li>
+</ol>
+</li>
+</ul>
+<hr class="docutils" />
+<p><a id="tag3"></a></p>
+<section id="area-estimation">
+<h3>1. Area Estimation<a class="headerlink" href="#area-estimation" title="Link to this heading">#</a></h3>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig02.png">
+</center>
+<ul>
+<li><p>Calculate the area of gray region.</p>
+<ol class="arabic simple">
+<li><p>Domain of possible inputs: <span class="math notranslate nohighlight">\( x, y \in [0, 1]\)</span></p></li>
+<li><p>Randomly and uniformly generate <span class="math notranslate nohighlight">\(N\)</span> samples over the domain.</p></li>
+<li><p>Count 1 if the sample satisfies the conditions (<span class="math notranslate nohighlight">\( M = M +1 \)</span>)</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    x^2 + y^2 \leq 1 \\
+    (x-1)^2 + (y-1)^2 \leq 1
+    \end{split}\]</div>
+<ol class="arabic simple" start="4">
+<li><p>Aggregate the result by</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    \text{Estimation} = \frac{M}{N}
+    \]</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test3</span>
+
+<span class="n">test3</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">toPrint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.61000, STD = 0.48775, numData = 1
+Est. = 0.55500, STD = 0.32323, numData = 2
+Est. = 0.59000, STD = 0.23854, numData = 4
+Est. = 0.58143, STD = 0.19405, numData = 7
+Est. = 0.54750, STD = 0.11830, numData = 16
+Est. = 0.56375, STD = 0.08442, numData = 32
+Est. = 0.56476, STD = 0.06724, numData = 63
+Est. = 0.56827, STD = 0.04107, numData = 127
+Est. = 0.57281, STD = 0.03159, numData = 256
+Est. = 0.57176, STD = 0.02015, numData = 512
+Est. = 0.57258, STD = 0.01733, numData = 1024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.56997, STD = 0.01103, numData = 2048
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57228, STD = 0.00829, numData = 4095
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57084, STD = 0.00503, numData = 8191
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57111, STD = 0.00321, numData = 16383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.57079, STD = 0.00237, numData = 32768
+</pre></div>
+</div>
+<img alt="../../_images/5cc9dd7b04e4052a3ad24d8163c779117892d64eca9555d160dad64ee2aaf391.png" src="../../_images/5cc9dd7b04e4052a3ad24d8163c779117892d64eca9555d160dad64ee2aaf391.png" />
+</div>
+</div>
+<p><a id="tag4"></a></p>
+</section>
+<section id="univariate-integration">
+<h3>2. Univariate Integration<a class="headerlink" href="#univariate-integration" title="Link to this heading">#</a></h3>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig03.png">
+</center>
+<ul>
+<li><p>Given an univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>, calculate a definite integral <span class="math notranslate nohighlight">\(I\)</span> from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    I = \int_{a}^{b} {f(x)} \,{\rm d}x \\
+    f(x) = \frac{x}{2}
+    \end{split}\]</div>
+<ol class="arabic simple">
+<li><p>Domain of possible inputs: <span class="math notranslate nohighlight">\( x \in [1.2, 3.5]\)</span></p></li>
+<li><p>Randomly and uniformly generate <span class="math notranslate nohighlight">\(N\)</span> samples over the domain.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(E_N\)</span> as an approximation of <span class="math notranslate nohighlight">\(I\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    E_N = \frac{(b-a)}{N} \sum_{i=1}^{N} f(x_i)
+    \]</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test4</span>
+
+<span class="n">test4</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.81076, STD = 0.80174, numData = 1
+Est. = 2.64477, STD = 0.53939, numData = 2
+Est. = 2.69791, STD = 0.37507, numData = 4
+Est. = 2.67956, STD = 0.26085, numData = 7
+Est. = 2.71422, STD = 0.16652, numData = 16
+Est. = 2.71018, STD = 0.12625, numData = 32
+Est. = 2.70173, STD = 0.09708, numData = 63
+Est. = 2.70459, STD = 0.06494, numData = 127
+Est. = 2.70422, STD = 0.04715, numData = 256
+Est. = 2.70225, STD = 0.03079, numData = 512
+Est. = 2.70088, STD = 0.02299, numData = 1024
+Est. = 2.70385, STD = 0.01787, numData = 2048
+Est. = 2.70357, STD = 0.01075, numData = 4095
+Est. = 2.70172, STD = 0.00819, numData = 8191
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70186, STD = 0.00604, numData = 16383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 2.70305, STD = 0.00409, numData = 32768
+</pre></div>
+</div>
+<img alt="../../_images/deb39d3e1c924ac37b1d4a63cd94f0a61ba3fc3e0b8362c2281e00dddc6e206f.png" src="../../_images/deb39d3e1c924ac37b1d4a63cd94f0a61ba3fc3e0b8362c2281e00dddc6e206f.png" />
+</div>
+</div>
+<hr class="docutils" />
+<section id="exercise-3-1-monte-carlo-integration">
+<h4>Exercise 3.1: Monte Carlo Integration<a class="headerlink" href="#exercise-3-1-monte-carlo-integration" title="Link to this heading">#</a></h4>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig04.png">
+</center>
+<ul class="simple">
+<li><p>Please estimate the area of function <span class="math notranslate nohighlight">\(f(x)\)</span> from 0.5 to 3.0 based on Monte Carlo method.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+I = \int_{0.5}^{3.0} {f(x)} \,{\rm d}x \\
+f(x) = \frac{1}{1 + \sin{x} \cdot (\ln{x})^2}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Please repeat your estimation 100 times. The standard deviation of your estimation in these 100 trials should be less than 0.01.</p></li>
+</ul>
+<hr class="docutils" />
+<p><a id="tag5"></a></p>
+</section>
+</section>
+<section id="monte-carlo-integration-multi-variate">
+<h3>3. Monte Carlo Integration (multi-variate)<a class="headerlink" href="#monte-carlo-integration-multi-variate" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Given a multi-variate function <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>, calculate a definite integral <span class="math notranslate nohighlight">\(I\)</span> in domain <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    I = \iint_{\Omega}^{} {f(x, y)} \,{\rm d}x {\rm d}y \\
+    \end{split}\]</div>
+<ol class="arabic simple">
+<li><p>Domain of possible inputs: <span class="math notranslate nohighlight">\( \mathbf{x} = (x, y) \in \Omega\)</span></p></li>
+<li><p>Randomly and uniformly generate <span class="math notranslate nohighlight">\(N\)</span> samples over the domain.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(E_N\)</span> as an approximation of <span class="math notranslate nohighlight">\(I\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    E_N = \frac{\text{Area}(\Omega)}{N} \sum_{i=1}^{N} f(\mathbf{x}_i)
+    \]</div>
+</li>
+<li><p>However, the shape of domain <span class="math notranslate nohighlight">\(\Omega\)</span> will affect the result of your estimation.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="multi-variate-monte-carlo-integration-on-rectangular-domain">
+<h4>3.1 Multi-variate Monte Carlo Integration on Rectangular Domain<a class="headerlink" href="#multi-variate-monte-carlo-integration-on-rectangular-domain" title="Link to this heading">#</a></h4>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig05.png">
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig06.png">
+</center>
+<ul>
+<li><p>Given a multi-variate function <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>, calculate a definite integral <span class="math notranslate nohighlight">\(I\)</span> in domain <span class="math notranslate nohighlight">\(\Omega = [-1,1] \times [-1,1]\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    I = \iint_{\Omega}^{} {f(x, y)} \,{\rm d}x {\rm d}y \\
+    f(x, y) = \frac{1}{2 \pi} \exp{ [- \frac{1}{2} (x^2 + y^2)] }
+    \end{split}\]</div>
+<ol class="arabic simple">
+<li><p>Domain of possible inputs: <span class="math notranslate nohighlight">\( \mathbf{x} \in \Omega = [-1,1] \times [-1,1]\)</span></p></li>
+<li><p>Randomly and uniformly generate <span class="math notranslate nohighlight">\(N\)</span> samples over the domain <span class="math notranslate nohighlight">\(\Omega = [-1,1] \times [-1,1]\)</span>.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(E_N\)</span> as an approximation of <span class="math notranslate nohighlight">\(I\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+    E_N = \frac{\text{Area}(\Omega)}{N_{\Omega}} \sum_{i=1}^{N_{\Omega}} f(\mathbf{x}_i)
+    \]</div>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="multi-variate-monte-carlo-integration-on-non-rectangular-domain">
+<h4>3.2 Multi-variate Monte Carlo Integration on Non-rectangular Domain<a class="headerlink" href="#multi-variate-monte-carlo-integration-on-non-rectangular-domain" title="Link to this heading">#</a></h4>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig07.png">
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig08.png">
+</center>
+<ul>
+<li><p>Given a multi-variate function <span class="math notranslate nohighlight">\(f(\mathbf{x})\)</span>, calculate a definite integral <span class="math notranslate nohighlight">\(I\)</span> in domain <span class="math notranslate nohighlight">\(\Omega : x^2 + y^2 \leq 1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    I = \iint_{\Omega}^{} {f(x, y)} \,{\rm d}x {\rm d}y \\
+    f(x, y) = \frac{1}{2 \pi} \exp{ [- \frac{1}{2} (x^2 + y^2)] }
+    \end{split}\]</div>
+<ol class="arabic simple">
+<li><p>Domain of possible inputs: <span class="math notranslate nohighlight">\( \mathbf{x} \in R = [-1,1] \times [-1,1]\)</span></p></li>
+<li><p>Randomly and uniformly generate <span class="math notranslate nohighlight">\(N_R\)</span> samples over the domain <span class="math notranslate nohighlight">\(R = [-1,1] \times [-1,1]\)</span>.</p></li>
+<li><p>Keep the samples in the domain <span class="math notranslate nohighlight">\(\Omega\)</span>. The number of samples in the domain is approximately <span class="math notranslate nohighlight">\(N_{\Omega}\)</span>.</p></li>
+<li><p>Calculate <span class="math notranslate nohighlight">\(E_N\)</span> as an approximation of <span class="math notranslate nohighlight">\(I\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    E_N = \frac{\text{Area}(\Omega)}{N} \sum_{i=1}^{N} f(\mathbf{x}_i)
+        = \frac{\text{Area}(R)}{N_{R}} \sum_{i=1}^{N_{\Omega}} f(\mathbf{x}_i) \\
+    
+    \because \frac{N_{\Omega}}{N_R} = \frac{\text{Area}(\Omega)}{\text{Area}(R)}
+    \end{split}\]</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.testFuncs</span> <span class="kn">import</span> <span class="n">test5</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">test5</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="o">-</span><span class="n">L</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.32213, STD = 0.75632, numData = 1
+Est. = 0.42451, STD = 0.55285, numData = 2
+Est. = 0.43377, STD = 0.44072, numData = 4
+Est. = 0.36498, STD = 0.29608, numData = 7
+Est. = 0.43628, STD = 0.20733, numData = 16
+Est. = 0.35599, STD = 0.14940, numData = 32
+Est. = 0.40810, STD = 0.09647, numData = 63
+Est. = 0.39041, STD = 0.07376, numData = 127
+Est. = 0.39693, STD = 0.04156, numData = 256
+Est. = 0.39377, STD = 0.03174, numData = 512
+Est. = 0.39460, STD = 0.02286, numData = 1024
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39231, STD = 0.01704, numData = 2048
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39459, STD = 0.01039, numData = 4095
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39239, STD = 0.00925, numData = 8191
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39307, STD = 0.00693, numData = 16383
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Est. = 0.39289, STD = 0.00430, numData = 32768
+</pre></div>
+</div>
+<img alt="../../_images/60df583442cde9272cc0004b76fa2eff493302008b8f08c462a703bc2c2285f8.png" src="../../_images/60df583442cde9272cc0004b76fa2eff493302008b8f08c462a703bc2c2285f8.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="exercise-3-2-multi-variate-monte-carlo-integration">
+<h3>Exercise 3.2: Multi-variate Monte Carlo Integration<a class="headerlink" href="#exercise-3-2-multi-variate-monte-carlo-integration" title="Link to this heading">#</a></h3>
+<center>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture18/assets/fig09.png">
+</center>
+<ul class="simple">
+<li><p>Please estimtate the definite integral of function <span class="math notranslate nohighlight">\(f(x, y)\)</span> over domain <span class="math notranslate nohighlight">\(\Omega\)</span> based on Monte Carlo method.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}&amp; I = \iint_{\Omega}^{} {f(x, y)} \,{\rm d}x{\rm d}y \\
+&amp; f(x, y) = \exp{(- \frac{x'^2 + \gamma^2 y'^{2}}{2 \sigma^2} )} \cdot \exp{[ -j (\frac{2 \pi}{\lambda} x' + \phi)]} \\\end{split}\\\begin{split}&amp; \begin{bmatrix} x' \\ y' \end{bmatrix} = 
+\begin{bmatrix} \cos{\theta} &amp; \sin{\theta} \\ -\sin{\theta} &amp; \cos{\theta} \end{bmatrix}
+\begin{bmatrix} x \\ y \end{bmatrix} \\\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p>The condition of this exercise:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}&amp; \Omega : \frac{|x - 0.3|}{2} + |y - 0.3| \leq 0.25 \\\end{split}\\&amp; (\sigma, \gamma, \theta, \lambda, \phi) = (0.4, 2, \frac{\pi}{4}, 1, 0)\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<ul class="simple">
+<li><p>Please repeat your estimation 100 times. The standard deviation of your estimation in these 100 trials should be less than 0.01.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary-of-monte-carlo-method">
+<h3>Summary of Monte Carlo Method<a class="headerlink" href="#summary-of-monte-carlo-method" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A numerical approach for acquiring <strong>an approximate solution</strong> of a problem that is <strong>difficult to solve its analytical solution</strong>.</p></li>
+<li><p>It is an approximate solution based on <strong>the law of large numbers</strong>. This implies that it <strong>can only provide a close enough solution, not correct answer</strong>.</p></li>
+<li><p>General flowchart:</p>
+<ol class="arabic simple">
+<li><p>Define a domain <span class="math notranslate nohighlight">\(\Omega\)</span> of possible inputs, <span class="math notranslate nohighlight">\(\mathbf{x} \in \Omega\)</span>.</p></li>
+<li><p>Randomly generate <span class="math notranslate nohighlight">\(N_R\)</span> samples from a probability distribution (usually use uniform distribution) over the domain <span class="math notranslate nohighlight">\(R\)</span>. The target domain <span class="math notranslate nohighlight">\(\Omega\)</span> should be in the domain <span class="math notranslate nohighlight">\(R ( \Omega \in R )\)</span>.</p></li>
+<li><p>Keep the samples in the domain <span class="math notranslate nohighlight">\(\Omega\)</span>. The number of samples in the domain is approximately <span class="math notranslate nohighlight">\(N_{\Omega}\)</span>.</p></li>
+<li><p>Perform a deterministic computation on the inputs.</p></li>
+<li><p>Aggregate the results.</p></li>
+</ol>
+</li>
+</ul>
+<details>
+<summary>Don't click this</summary>
+<ul>
+<li>
+<details><summary>Exercise 3.1</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">getIntegralEst</span>
+
+
+<span class="k">def</span> <span class="nf">exercise1</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">numData</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">15</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;func&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">toPrint</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;toPrint&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">xVals</span><span class="p">,</span> <span class="n">yEsts</span><span class="p">,</span> <span class="n">yStds</span><span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="n">xAxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">numData</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">xAxis</span><span class="p">:</span>
+        <span class="n">curEst</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">getIntegralEst</span><span class="p">(</span>
+            <span class="n">numData</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> 
+            <span class="n">numTrials</span><span class="o">=</span><span class="n">numTrials</span><span class="p">,</span> 
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> 
+            <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> 
+            <span class="n">func</span><span class="o">=</span><span class="n">func</span>
+        <span class="p">)</span>
+        
+        <span class="n">xVals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">yStds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+        <span class="n">yEsts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curEst</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">toPrint</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Est. = </span><span class="si">{:.05f}</span><span class="s2">, STD = </span><span class="si">{:.05f}</span><span class="s2">, numData = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">curEst</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xVals</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">yEsts</span><span class="p">,</span>
+        <span class="n">yerr</span><span class="o">=</span><span class="n">yStds</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAxis</span><span class="p">,</span> <span class="n">yEsts</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimations&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Exercise 1&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Data&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated Value&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+    <span class="n">xMin</span><span class="p">,</span> <span class="n">xMax</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+    <span class="n">scipyResult</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span>
+        <span class="n">scipyResult</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">xmin</span> <span class="o">=</span> <span class="n">xMin</span><span class="p">,</span> 
+        <span class="n">xmax</span> <span class="o">=</span> <span class="n">xMax</span><span class="p">,</span> 
+        <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> 
+        <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:.05f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scipyResult</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details>
+</li>
+<li>
+<details><summary>Exercise 3.2</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+
+
+<span class="k">def</span> <span class="nf">exercise2</span><span class="p">(</span><span class="n">numTrials</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">numData</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">15</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">est4exercise2</span><span class="p">(</span><span class="n">numData</span><span class="p">,</span> <span class="n">numTrials</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="n">estimates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTrials</span><span class="p">):</span>
+            <span class="n">integralGuess</span> <span class="o">=</span> <span class="n">mcFunc4exercise2</span><span class="p">(</span><span class="n">numData</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">)</span>
+            <span class="n">estimates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">integralGuess</span><span class="p">)</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+        <span class="n">curEst</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">curEst</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mcFunc4exercise2</span><span class="p">(</span><span class="n">numData</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numData</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1</span><span class="o">-</span><span class="n">a1</span><span class="p">)</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">+</span> <span class="n">a1</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">b2</span><span class="o">-</span><span class="n">a2</span><span class="p">)</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">+</span> <span class="n">a2</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">0.3</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="mf">0.3</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">0.25</span><span class="p">:</span>
+                <span class="n">I</span> <span class="o">+=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="n">I</span><span class="o">/</span><span class="n">numData</span>
+    
+    <span class="k">def</span> <span class="nf">gabor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simple version Gabor function for Monte Carlo&quot;&quot;&quot;</span>
+        <span class="n">sigma</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
+        <span class="n">sigma_x</span> <span class="o">=</span> <span class="n">sigma</span>
+        <span class="n">sigma_y</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">/</span> <span class="n">gamma</span>
+        <span class="c1"># Rotation</span>
+        <span class="n">x_theta</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">y_theta</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+            <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_theta</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y_theta</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">sigma_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x_theta</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gb</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">))</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;func&quot;</span><span class="p">,</span> <span class="n">gabor</span><span class="p">)</span>
+    <span class="n">toPrint</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;toPrint&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">xVals</span><span class="p">,</span> <span class="n">yEsts</span><span class="p">,</span> <span class="n">yStds</span><span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">xAxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">numData</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">xAxis</span><span class="p">:</span>
+        <span class="n">curEst</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">est4exercise2</span><span class="p">(</span>
+            <span class="n">numData</span><span class="o">=</span><span class="n">val</span><span class="p">,</span> 
+            <span class="n">numTrials</span><span class="o">=</span><span class="n">numTrials</span><span class="p">,</span> 
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> 
+            <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> 
+            <span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+        <span class="p">)</span>
+        
+        <span class="n">xVals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">yStds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+        <span class="n">yEsts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">curEst</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">toPrint</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Est. = </span><span class="si">{:.05f}</span><span class="s2">, STD = </span><span class="si">{:.05f}</span><span class="s2">, numData = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">curEst</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">val</span><span class="p">))</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">xVals</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">yEsts</span><span class="p">,</span>
+        <span class="n">yerr</span><span class="o">=</span><span class="n">yStds</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xAxis</span><span class="p">,</span> <span class="n">yEsts</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Estimations&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simulation of 2D Monte Carlo Integration&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Data&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Estimated Value&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</details>
+</li>
+</details></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters\18"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../17/chap17.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Random Walks and Stochastic Programs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../archives/IntroConcurrencyParallelism.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Concurrency and Parallelism</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#last-time">Last Time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-experiment">An Experiment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal-s-problem">Pascal’s Problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned-in-the-pascal-s-problem">What have we learned in the Pascal’s problem?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pi-estimation"><span class="math notranslate nohighlight">\(\pi\)</span> Estimation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#what-have-we-learned-in-the-pi-estimation">What have we learned in the <span class="math notranslate nohighlight">\(\pi\)</span> Estimation?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limit-theorems"><strong>Limit Theorems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers">Law of large numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-expectation-of-sample-means-the-means-of-the-samples">The Expectation of Sample Means (The Means of the Samples)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variance-of-the-sample-means">The Variance of the Sample Means</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem (CLT)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-method"><strong>Monte Carlo method</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-estimation">1. Area Estimation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-integration">2. Univariate Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-1-monte-carlo-integration">Exercise 3.1: Monte Carlo Integration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-integration-multi-variate">3. Monte Carlo Integration (multi-variate)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variate-monte-carlo-integration-on-rectangular-domain">3.1 Multi-variate Monte Carlo Integration on Rectangular Domain</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-variate-monte-carlo-integration-on-non-rectangular-domain">3.2 Multi-variate Monte Carlo Integration on Non-rectangular Domain</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-2-multi-variate-monte-carlo-integration">Exercise 3.2: Multi-variate Monte Carlo Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-monte-carlo-method">Summary of Monte Carlo Method</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chieh-En Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

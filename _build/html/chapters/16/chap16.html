@@ -1,0 +1,2265 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems &#8212; Introduction to Computer Science and Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/16/chap16';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Random Walks and Stochastic Programs" href="../17/chap17.html" />
+    <link rel="prev" title="Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nycu_dop_logo.png" class="logo__image only-light" alt="Introduction to Computer Science and Programming - Home"/>
+    <script>document.write(`<img src="../../_static/nycu_dop_logo.png" class="logo__image only-dark" alt="Introduction to Computer Science and Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Introduction to Computer Science and Programming
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I: Fundamentals of Computer Science and Python Programming</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01/intro_chap1.html">01. Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02/chap02.html">02. Python Basics, Branching, and Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03/chap03.html">03. Simple Numerical Algorithms I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04/chap04.html">04. Abstraction, Decomposition, and Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05/chap05.html">05. Tuples, Lists, Mutability, Aliasing, and Cloning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06/chap06.html">06. Recursion and Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07/chap07.html">07. Modules, Packages, Exception, and Assertion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08/chap08.html">08. Introduction to Object-Oriented Programming I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09/chap09.html">09. Introduction to Object-Oriented Programming II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14/chap14.html">14. Data Analysis and More Data Visualization with Python I</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15/chap15.html">15. Data Analysis and More Data Visualization with Python II</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III: Data Science with Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../17/chap17.html">17. Random Walks and Stochastic Programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18/chap18.html">18. Limit Theorems and Monte Carlo Method</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bruce88617/nycudopcs/issues/new?title=Issue%20on%20page%20%2Fchapters/16/chap16.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/chapters/16/chap16.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack-problems"><strong>Knapsack Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-algorithms">Greedy Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-of-greedy-algorithms">Implementation of Greedy Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-0-1-knapsack-problems"><strong>The 0/1 Knapsack Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-search-method-exhaustive-enumeration">Brute-force Search Method (Exhaustive Enumeration)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming"><strong>Dynamic Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dynamic-programming">What is Dynamic Programming?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example-fibonacci">A Simple Example: Fibonacci</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-and-the-0-1-knapsack-problems">Dynamic Programming and the 0/1 Knapsack Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rooted-binary-tree">Rooted Binary Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-solution">Dynamic Programming Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-theory"><strong>Graph Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-from-tpe-to-osl">Introduction: From TPE to OSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph-digraph">Directed Graph (Digraph)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graph">Weighted Graph</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-structures-of-graph">Common Data Structures of Graph</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-list">Edge List</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix">Adjacency Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-list">Adjacency List</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-optimization-problems"><strong>Graph Optimization Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue-and-stack">Queue and Stack</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search-bfs"><strong>Breadth-First Search (BFS)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-find-all-paths-from-node-0-to-node-1">Example 1: Find All Paths from Node 0 to Node 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-all-paths-from-a-to-h">Example 2: Find All Paths from A to H</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-first-search-dfs"><strong>Depth-First Search (DFS)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-find-all-paths-from-a-to-h-dfs">Example 3: Find All Paths from A to H (DFS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shortest-path-of-weighted-graph"><strong>The Shortest Path of Weighted Graph</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-find-the-shortest-path-from-a-to-h-bfs-or-dfs">Example 4: Find the Shortest Path from A to H (BFS or DFS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstra-algorithm"><strong>Dijkstra Algorithm</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-find-the-shortest-paths-from-node-a-to-the-others">Example: Find the shortest paths from node A to the others</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="knapsack-problems-dynamic-programming-and-graph-optimization-problems">
+<h1>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems<a class="headerlink" href="#knapsack-problems-dynamic-programming-and-graph-optimization-problems" title="Link to this heading">#</a></h1>
+<section id="today">
+<h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
+<ul>
+  <li>Part I: Knapsack Problems</li>
+  <ul>
+    <li><a href="#tag2">Knapsack problems</a></li>
+    <li><a href="#tag3">The 0/1 knapsack problems</a></li>
+    <li><a href="#tag4">Dynamic programming</a></li>
+  </ul>
+  <li>Part II: Graph Optimization Problems</li>
+  <ul>
+    <li><a href="#tag5">Graph theory</a></li>
+    <li><a href="#tag6">Graph optimization problems</a></li>
+    <li><a href="#tag7">Breadth-first search</a></li>
+    <li><a href="#tag8">Depth-first search</a></li>
+    <li><a href="#tag9">Dijkstra Algorithm</a></li>
+  </ul>
+</ul>
+<p><a id="tag2"></a></p>
+</section>
+<section id="knapsack-problems">
+<h2><strong>Knapsack Problems</strong><a class="headerlink" href="#knapsack-problems" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Given a set of items, each with a weight and a value, <strong>determine the number of each item to include in a collection</strong> so that <strong>the total weight is less than or equal to a given limit and the total value is as large as possible</strong>.</p></li>
+</ul>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>A burglar who has a knapsack that can hold <strong>at most 20 kg of loot</strong> breaks into a house and finds the items as shown below. Obviously, he will not be able to take all of the items, so he needs to decide what to take and what to leave behind.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-center"><p>Value</p></th>
+<th class="head text-center"><p>Weight</p></th>
+<th class="head text-center"><p>Value/Weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Book</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Violin</p></td>
+<td class="text-center"><p>175</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>17.5</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Camera</p></td>
+<td class="text-center"><p>50</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>25</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>TV</p></td>
+<td class="text-center"><p>200</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Painting</p></td>
+<td class="text-center"><p>90</p></td>
+<td class="text-center"><p>9</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Wine</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<br>
+<ul class="simple">
+<li><p>The question becomes, what combination will bring him the greatest wealth?</p></li>
+</ul>
+</section>
+<section id="greedy-algorithms">
+<h3>Greedy Algorithms<a class="headerlink" href="#greedy-algorithms" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The simplest way to find an approximate solution to this problem. Choose the best item first, then the next best, and continue until reached the limit.</p></li>
+<li><p>What is the best meaning? Is it the most valuable, least weight, or the best value/weight ratio?</p></li>
+<li><p>For example, the following results show three different solutions via greedy algorithms.</p>
+<ol class="arabic">
+<li><p>Greedy-by-value:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>No.</p></th>
+<th class="head text-center"><p>Item to be take</p></th>
+<th class="head text-center"><p>Cummulative value</p></th>
+<th class="head text-center"><p>Cummulative weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>TV</p></td>
+<td class="text-center"><p>200</p></td>
+<td class="text-center"><p>20</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+  <br>
+<ol class="arabic" start="2">
+<li><p>Greedy-by-weight-inverse:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>No.</p></th>
+<th class="head text-center"><p>Item to be take</p></th>
+<th class="head text-center"><p>Cummulative value</p></th>
+<th class="head text-center"><p>Cummulative weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Book</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Camera</p></td>
+<td class="text-center"><p>60</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Wine</p></td>
+<td class="text-center"><p>80</p></td>
+<td class="text-center"><p>7</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Painting</p></td>
+<td class="text-center"><p>170</p></td>
+<td class="text-center"><p>16</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+  <br>
+<ol class="arabic" start="3">
+<li><p>Greedy-by-ratio</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>No.</p></th>
+<th class="head text-center"><p>Item to be take</p></th>
+<th class="head text-center"><p>Cummulative value</p></th>
+<th class="head text-center"><p>Cummulative weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>Camera</p></td>
+<td class="text-center"><p>50</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>Violin</p></td>
+<td class="text-center"><p>225</p></td>
+<td class="text-center"><p>12</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>Book</p></td>
+<td class="text-center"><p>235</p></td>
+<td class="text-center"><p>13</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p>Wine</p></td>
+<td class="text-center"><p>255</p></td>
+<td class="text-center"><p>17</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+  <br>
+</li>
+<li><p>Greedy algorithm can provide an approximate solution with efficiency, but <strong>NOT guarantee to find the optimal solution</strong>.</p></li>
+</ul>
+</section>
+<section id="implementation-of-greedy-algorithms">
+<h3>Implementation of Greedy Algorithms<a class="headerlink" href="#implementation-of-greedy-algorithms" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part1.testFuncs</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="n">test1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Use greedy by value to fill knapsack of size 20
+Total value of items taken is 200.0.
+    &lt;TV, 200, 20&gt;
+Use greedy by weight to fill knapsack of size 20
+Total value of items taken is 170.0.
+    &lt;book, 10, 1&gt;
+    &lt;camera, 50, 2&gt;
+    &lt;wine, 20, 4&gt;
+    &lt;painting, 90, 9&gt;
+Use greedy by density to fill knapsack of size 20
+Total value of items taken is 255.0.
+    &lt;camera, 50, 2&gt;
+    &lt;violin, 175, 10&gt;
+    &lt;book, 10, 1&gt;
+    &lt;wine, 20, 4&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test1</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Use greedy by value to fill knapsack of size 25
+Total value of items taken is 260.0.
+    &lt;TV, 200, 20&gt;
+    &lt;camera, 50, 2&gt;
+    &lt;book, 10, 1&gt;
+Use greedy by weight to fill knapsack of size 25
+Total value of items taken is 170.0.
+    &lt;book, 10, 1&gt;
+    &lt;camera, 50, 2&gt;
+    &lt;wine, 20, 4&gt;
+    &lt;painting, 90, 9&gt;
+Use greedy by density to fill knapsack of size 25
+Total value of items taken is 325.0.
+    &lt;camera, 50, 2&gt;
+    &lt;violin, 175, 10&gt;
+    &lt;book, 10, 1&gt;
+    &lt;painting, 90, 9&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise">
+<h3>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-center"><p>Value</p></th>
+<th class="head text-center"><p>Weight</p></th>
+<th class="head text-center"><p>Value/Weight</p></th>
+<th class="head text-center"><p>Easy to Sale</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Book</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Violin</p></td>
+<td class="text-center"><p>175</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>17.5</p></td>
+<td class="text-center"><p>7</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Camera</p></td>
+<td class="text-center"><p>50</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>25</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>TV</p></td>
+<td class="text-center"><p>200</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Painting</p></td>
+<td class="text-center"><p>90</p></td>
+<td class="text-center"><p>9</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Wine</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>5</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Use greedy algorithm to find the solution</p></li>
+</ul>
+<p><a id="tag3"></a></p>
+</section>
+</section>
+<section id="the-0-1-knapsack-problems">
+<h2><strong>The 0/1 Knapsack Problems</strong><a class="headerlink" href="#the-0-1-knapsack-problems" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Each item is represented by a pair, <span class="math notranslate nohighlight">\(&lt;value, weight&gt;\)</span></p></li>
+<li><p>The knapsack can accommodate items with a total weight of no more than <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
+<li><p>A vector <span class="math notranslate nohighlight">\(I\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> represents the set of available items. Each element of the vector is an item.</p></li>
+<li><p>A vector <span class="math notranslate nohighlight">\(V\)</span> of length <span class="math notranslate nohighlight">\(n\)</span> represents whether each item is taken or not (e.g. <span class="math notranslate nohighlight">\(V[i] = 1\)</span> represents that item <span class="math notranslate nohighlight">\(I[i]\)</span> is taken).</p></li>
+<li><p>Find the optimal <span class="math notranslate nohighlight">\(V\)</span> that</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}
+\begin{aligned}\\\begin{split}&amp; \text{maximize:} \sum_{i=0}^{n-1} V[i] \cdot I[i].value &amp; \\
+&amp; \text{subject to:} \sum_{i=0}^{n-1} V[i] \cdot I[i].weight \leq w &amp; \\\end{split}\\\end{aligned}
+\end{aligned}\end{align} \]</div>
+<section id="brute-force-search-method-exhaustive-enumeration">
+<h3>Brute-force Search Method (Exhaustive Enumeration)<a class="headerlink" href="#brute-force-search-method-exhaustive-enumeration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Enumerate all possible combinations of items.</p></li>
+<li><p>Remove all of the combinations which does not meet the constraints.</p></li>
+<li><p>Choose the combination whose value is the largest from the remaining.</p></li>
+</ul>
+</section>
+<section id="implementation">
+<h3>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part1.testFuncs</span> <span class="kn">import</span> <span class="n">test2</span><span class="p">,</span> <span class="n">test3</span>
+
+<span class="n">test2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total value of items taken is 275.0
+&lt;book, 10, 1&gt;
+&lt;violin, 175, 10&gt;
+&lt;painting, 90, 9&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test2</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total value of items taken is 235.0
+&lt;book, 10, 1&gt;
+&lt;violin, 175, 10&gt;
+&lt;camera, 50, 2&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test3</span><span class="p">(</span><span class="n">numItems</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total value of items taken is 822.0
+&lt;1, 196, 1&gt;
+&lt;3, 120, 5&gt;
+&lt;10, 147, 4&gt;
+&lt;14, 159, 8&gt;
+&lt;15, 200, 2&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="brief-summary">
+<h3>Brief Summary<a class="headerlink" href="#brief-summary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>It’s simple but time-consuming. The computational complexity is <span class="math notranslate nohighlight">\(O(n \cdot 2^n)\)</span>.</p></li>
+<li><p>It can definitely find the optimal solution.</p></li>
+</ul>
+<p><a id="tag4"></a></p>
+</section>
+</section>
+<section id="dynamic-programming">
+<h2><strong>Dynamic Programming</strong><a class="headerlink" href="#dynamic-programming" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“The fact that I was really doing mathematics… was something not even a Congressman could object to.”</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                            ... Richard Bellman on the Birth of Dynamic Programming
+</pre></div>
+</div>
+</div></blockquote>
+<section id="what-is-dynamic-programming">
+<h3>What is Dynamic Programming?<a class="headerlink" href="#what-is-dynamic-programming" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A method for efficiently solving problems that exhibit the characteristics of <strong>overlapping subproblems</strong> and <strong>optimal structure</strong>.</p></li>
+<li><p>A problems has <strong>optimal structure</strong> if <strong>a globally optimal solution can be found by combining optimal solutions to local subproblems</strong>. Ex: Merge sort</p></li>
+<li><p>A problem has <strong>overlapping subproblems</strong> if <strong>an optimal solution involves solving the same problem multiple times</strong>.</p></li>
+<li><p>The key idea behind dynamic programming is <strong>memorization</strong>.</p></li>
+</ul>
+</section>
+<section id="a-simple-example-fibonacci">
+<h3>A Simple Example: Fibonacci<a class="headerlink" href="#a-simple-example-fibonacci" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fastFib</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">memo</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">fastFib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span> <span class="o">+</span> <span class="n">fastFib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span>
+        <span class="n">memo</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dynamic-programming-and-the-0-1-knapsack-problems">
+<h2>Dynamic Programming and the 0/1 Knapsack Problems<a class="headerlink" href="#dynamic-programming-and-the-0-1-knapsack-problems" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Dynamic programming provides a practical method for solving the 0/1 knapsack problems in a reasonable amount of time.</p></li>
+<li><p>The key idea is to think about exploring the space of possible solutions by constructing a rooted binary tree that enumerates all states that satisfy the constraint.</p></li>
+</ul>
+<section id="rooted-binary-tree">
+<h3>Rooted Binary Tree<a class="headerlink" href="#rooted-binary-tree" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>Item</p></th>
+<th class="head text-center"><p>Value</p></th>
+<th class="head text-center"><p>Weight</p></th>
+<th class="head text-center"><p>Value/Weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><strong>a</strong></p></td>
+<td class="text-center"><p>Book</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>b</strong></p></td>
+<td class="text-center"><p>Violin</p></td>
+<td class="text-center"><p>175</p></td>
+<td class="text-center"><p>10</p></td>
+<td class="text-center"><p>17.5</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>c</strong></p></td>
+<td class="text-center"><p>Camera</p></td>
+<td class="text-center"><p>50</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>25</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>d</strong></p></td>
+<td class="text-center"><p>TV</p></td>
+<td class="text-center"><p>200</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>e</strong></p></td>
+<td class="text-center"><p>Painting</p></td>
+<td class="text-center"><p>90</p></td>
+<td class="text-center"><p>9</p></td>
+<td class="text-center"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>f</strong></p></td>
+<td class="text-center"><p>Wine</p></td>
+<td class="text-center"><p>20</p></td>
+<td class="text-center"><p>4</p></td>
+<td class="text-center"><p>5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig01.png">
+<ul class="simple">
+<li><p>There is exactly one node without any parent. This node is called the <strong><strong>root</strong></strong>.</p></li>
+<li><p>Each non-root node has exactly one parent.</p></li>
+<li><p>Each node has at most two children. A childless node is called a <strong><strong>leaf</strong></strong>.</p></li>
+</ul>
+<br>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig02.png">
+</section>
+<section id="id1">
+<h3>Implementation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part1.testFuncs</span> <span class="kn">import</span> <span class="n">testDT1</span>
+
+<span class="n">testDT1</span><span class="p">()</span>
+<span class="n">testDT1</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">testDT1</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Test 1 (max. weight = 5):
+    Items taken:
+         &lt;camera, 50, 2&gt;
+         &lt;book, 10, 1&gt;
+    Total value of items taken = 60
+Decision Tree Test 1 (max. weight = 10):
+    Items taken:
+         &lt;violin, 175, 10&gt;
+    Total value of items taken = 175
+Decision Tree Test 1 (max. weight = 20):
+    Items taken:
+         &lt;painting, 90, 9&gt;
+         &lt;violin, 175, 10&gt;
+         &lt;book, 10, 1&gt;
+    Total value of items taken = 275
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part1.testFuncs</span> <span class="kn">import</span> <span class="n">testDT2</span>
+
+<span class="n">testDT2</span><span class="p">()</span>
+<span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Test 2 (max. weight = 5):
+    Items taken:
+         &lt;9, 152, 3&gt;
+         &lt;0, 19, 2&gt;
+    Total value of items taken = 171
+Decision Tree Test 2 (max. weight = 20):
+    Items taken:
+         &lt;15, 185, 2&gt;
+         &lt;12, 165, 5&gt;
+         &lt;3, 167, 7&gt;
+         &lt;0, 133, 4&gt;
+    Total value of items taken = 650
+Decision Tree Test 2 (max. weight = 20):
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">testDT2</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\testFuncs.py:57,</span> in <span class="ni">testDT2</span><span class="nt">(availWeight, numItems, maxVal, maxWeight)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree Test 2 (max. weight = </span><span class="si">{}</span><span class="s2">):&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">availWeight</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="n">items</span> <span class="o">=</span> <span class="n">buildManyItems</span><span class="p">(</span><span class="n">numItems</span><span class="p">,</span> <span class="n">maxVal</span><span class="p">,</span> <span class="n">maxWeight</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">57</span> <span class="n">val</span><span class="p">,</span> <span class="n">taken</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">availWeight</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Items taken:&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">2</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
+<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">2</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">3</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">4</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">45</span> <span class="p">(</span><span class="mi">2</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
+<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">45</span> <span class="p">(</span><span class="mi">25</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">23</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">49</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
+<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">45</span> <span class="p">(</span><span class="mi">21</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">)]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
+<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:40,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>             <span class="n">bestSet</span> <span class="o">=</span> <span class="n">items</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="k">return</span> <span class="p">(</span><span class="n">bestSet</span><span class="p">,</span> <span class="n">bestVal</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">40</span> <span class="k">def</span> <span class="nf">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">,</span> <span class="n">avail</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="k">if</span> <span class="n">toConsider</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span> <span class="n">avail</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Considering another situation</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Item</p></th>
+<th class="head text-center"><p>Value</p></th>
+<th class="head text-center"><p>Weight</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><strong>a</strong></p></td>
+<td class="text-center"><p>6</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>b</strong></p></td>
+<td class="text-center"><p>7</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><strong>c</strong></p></td>
+<td class="text-center"><p>8</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><strong>d</strong></p></td>
+<td class="text-center"><p>9</p></td>
+<td class="text-center"><p>5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>The decision tree becomes</p></li>
+</ul>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig02_2.png"></section>
+<section id="dynamic-programming-solution">
+<h3>Dynamic Programming Solution<a class="headerlink" href="#dynamic-programming-solution" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part1.testFuncs</span> <span class="kn">import</span> <span class="n">testDT3</span>
+
+<span class="n">testDT3</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Test 2 (max. weight = 20):
+    Items taken:
+         &lt;117, 125, 2&gt;
+         &lt;93, 114, 2&gt;
+         &lt;73, 120, 1&gt;
+         &lt;62, 33, 1&gt;
+         &lt;59, 188, 3&gt;
+         &lt;51, 110, 2&gt;
+         &lt;45, 113, 2&gt;
+         &lt;27, 110, 3&gt;
+         &lt;18, 170, 4&gt;
+    Total value of items taken = 1083
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="tag5"></a></p>
+</section>
+</section>
+<section id="graph-theory">
+<h2><strong>Graph Theory</strong><a class="headerlink" href="#graph-theory" title="Link to this heading">#</a></h2>
+<section id="introduction-from-tpe-to-osl">
+<h3>Introduction: From TPE to OSL<a class="headerlink" href="#introduction-from-tpe-to-osl" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>What is the cheapest, fastest, or the best flight from TPE to OSL, on Mar. 30 in 2023?</p></li>
+</ul>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig03.png">
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* The best choice (cost: NT$25,251):
+
+    |Flight No.|From|To|Flight Time|Connecting Time|
+    |:--:|:--:|:--:|:--:|:--:|
+    |TK25|TPE|IST|12h05m|x|
+    |TK1751|IST|OSL|3h55m|3h25m|
+
+* The cheapest choice (cost: NT$23,233):
+
+    |Flight No.|From|To|Flight Time|Connecting Time|
+    |:--:|:--:|:--:|:--:|:--:|
+    |CI783|TPE|SGN|3h35m|x|
+    |QR971|SGN|DOH|7h30m|3h10m|
+    |QR175|DOH|OSL|6h45m|8h30m|
+
+* The fastest choice (cost: NT$41,641):
+
+    |Flight No.|From|To|Flight Time|Connecting Time|
+    |:--:|:--:|:--:|:--:|:--:|
+    |CI61|TPE|FRA|13h30m|x|
+    |LH860|FRA|OSL|1h55m|3h30m|
+</pre></div>
+</div>
+<br>
+<ul class="simple">
+<li><p>How do we calculate this?</p></li>
+<li><p>A graph is a set of objects called <strong><strong>nodes</strong></strong> (or <strong><strong>vertices</strong></strong>) connected by a set of <strong><strong>edges</strong></strong> (or <strong><strong>arcs</strong></strong>).</p></li>
+<li><p>It is a thing that can be used to record associations and relationships.</p></li>
+</ul>
+<img align="center" height=200px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig04.png">
+</section>
+<section id="directed-graph-digraph">
+<h3>Directed Graph (Digraph)<a class="headerlink" href="#directed-graph-digraph" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>If the edges are unidirectional the graph is called a <strong>directed graph</strong> or <strong>digraph</strong>.</p></li>
+<li><p>In a directed graph, if there is an edge from node <span class="math notranslate nohighlight">\(n_1\)</span> to node <span class="math notranslate nohighlight">\(n_2\)</span>, we refer to <span class="math notranslate nohighlight">\(n_1\)</span> as the <strong>source</strong> or <strong>parent node</strong> and <span class="math notranslate nohighlight">\(n_2\)</span> as the <strong>destination</strong> or <strong>child node</strong>.</p></li>
+</ul>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig05.png">
+</section>
+<section id="weighted-graph">
+<h3>Weighted Graph<a class="headerlink" href="#weighted-graph" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>If a weight is associated with each edge in a graph or digraph, it is called a weighted graph.</p></li>
+</ul>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig06.png">
+</section>
+</section>
+<section id="common-data-structures-of-graph">
+<h2>Common Data Structures of Graph<a class="headerlink" href="#common-data-structures-of-graph" title="Link to this heading">#</a></h2>
+<section id="edge-list">
+<h3>Edge List<a class="headerlink" href="#edge-list" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Simple, intuitive, and low spatial complexity</p></li>
+<li><p>Difficult for computation - not easy to find all edges that connected with a single node.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>#</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-center"><p>1</p></th>
+<th class="head text-center"><p>2</p></th>
+<th class="head text-center"><p>3</p></th>
+<th class="head text-center"><p>4</p></th>
+<th class="head text-center"><p>5</p></th>
+<th class="head text-center"><p>6</p></th>
+<th class="head text-center"><p>7</p></th>
+<th class="head text-center"><p>8</p></th>
+<th class="head text-center"><p>9</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Source</p></td>
+<td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p>IST</p></td>
+<td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p>HEL</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Destination</p></td>
+<td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p>IST</p></td>
+<td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p>HEL</p></td>
+<td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>OSL</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</section>
+<section id="adjacency-matrix">
+<h3>Adjacency Matrix<a class="headerlink" href="#adjacency-matrix" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Clear but high spatial complexity, <span class="math notranslate nohighlight">\(O(n \times n)\)</span></p></li>
+<li><p>Adjacency matrix of a digraph</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>#</p></th>
+<th class="head text-center"><p>TPE</p></th>
+<th class="head text-center"><p>SGN</p></th>
+<th class="head text-center"><p>SIN</p></th>
+<th class="head text-center"><p>IST</p></th>
+<th class="head text-center"><p>DOH</p></th>
+<th class="head text-center"><p>FRA</p></th>
+<th class="head text-center"><p>HEL</p></th>
+<th class="head text-center"><p>OSL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>IST</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HEL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<br>
+<ul>
+<li><p>Adjacency matrix of a weighted digraph (<span class="math notranslate nohighlight">\(\text{weight} = \text{flight time} + \text{connecting time}\)</span>)</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>#</p></th>
+<th class="head text-center"><p>TPE</p></th>
+<th class="head text-center"><p>SGN</p></th>
+<th class="head text-center"><p>SIN</p></th>
+<th class="head text-center"><p>IST</p></th>
+<th class="head text-center"><p>DOH</p></th>
+<th class="head text-center"><p>FRA</p></th>
+<th class="head text-center"><p>HEL</p></th>
+<th class="head text-center"><p>OSL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>405</p></td>
+<td class="text-center"><p>745</p></td>
+<td class="text-center"><p>930</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1020</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>960</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1150</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>IST</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>235</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>405</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>115</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HEL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>85</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<br>
+<ul>
+<li><p>Adjacency matrix of a graph</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>#</p></th>
+<th class="head text-center"><p>TPE</p></th>
+<th class="head text-center"><p>SGN</p></th>
+<th class="head text-center"><p>SIN</p></th>
+<th class="head text-center"><p>IST</p></th>
+<th class="head text-center"><p>DOH</p></th>
+<th class="head text-center"><p>FRA</p></th>
+<th class="head text-center"><p>HEL</p></th>
+<th class="head text-center"><p>OSL</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>IST</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HEL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</section>
+<section id="adjacency-list">
+<h3>Adjacency List<a class="headerlink" href="#adjacency-list" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Less spatial complexity in some cases.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Node</p></th>
+<th class="head text-center"><p>Edges</p></th>
+<th class="head text-center"><p>Weights</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>TPE</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[SGN,</span> <span class="pre">SIN,</span> <span class="pre">IST,</span> <span class="pre">FRA]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[405,</span> <span class="pre">745,</span> <span class="pre">930,</span> <span class="pre">1020]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>SGN</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[DOH,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[960,]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>SIN</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[HEL,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[1150,]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>IST</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[OSL,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[235,]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>DOH</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[OSL,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[405,]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>FRA</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[OSL,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[115,]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HEL</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[OSL,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[85,]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>OSL</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<p><a id="tag6"></a></p>
+</section>
+</section>
+<section id="graph-optimization-problems">
+<h2><strong>Graph Optimization Problems</strong><a class="headerlink" href="#graph-optimization-problems" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Shortest path</p></li>
+<li><p>Shortest weighted path</p></li>
+<li><p>Maximum clique</p></li>
+<li><p>Min cut</p></li>
+<li><p>…</p></li>
+</ul>
+<section id="queue-and-stack">
+<h3>Queue and Stack<a class="headerlink" href="#queue-and-stack" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Queue: First In First Out (FIFO)</p></li>
+<li><p>Stack: Last In First Out (LIFO)</p></li>
+</ul>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig07.png"><p><a id="tag7"></a></p>
+</section>
+</section>
+<section id="breadth-first-search-bfs">
+<h2><strong>Breadth-First Search (BFS)</strong><a class="headerlink" href="#breadth-first-search-bfs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A graph travesal algorithm that prioritizes the expansion of breadth</p>
+<ol class="arabic simple">
+<li><p>Start from the initial node</p></li>
+<li><p>Enqueue the initial node</p></li>
+<li><p>Repeat the following steps until nothing remaining in the queue:</p>
+<ul>
+<li><p>Dequeue the first item from queue</p></li>
+<li><p>Enqueue the unvisited neighbors (in the order of index) of the node</p></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<section id="example-1-find-all-paths-from-node-0-to-node-1">
+<h3>Example 1: Find All Paths from Node 0 to Node 1<a class="headerlink" href="#example-1-find-all-paths-from-node-0-to-node-1" title="Link to this heading">#</a></h3>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig08.png">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p># of Iteration</p></th>
+<th class="head text-center"><p>Status of Queue</p></th>
+<th class="head text-center"><p>Dequeue the First Item</p></th>
+<th class="head text-center"><p>Enqueue the Result</p></th>
+<th class="head text-center"><p>End of This Round</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,2]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1],</span> <span class="pre">[0,2],]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1],</span> <span class="pre">[0,2],]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2],</span> <span class="pre">[0,1,2]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2],</span> <span class="pre">[0,1,2]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,2,4]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2],</span> <span class="pre">[0,2,3],</span> <span class="pre">[0,2,4]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2],</span> <span class="pre">[0,2,3],</span> <span class="pre">[0,2,4]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,3]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3],</span> <span class="pre">[0,2,4],</span> <span class="pre">[0,1,2,3],</span> <span class="pre">[0,1,2,4]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3],</span> <span class="pre">[0,2,4],</span> <span class="pre">[0,1,2,3],</span> <span class="pre">[0,1,2,4]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3,4]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,2,3,5]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,2,3,1]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,4],</span> <span class="pre">[0,1,2,3],</span> <span class="pre">[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,4],</span> <span class="pre">[0,1,2,3],</span> <span class="pre">[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,4]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3],</span> <span class="pre">[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>6</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3],</span> <span class="pre">[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,3]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,3,4]</span></code>, <code class="docutils literal notranslate"><span class="pre">[0,1,2,3,5]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>7</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,4],</span> <span class="pre">[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,4]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>8</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,4],</span> <span class="pre">[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3,4]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>9</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,5],</span> <span class="pre">[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3,5]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>10</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,2,3,1],</span> <span class="pre">[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,2,3,1]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>11</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3,4],</span> <span class="pre">[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,3,4]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3,5]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>12</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[0,1,2,3,5]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[0,1,2,3,5]</span></code></p></td>
+<td class="text-center"><p>X</p></td>
+<td class="text-center"><p>X</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test1</span>
+
+<span class="n">test1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current BFS path: 0
+Current BFS path: 0-&gt;1
+Current BFS path: 0-&gt;2
+Current BFS path: 0-&gt;1-&gt;2
+Current BFS path: 0-&gt;2-&gt;3
+Current BFS path: 0-&gt;2-&gt;4
+Current BFS path: 0-&gt;1-&gt;2-&gt;3
+Current BFS path: 0-&gt;1-&gt;2-&gt;4
+Current BFS path: 0-&gt;2-&gt;3-&gt;4
+Current BFS path: 0-&gt;2-&gt;3-&gt;5
+Current BFS path: 0-&gt;2-&gt;3-&gt;1
+Current BFS path: 0-&gt;1-&gt;2-&gt;3-&gt;4
+Current BFS path: 0-&gt;1-&gt;2-&gt;3-&gt;5
+Result of BFS:
+ [&#39;0-&gt;2-&gt;3-&gt;5&#39;, &#39;0-&gt;1-&gt;2-&gt;3-&gt;5&#39;]
+Shortest path:
+ 0-&gt;2-&gt;3-&gt;5, path length = 3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-find-all-paths-from-a-to-h">
+<h3>Example 2: Find All Paths from A to H<a class="headerlink" href="#example-2-find-all-paths-from-a-to-h" title="Link to this heading">#</a></h3>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig09.png">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p># of Iteration</p></th>
+<th class="head text-center"><p>Status of Queue</p></th>
+<th class="head text-center"><p>Dequeue the First Item</p></th>
+<th class="head text-center"><p>Enqueue the Result</p></th>
+<th class="head text-center"><p>End of This Round</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,E]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,G]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B],</span> <span class="pre">[A,E],</span> <span class="pre">[A,G],]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B],</span> <span class="pre">[A,E],</span> <span class="pre">[A,G],]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,C]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,B,D]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,B,E]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,E],</span> <span class="pre">[A,G],</span> <span class="pre">[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,E],</span> <span class="pre">[A,G],</span> <span class="pre">[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,E]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,E,D]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,E,F]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,G],</span> <span class="pre">[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],</span> <span class="pre">[A,E,D],</span> <span class="pre">[A,E,F]]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,G],</span> <span class="pre">[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],</span> <span class="pre">[A,E,D],</span> <span class="pre">[A,E,F]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,G]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,G,E]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,G,F]</span></code>, <code class="docutils literal notranslate"><span class="pre">[A,G,H]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],</span> <span class="pre">[A,E,D],</span> <span class="pre">[A,E,F],</span> <span class="pre">[A,G,E],</span> <span class="pre">[A,G,F],</span> <span class="pre">[A,G,H]]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C],</span> <span class="pre">[A,B,D],</span> <span class="pre">[A,B,E],</span> <span class="pre">[A,E,D],</span> <span class="pre">[A,E,F],</span> <span class="pre">[A,G,E],</span> <span class="pre">[A,G,F],</span> <span class="pre">[A,G,H]]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,C]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,C,H]</span></code></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scripts.part2.testFuncs</span> <span class="kn">import</span> <span class="n">test2</span>
+
+<span class="n">test2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current BFS path: A
+Current BFS path: A-&gt;B
+Current BFS path: A-&gt;E
+Current BFS path: A-&gt;G
+Current BFS path: A-&gt;B-&gt;C
+Current BFS path: A-&gt;B-&gt;D
+Current BFS path: A-&gt;B-&gt;E
+Current BFS path: A-&gt;E-&gt;D
+Current BFS path: A-&gt;E-&gt;F
+Current BFS path: A-&gt;G-&gt;E
+Current BFS path: A-&gt;G-&gt;F
+Current BFS path: A-&gt;G-&gt;H
+Current BFS path: A-&gt;B-&gt;C-&gt;H
+Current BFS path: A-&gt;B-&gt;D-&gt;C
+Current BFS path: A-&gt;B-&gt;D-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;D
+Current BFS path: A-&gt;B-&gt;E-&gt;F
+Current BFS path: A-&gt;E-&gt;D-&gt;C
+Current BFS path: A-&gt;E-&gt;D-&gt;H
+Current BFS path: A-&gt;E-&gt;F-&gt;D
+Current BFS path: A-&gt;E-&gt;F-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;D
+Current BFS path: A-&gt;G-&gt;E-&gt;F
+Current BFS path: A-&gt;G-&gt;F-&gt;D
+Current BFS path: A-&gt;G-&gt;F-&gt;H
+Current BFS path: A-&gt;B-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;D-&gt;C
+Current BFS path: A-&gt;B-&gt;E-&gt;D-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;F-&gt;D
+Current BFS path: A-&gt;B-&gt;E-&gt;F-&gt;H
+Current BFS path: A-&gt;E-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;E-&gt;F-&gt;D-&gt;C
+Current BFS path: A-&gt;E-&gt;F-&gt;D-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;D-&gt;C
+Current BFS path: A-&gt;G-&gt;E-&gt;D-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;F-&gt;D
+Current BFS path: A-&gt;G-&gt;E-&gt;F-&gt;H
+Current BFS path: A-&gt;G-&gt;F-&gt;D-&gt;C
+Current BFS path: A-&gt;G-&gt;F-&gt;D-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;F-&gt;D-&gt;C
+Current BFS path: A-&gt;B-&gt;E-&gt;F-&gt;D-&gt;H
+Current BFS path: A-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;F-&gt;D-&gt;C
+Current BFS path: A-&gt;G-&gt;E-&gt;F-&gt;D-&gt;H
+Current BFS path: A-&gt;G-&gt;F-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;B-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H
+Current BFS path: A-&gt;G-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H
+Result of BFS:
+ [&#39;A-&gt;G-&gt;H&#39;, &#39;A-&gt;B-&gt;C-&gt;H&#39;, &#39;A-&gt;B-&gt;D-&gt;H&#39;, &#39;A-&gt;E-&gt;D-&gt;H&#39;, &#39;A-&gt;E-&gt;F-&gt;H&#39;, &#39;A-&gt;G-&gt;F-&gt;H&#39;, &#39;A-&gt;B-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;B-&gt;E-&gt;D-&gt;H&#39;, &#39;A-&gt;B-&gt;E-&gt;F-&gt;H&#39;, &#39;A-&gt;E-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;E-&gt;F-&gt;D-&gt;H&#39;, &#39;A-&gt;G-&gt;E-&gt;D-&gt;H&#39;, &#39;A-&gt;G-&gt;E-&gt;F-&gt;H&#39;, &#39;A-&gt;G-&gt;F-&gt;D-&gt;H&#39;, &#39;A-&gt;B-&gt;E-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;B-&gt;E-&gt;F-&gt;D-&gt;H&#39;, &#39;A-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;G-&gt;E-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;G-&gt;E-&gt;F-&gt;D-&gt;H&#39;, &#39;A-&gt;G-&gt;F-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;B-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H&#39;, &#39;A-&gt;G-&gt;E-&gt;F-&gt;D-&gt;C-&gt;H&#39;]
+Shortest path:
+ A-&gt;G-&gt;H, path length = 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="tag8"></a></p>
+</section>
+</section>
+<section id="depth-first-search-dfs">
+<h2><strong>Depth-First Search (DFS)</strong><a class="headerlink" href="#depth-first-search-dfs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A graph travesal algorithm that prioritizes the expansion of depth</p>
+<ol class="arabic simple">
+<li><p>Start from the initial node</p></li>
+<li><p>Go to the farthest node from the starting node first</p></li>
+</ol>
+</li>
+<li><p>Using the concept of stack</p></li>
+<li><p>Can be achieved recursively</p></li>
+</ul>
+<section id="example-3-find-all-paths-from-a-to-h-dfs">
+<h3>Example 3: Find All Paths from A to H (DFS)<a class="headerlink" href="#example-3-find-all-paths-from-a-to-h-dfs" title="Link to this heading">#</a></h3>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig09.png">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p># of Recursive Calls</p></th>
+<th class="head text-center"><p>Status of Stack</p></th>
+<th class="head text-center"><p>Found Node</p></th>
+<th class="head text-center"><p>Leaf?</p></th>
+<th class="head text-center"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[B,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[C,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,C,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[H,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C,H],]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>4</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[D,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C,H],]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,D,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[C,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C,H],]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>6</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,D,C,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[H,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C,H],</span> <span class="pre">[A,B,D,C,H],]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>7</p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[A,B,D,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[H,]</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">[[A,B,C,H],</span> <span class="pre">[A,B,D,C,H],</span> <span class="pre">[A,B,D,H],]</span></code></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Run the script:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main_Lecture01.py<span class="w"> </span>--num<span class="w"> </span><span class="m">3</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="the-shortest-path-of-weighted-graph">
+<h2><strong>The Shortest Path of Weighted Graph</strong><a class="headerlink" href="#the-shortest-path-of-weighted-graph" title="Link to this heading">#</a></h2>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig10.png">
+<section id="example-4-find-the-shortest-path-from-a-to-h-bfs-or-dfs">
+<h3>Example 4: Find the Shortest Path from A to H (BFS or DFS)<a class="headerlink" href="#example-4-find-the-shortest-path-from-a-to-h-bfs-or-dfs" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Run this on terminal:</p>
+<ul class="simple">
+<li><p>BFS:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main_Lecture01.py<span class="w"> </span>--num<span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>DFS:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main_Lecture01.py<span class="w"> </span>--num<span class="w"> </span><span class="m">6</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p><a id="tag9"></a></p>
+</section>
+</section>
+<section id="dijkstra-algorithm">
+<h2><strong>Dijkstra Algorithm</strong><a class="headerlink" href="#dijkstra-algorithm" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>An algorithm that calculates the shortest paths from a specific node to all other nodes of a graph</p></li>
+<li><p>Create a table to record three things at the beginning,</p>
+<ol class="arabic simple">
+<li><p><strong>Visited</strong>: has this node been visited? (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>)</p></li>
+<li><p><strong>Cost</strong>: path length from source node to current node (default: <code class="docutils literal notranslate"><span class="pre">infinite</span></code>)</p></li>
+<li><p><strong>Path</strong>: previous connected node of this node (default: <code class="docutils literal notranslate"><span class="pre">-1</span></code>)</p></li>
+</ol>
+</li>
+<li><p>Algorithm:</p>
+<ol class="arabic simple">
+<li><p>Start from the source node</p></li>
+<li><p>Update the <strong>cost</strong> and <strong>path</strong></p></li>
+<li><p>Choose <strong>the nearest unvisited node</strong> as the next</p></li>
+</ol>
+</li>
+</ul>
+<section id="example-find-the-shortest-paths-from-node-a-to-the-others">
+<h3>Example: Find the shortest paths from node A to the others<a class="headerlink" href="#example-find-the-shortest-paths-from-node-a-to-the-others" title="Link to this heading">#</a></h3>
+<img align="center" height=300px width=auto src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig10.png">
+<hr class="docutils" />
+<img align="center" height=auto width=400px src="https://raw.githubusercontent.com/bruce88617/nycudopcs/main/Lectures/Lecture16/assets/fig11.png">
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./chapters\16"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../15/chap15.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data Analysis and More Data Visualization with Python II</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../17/chap17.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random Walks and Stochastic Programs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today"><strong>Today</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knapsack-problems"><strong>Knapsack Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#greedy-algorithms">Greedy Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-of-greedy-algorithms">Implementation of Greedy Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-0-1-knapsack-problems"><strong>The 0/1 Knapsack Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-search-method-exhaustive-enumeration">Brute-force Search Method (Exhaustive Enumeration)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-summary">Brief Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming"><strong>Dynamic Programming</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dynamic-programming">What is Dynamic Programming?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example-fibonacci">A Simple Example: Fibonacci</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-and-the-0-1-knapsack-problems">Dynamic Programming and the 0/1 Knapsack Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rooted-binary-tree">Rooted Binary Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Implementation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-solution">Dynamic Programming Solution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-theory"><strong>Graph Theory</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-from-tpe-to-osl">Introduction: From TPE to OSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directed-graph-digraph">Directed Graph (Digraph)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-graph">Weighted Graph</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-data-structures-of-graph">Common Data Structures of Graph</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-list">Edge List</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-matrix">Adjacency Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adjacency-list">Adjacency List</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-optimization-problems"><strong>Graph Optimization Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue-and-stack">Queue and Stack</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#breadth-first-search-bfs"><strong>Breadth-First Search (BFS)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-find-all-paths-from-node-0-to-node-1">Example 1: Find All Paths from Node 0 to Node 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-all-paths-from-a-to-h">Example 2: Find All Paths from A to H</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-first-search-dfs"><strong>Depth-First Search (DFS)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-find-all-paths-from-a-to-h-dfs">Example 3: Find All Paths from A to H (DFS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shortest-path-of-weighted-graph"><strong>The Shortest Path of Weighted Graph</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4-find-the-shortest-path-from-a-to-h-bfs-or-dfs">Example 4: Find the Shortest Path from A to H (BFS or DFS)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dijkstra-algorithm"><strong>Dijkstra Algorithm</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-find-the-shortest-paths-from-node-a-to-the-others">Example: Find the shortest paths from node A to the others</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Chieh-En Lee
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
