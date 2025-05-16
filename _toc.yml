@@ -61,5 +61,6 @@ parts:
     chapters:
     - file: archives/IntroConcurrencyParallelism.ipynb
       title: A01. Introduction to Concurrency and Parallelism
-
+    - file: archives/Homeworks/hws.ipynb
+      title: A02. Homeworks
 
