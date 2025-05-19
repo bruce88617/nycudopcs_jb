@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems &#8212; Introduction to Computer Science and Programming</title>
+    <title>16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/16/chap16';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Random Walks and Stochastic Programs" href="../17/chap17.html" />
-    <link rel="prev" title="Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
+    <link rel="next" title="17. Random Walks and Stochastic Programs" href="../17/chap17.html" />
+    <link rel="prev" title="15. Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</h1>
+    <h1>16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -478,7 +479,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="knapsack-problems-dynamic-programming-and-graph-optimization-problems">
-<h1>Knapsack Problems, Dynamic Programming, and Graph Optimization Problems<a class="headerlink" href="#knapsack-problems-dynamic-programming-and-graph-optimization-problems" title="Link to this heading">#</a></h1>
+<h1>16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems<a class="headerlink" href="#knapsack-problems-dynamic-programming-and-graph-optimization-problems" title="Link to this heading">#</a></h1>
 <section id="today">
 <h2><strong>Today</strong><a class="headerlink" href="#today" title="Link to this heading">#</a></h2>
 <ul>
@@ -842,10 +843,14 @@ Total value of items taken is 325.0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total value of items taken is 450.0
-&lt;9, 170, 8&gt;
-&lt;18, 94, 3&gt;
-&lt;19, 186, 8&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total value of items taken is 799.0
+&lt;0, 27, 1&gt;
+&lt;2, 82, 4&gt;
+&lt;8, 144, 5&gt;
+&lt;12, 48, 2&gt;
+&lt;13, 166, 4&gt;
+&lt;14, 169, 2&gt;
+&lt;15, 163, 1&gt;
 </pre></div>
 </div>
 </div>
@@ -1014,116 +1019,28 @@ Decision Tree Test 1 (max. weight = 20):
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Test 2 (max. weight = 5):
     Items taken:
-         &lt;6, 145, 4&gt;
-    Total value of items taken = 145
+         &lt;1, 151, 3&gt;
+    Total value of items taken = 151
 Decision Tree Test 2 (max. weight = 20):
     Items taken:
-         &lt;12, 123, 3&gt;
-         &lt;11, 163, 6&gt;
-         &lt;7, 194, 8&gt;
-         &lt;6, 34, 1&gt;
-    Total value of items taken = 514
+         &lt;12, 76, 4&gt;
+         &lt;9, 167, 4&gt;
+         &lt;7, 166, 8&gt;
+    Total value of items taken = 409
 Decision Tree Test 2 (max. weight = 20):
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">testDT2</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">testDT2</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\testFuncs.py:57,</span> in <span class="ni">testDT2</span><span class="nt">(availWeight, numItems, maxVal, maxWeight)</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision Tree Test 2 (max. weight = </span><span class="si">{}</span><span class="s2">):&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">availWeight</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="n">items</span> <span class="o">=</span> <span class="n">buildManyItems</span><span class="p">(</span><span class="n">numItems</span><span class="p">,</span> <span class="n">maxVal</span><span class="p">,</span> <span class="n">maxWeight</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">57</span> <span class="n">val</span><span class="p">,</span> <span class="n">taken</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">availWeight</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    Items taken:&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="k">try</span><span class="p">:</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">6</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
-<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">19</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
-<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">5</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">49</span> <span class="p">(</span><span class="mi">1</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
-<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
-<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">27</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">45</span> <span class="p">(</span><span class="mi">7</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">49</span> <span class="p">(</span><span class="mi">3</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:49,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Left branch</span>
-<span class="ne">---&gt; </span><span class="mi">49</span> <span class="n">withVal</span><span class="p">,</span> <span class="n">withToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span> <span class="o">-</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getWeight</span><span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-
-    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">similar</span> <span class="n">frames</span><span class="p">:</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">45</span> <span class="p">(</span><span class="mi">39</span> <span class="n">times</span><span class="p">),</span> <span class="n">searchDT</span> <span class="n">at</span> <span class="n">line</span> <span class="mi">52</span> <span class="p">(</span><span class="mi">3</span> <span class="n">times</span><span class="p">)]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:45,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">elif</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">avail</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="c1"># Right branch only</span>
-<span class="ne">---&gt; </span><span class="mi">45</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span>     <span class="n">nextItem</span> <span class="o">=</span> <span class="n">toConsider</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:52,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span> <span class="n">withVal</span> <span class="o">+=</span> <span class="n">nextItem</span><span class="o">.</span><span class="n">getValue</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="c1"># Right branch</span>
-<span class="ne">---&gt; </span><span class="mi">52</span> <span class="n">withoutVal</span><span class="p">,</span> <span class="n">withoutToTake</span> <span class="o">=</span> <span class="n">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">avail</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span> <span class="c1"># Choose better branch</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> <span class="k">if</span> <span class="n">withVal</span> <span class="o">&gt;</span> <span class="n">withoutVal</span><span class="p">:</span>
-
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\16\scripts\part1\funcs.py:40,</span> in <span class="ni">searchDT</span><span class="nt">(toConsider, avail)</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span>             <span class="n">bestSet</span> <span class="o">=</span> <span class="n">items</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="k">return</span> <span class="p">(</span><span class="n">bestSet</span><span class="p">,</span> <span class="n">bestVal</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">40</span> <span class="k">def</span> <span class="nf">searchDT</span><span class="p">(</span><span class="n">toConsider</span><span class="p">,</span> <span class="n">avail</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="k">if</span> <span class="n">toConsider</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span> <span class="n">avail</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">())</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Items taken:
+         &lt;102, 36, 1&gt;
+         &lt;50, 134, 3&gt;
+         &lt;43, 133, 1&gt;
+         &lt;42, 76, 2&gt;
+         &lt;39, 124, 2&gt;
+         &lt;34, 117, 2&gt;
+         &lt;29, 132, 2&gt;
+         &lt;26, 178, 4&gt;
+         &lt;11, 170, 3&gt;
+    Total value of items taken = 1100
 </pre></div>
 </div>
 </div>
@@ -1175,16 +1092,16 @@ Decision Tree Test 2 (max. weight = 20):
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Decision Tree Test 2 (max. weight = 20):
     Items taken:
-         &lt;117, 125, 2&gt;
-         &lt;93, 114, 2&gt;
-         &lt;73, 120, 1&gt;
-         &lt;62, 33, 1&gt;
-         &lt;59, 188, 3&gt;
-         &lt;51, 110, 2&gt;
-         &lt;45, 113, 2&gt;
-         &lt;27, 110, 3&gt;
-         &lt;18, 170, 4&gt;
-    Total value of items taken = 1083
+         &lt;101, 152, 2&gt;
+         &lt;91, 174, 4&gt;
+         &lt;89, 186, 4&gt;
+         &lt;83, 181, 1&gt;
+         &lt;71, 187, 3&gt;
+         &lt;53, 149, 1&gt;
+         &lt;39, 97, 1&gt;
+         &lt;31, 119, 3&gt;
+         &lt;6, 127, 1&gt;
+    Total value of items taken = 1372
 </pre></div>
 </div>
 </div>
@@ -2119,7 +2036,7 @@ Shortest path:
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Data Analysis and More Data Visualization with Python II</p>
+        <p class="prev-next-title">15. Data Analysis and More Data Visualization with Python II</p>
       </div>
     </a>
     <a class="right-next"
@@ -2127,7 +2044,7 @@ Shortest path:
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Random Walks and Stochastic Programs</p>
+        <p class="prev-next-title">17. Random Walks and Stochastic Programs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

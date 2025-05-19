@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Random Walks and Stochastic Programs &#8212; Introduction to Computer Science and Programming</title>
+    <title>17. Random Walks and Stochastic Programs &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/17/chap17';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
-    <link rel="prev" title="Knapsack Problems, Dynamic Programming, and Graph Optimization Problems" href="../16/chap16.html" />
+    <link rel="next" title="18. Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
+    <link rel="prev" title="16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems" href="../16/chap16.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Random Walks and Stochastic Programs</h1>
+    <h1>17. Random Walks and Stochastic Programs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -464,7 +465,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="random-walks-and-stochastic-programs">
-<h1>Random Walks and Stochastic Programs<a class="headerlink" href="#random-walks-and-stochastic-programs" title="Link to this heading">#</a></h1>
+<h1>17. Random Walks and Stochastic Programs<a class="headerlink" href="#random-walks-and-stochastic-programs" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -548,15 +549,15 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #1: Random Walk of Drunkard HoHoChen
     UsualDrunk random walk of 10 steps
-        Mean = 3.039, Max = 6.3, Min = 0.0
+        Mean = 2.810, Max = 7.1, Min = 0.0
     UsualDrunk random walk of 100 steps
-        Mean = 9.299, Max = 18.9, Min = 0.0
+        Mean = 8.749, Max = 18.6, Min = 0.0
     UsualDrunk random walk of 1000 steps
-        Mean = 28.113, Max = 72.8, Min = 2.8
+        Mean = 31.840, Max = 69.6, Min = 0.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    UsualDrunk random walk of 10000 steps
-        Mean = 87.919, Max = 236.7, Min = 8.5
+        Mean = 87.033, Max = 224.2, Min = 4.2
 ==================== End of Test 1 ====================
 </pre></div>
 </div>
@@ -572,7 +573,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #2: Random Walk of Drunkard YenYenChen
 </pre></div>
 </div>
-<img alt="../../_images/892799ec500fbc423b70ba03250d93a46ab07e83c0074eccda6ef3a57c25b53b.png" src="../../_images/892799ec500fbc423b70ba03250d93a46ab07e83c0074eccda6ef3a57c25b53b.png" />
+<img alt="../../_images/85d3d9286aa637d906a7dc5140cb92f7c79447e9dfc6e220e523a6b2e08f0134.png" src="../../_images/85d3d9286aa637d906a7dc5140cb92f7c79447e9dfc6e220e523a6b2e08f0134.png" />
 </div>
 </div>
 <p><a id="tag2"></a></p>
@@ -599,17 +600,17 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run Test #3: Random Walk of Drunkard YingYingChen
     UsualDrunk random walk of 100 steps
-        Mean = 8.779, Max = 22.0, Min = 0.0
+        Mean = 9.835, Max = 24.4, Min = 0.0
     UsualDrunk random walk of 1000 steps
-        Mean = 27.760, Max = 66.2, Min = 2.8
+        Mean = 29.005, Max = 65.4, Min = 6.3
     HeatAvoidDrunk random walk of 100 steps
-        Mean = 27.850, Max = 54.3, Min = 2.2
+        Mean = 25.839, Max = 57.3, Min = 7.6
     HeatAvoidDrunk random walk of 1000 steps
-        Mean = 249.221, Max = 323.1, Min = 169.0
+        Mean = 248.676, Max = 330.1, Min = 175.5
     EastWardDrunk random walk of 100 steps
-        Mean = 68.707, Max = 93.1, Min = 47.8
+        Mean = 66.386, Max = 94.1, Min = 46.0
     EastWardDrunk random walk of 1000 steps
-        Mean = 663.934, Max = 753.7, Min = 581.2
+        Mean = 662.854, Max = 726.5, Min = 594.1
 ==================== End of Test 3 ====================
 </pre></div>
 </div>
@@ -649,12 +650,17 @@ document.write(`
 <span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">field</span><span class="o">.</span><span class="n">moveDrunk</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">return</span> <span class="n">start</span><span class="o">.</span><span class="n">distFrom</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">getLoc</span><span class="p">(</span><span class="n">target</span><span class="p">))</span>
 
-<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:43,</span> in <span class="ni">Field.moveDrunk</span><span class="nt">(self, drunk)</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>         <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span> <span class="o">=</span> <span class="n">loc</span>
-<span class="ne">---&gt; </span><span class="mi">43</span> <span class="k">def</span> <span class="nf">moveDrunk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drunk</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span>     <span class="k">if</span> <span class="n">drunk</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Drunk not in field&quot;</span><span class="p">)</span>
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:48,</span> in <span class="ni">Field.moveDrunk</span><span class="nt">(self, drunk)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span> <span class="o">=</span> <span class="n">drunk</span><span class="o">.</span><span class="n">takeStep</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span> <span class="n">currentLocation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">48</span> <span class="bp">self</span><span class="o">.</span><span class="n">drunks</span><span class="p">[</span><span class="n">drunk</span><span class="p">]</span> <span class="o">=</span> <span class="n">currentLocation</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">xDist</span><span class="p">,</span> <span class="n">yDist</span><span class="p">)</span>
+
+<span class="nn">File O:\Personal_GitHub\nycudopcs_jb\chapters\17\scripts\part1\objs.py:15,</span> in <span class="ni">Location.move</span><span class="nt">(self, deltaX, deltaY)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deltaX</span><span class="p">,</span> <span class="n">deltaY</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="k">return</span> <span class="n">Location</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">+</span><span class="n">deltaX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">+</span><span class="n">deltaY</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">def</span> <span class="nf">getX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -828,7 +834,7 @@ TTTTT
 </ul>
 <div class="math notranslate nohighlight">
 \[
-X: S \to \Reals
+X: S \to \mathbb{R}
 \]</div>
 <ul class="simple">
 <li><p>Since a random variable is a function that returns you a real value represented an event in the sample space, it means we will get different results if we measure it (different experiments). Therefore, we define <span class="math notranslate nohighlight">\(X_i\)</span> as the <span class="math notranslate nohighlight">\(i^{th}\)</span> measurement of the random variable <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
@@ -888,7 +894,7 @@ P_X (x_k) = P(X = x_k) \text{, for } k = 1, 2, 3, ...
 </ul>
 <div class="math notranslate nohighlight">
 \[
-f_X (x) = f(X = x) \text{, for } x \in \R
+f_X (x) = f(X = x) \text{, for } x \in \mathbb{R}
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -960,7 +966,7 @@ f_X (x) = f(X = x) \text{, for } x \in \R
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-&amp;\mathbb{E}[aX + b] = a \mathbb{E}[X] + b \text{, for all } a, b \in \R \\
+&amp;\mathbb{E}[aX + b] = a \mathbb{E}[X] + b \text{, for all } a, b \in \mathbb{R} \\
 &amp;\mathbb{E}[X_1 + X_2 + \cdots + X_n] = \mathbb{E}[X_1] + \mathbb{E}[X_2] + \cdots + \mathbb{E}[X_n]
 \end{aligned}
 \end{split}\]</div>
@@ -1226,7 +1232,7 @@ P_X(k) = \begin{cases}
 <section id="pascal-distribution">
 <h3>Pascal Distribution<a class="headerlink" href="#pascal-distribution" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>Pascal distribution</strong> is a generalization of the geometric distribution. It relates to the random experiment of repeated independent trials until observing <span class="math notranslate nohighlight">\(m\)</span> successes. Suppose that we have a coin with <span class="math notranslate nohighlight">\(P(Head) = p\)</span>. I toss the coin until we observe <span class="math notranslate nohighlight">\(m\)</span> heads, where <span class="math notranslate nohighlight">\(m \in \N\)</span>. We define <span class="math notranslate nohighlight">\(X\)</span> as the total number of trials in this experiment. Then <span class="math notranslate nohighlight">\(X\)</span> is said to have Pascal distribution with parameter <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(X \sim Pascal(m,p)\)</span>. In this case, the range of <span class="math notranslate nohighlight">\(X\)</span> here is <span class="math notranslate nohighlight">\(R_X = \{m, m+1, m+2, m+3, ...\}\)</span> and <span class="math notranslate nohighlight">\(Pascal(1, p) = Geometric(p)\)</span>.</p></li>
+<li><p>The <strong>Pascal distribution</strong> is a generalization of the geometric distribution. It relates to the random experiment of repeated independent trials until observing <span class="math notranslate nohighlight">\(m\)</span> successes. Suppose that we have a coin with <span class="math notranslate nohighlight">\(P(Head) = p\)</span>. I toss the coin until we observe <span class="math notranslate nohighlight">\(m\)</span> heads, where <span class="math notranslate nohighlight">\(m \in \mathbb{N}\)</span>. We define <span class="math notranslate nohighlight">\(X\)</span> as the total number of trials in this experiment. Then <span class="math notranslate nohighlight">\(X\)</span> is said to have Pascal distribution with parameter <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(X \sim Pascal(m,p)\)</span>. In this case, the range of <span class="math notranslate nohighlight">\(X\)</span> here is <span class="math notranslate nohighlight">\(R_X = \{m, m+1, m+2, m+3, ...\}\)</span> and <span class="math notranslate nohighlight">\(Pascal(1, p) = Geometric(p)\)</span>.</p></li>
 <li><p>To derive the PMF of a <span class="math notranslate nohighlight">\(Pascal(m, p)\)</span> random variable <span class="math notranslate nohighlight">\(X\)</span>. We can use this fact:</p>
 <ol class="arabic simple">
 <li><p>We observe <span class="math notranslate nohighlight">\(m-1\)</span> heads in the first <span class="math notranslate nohighlight">\(k-1\)</span> trials. We define the probability of this event is <span class="math notranslate nohighlight">\(P(B)\)</span>.</p></li>
@@ -1541,7 +1547,7 @@ f_X(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp{ \bigg[ -\frac{(x - \mu)^2}{2 \sig
 f_Z(z) = \frac{1}{\sqrt{2 \pi}} \exp{ \bigg( -\frac{z^2}{2} \bigg) }
 \]</div>
 <ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(X \sim N(\mu_X, \sigma_X^2)\)</span>, and <span class="math notranslate nohighlight">\(Y = aX + b\)</span>, where <span class="math notranslate nohighlight">\(a, b \in \R\)</span>, then</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X \sim N(\mu_X, \sigma_X^2)\)</span>, and <span class="math notranslate nohighlight">\(Y = aX + b\)</span>, where <span class="math notranslate nohighlight">\(a, b \in \mathbb{R}\)</span>, then</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1735,7 +1741,7 @@ f_X(x) = \begin{cases}
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</p>
+        <p class="prev-next-title">16. Knapsack Problems, Dynamic Programming, and Graph Optimization Problems</p>
       </div>
     </a>
     <a class="right-next"
@@ -1743,7 +1749,7 @@ f_X(x) = \begin{cases}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Limit Theorems and Monte Carlo Method</p>
+        <p class="prev-next-title">18. Limit Theorems and Monte Carlo Method</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

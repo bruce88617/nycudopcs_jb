@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to Statistical Inference &#8212; Introduction to Computer Science and Programming</title>
+    <title>19. Introduction to Statistical Inference &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/19/chap19';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Randomized Trials and Hypothesis Checking" href="../20/chap20.html" />
-    <link rel="prev" title="Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
+    <link rel="next" title="20. Randomized Trials and Hypothesis Checking" href="../20/chap20.html" />
+    <link rel="prev" title="18. Limit Theorems and Monte Carlo Method" href="../18/chap18.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to Statistical Inference</h1>
+    <h1>19. Introduction to Statistical Inference</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -495,7 +496,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-statistical-inference">
-<h1>Introduction to Statistical Inference<a class="headerlink" href="#introduction-to-statistical-inference" title="Link to this heading">#</a></h1>
+<h1>19. Introduction to Statistical Inference<a class="headerlink" href="#introduction-to-statistical-inference" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last Time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -562,7 +563,7 @@ document.write(`
 </ol>
 <div class="math notranslate nohighlight">
 \[
-F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x) \text{, for all } x \in \R.
+F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x) \text{, for all } x \in \mathbb{R}.
 \]</div>
 <p>In the above example, the random variable <span class="math notranslate nohighlight">\(\hat{\Theta} = \frac{X_1 + X_2 + X_3 + ... + X_n}{n}\)</span> is called a <strong>point estimator</strong> for the average height of males in the population, and we can obtain <span class="math notranslate nohighlight">\(\hat{\Theta} = \hat{\theta}\)</span>. Here, <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> is called an <strong>estimate</strong> of the average height of males in the population. In general, a point estimator is a function of the random sample <span class="math notranslate nohighlight">\(\hat{\Theta} = h(X_1, X_2, X_3, ..., X_n)\)</span> that is used to estimate an unknown quantity.</p>
 <section id="properties-of-random-samples">
@@ -570,7 +571,7 @@ F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x) \text{, for all } x \in \R.
 <p>Let <span class="math notranslate nohighlight">\(X_1, X_2, X_3, ..., X_n\)</span> be a random sample from the same distribution, we assume:</p>
 <ol class="arabic simple">
 <li><p>The <span class="math notranslate nohighlight">\(X_i\)</span>’s are independent.</p></li>
-<li><p><span class="math notranslate nohighlight">\(F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in \R\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_{X_1}(x) = F_{X_2}(x) = ... = F_{X_n}(x)\)</span> for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathbb{E}[X_i] = \mathbb{E}[X] = \mu &lt; \infty\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(0 &lt; \text{Var}(X_i) = \text{Var}(X) = \sigma^2 &lt; \infty\)</span>.</p></li>
 </ol>
@@ -685,11 +686,11 @@ MSE(\hat{\Theta}_1) &amp;= \mathbb{E} \big[ (\hat{\Theta}_1 - \theta)^2 \big] \\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n = 10:
-    Bias = -0.0094039
-    MSE = 0.0000884
+    Bias = -0.0284039
+    MSE = 0.0008068
 n = 1:
-    Bias = -0.1214039
-    MSE = 0.0147389
+    Bias = 0.0785961
+    MSE = 0.0061774
 </pre></div>
 </div>
 </div>
@@ -753,12 +754,12 @@ S^2 = \frac{1}{n-1} \sum_{k=1}^{n} (X_k - \bar{X})^2
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of Experiment = 2:
     Theoretical value of Variance = 0.0833333
-    Result of biased estimator of variance = 4.2500000
-    Result of unbiased estimator of variance = 4.7222222
+    Result of biased estimator of variance = 0.4400000
+    Result of unbiased estimator of variance = 0.4888889
 Number of Experiment = 100:
     Theoretical value of Variance = 0.0833333
-    Result of biased estimator of variance = 0.4100000
-    Result of unbiased estimator of variance = 0.4555556
+    Result of biased estimator of variance = 1.3600000
+    Result of unbiased estimator of variance = 1.5111111
 </pre></div>
 </div>
 </div>
@@ -1315,7 +1316,7 @@ f_Y(y) = \frac{1}{2^{\frac{n}{2}} \Gamma(\frac{n}{2})} y^{\frac{n}{2} - 1} e^{-\
 \end{aligned}
 \end{split}\]</div>
 <ol class="arabic simple" start="2">
-<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \N\)</span>, we define <span class="math notranslate nohighlight">\(\chi_{p,n}^2\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(Y &gt; \chi_{p,n}^2) = p,\)</span> where <span class="math notranslate nohighlight">\(Y \sim \chi^2(n)\)</span>. To calculate the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span>, we define <span class="math notranslate nohighlight">\(\chi_{p,n}^2\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(Y &gt; \chi_{p,n}^2) = p,\)</span> where <span class="math notranslate nohighlight">\(Y \sim \chi^2(n)\)</span>. To calculate the <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code>.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1329,7 +1330,7 @@ f_Y(y) = \frac{1}{2^{\frac{n}{2}} \Gamma(\frac{n}{2})} y^{\frac{n}{2} - 1} e^{-\
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-squared(p=0.05, n=7) = 14.07
 </pre></div>
 </div>
-<img alt="../../_images/004e86e4b9b681cff52b417b45d841cf5a750472e7fc441fde7124e4a6891031.png" src="../../_images/004e86e4b9b681cff52b417b45d841cf5a750472e7fc441fde7124e4a6891031.png" />
+<img alt="../../_images/11cdf0aa850a2c76b1bfc6bac2f2449baa65d1f12e55fcd63732ec7cdad71c47.png" src="../../_images/11cdf0aa850a2c76b1bfc6bac2f2449baa65d1f12e55fcd63732ec7cdad71c47.png" />
 </div>
 </div>
 <section id="why-do-we-need-the-chi-2-distribution">
@@ -1415,7 +1416,7 @@ f_T(t, \nu) = \frac{\Gamma \big(\frac{\nu + 1}{2} \big)}{\sqrt{\pi \nu} \Gamma (
 <li><p>The expected value of <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom <span class="math notranslate nohighlight">\(\mathbb{E}[T] = 0\)</span>, for <span class="math notranslate nohighlight">\(n &gt; 0\)</span>. But <span class="math notranslate nohighlight">\(\mathbb{E}[T]\)</span> is undefined for <span class="math notranslate nohighlight">\(n = 1\)</span>.</p></li>
 <li><p>The variance of <span class="math notranslate nohighlight">\(t\)</span>-distribution with <span class="math notranslate nohighlight">\(n\)</span> degrees of freedom <span class="math notranslate nohighlight">\(\text{Var}(T) = \frac{n}{n-2}\)</span>, for <span class="math notranslate nohighlight">\(n &gt; 2\)</span>. But <span class="math notranslate nohighlight">\(\text{Var}(T)\)</span> is undefined for <span class="math notranslate nohighlight">\(n = 1, 2\)</span>.</p></li>
 <li><p>As <span class="math notranslate nohighlight">\(n \to \infty\)</span>, <span class="math notranslate nohighlight">\(T(n) \to N(0, 1)\)</span>.</p></li>
-<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \N\)</span>, we define <span class="math notranslate nohighlight">\(t_{p,n}\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(T &gt; t_{p,n}) = p.\)</span> Since the <span class="math notranslate nohighlight">\(t\)</span>-distribution has a symmetric PDF, we have $<span class="math notranslate nohighlight">\(t_{1-p,n} = -t_{p,n}\)</span><span class="math notranslate nohighlight">\( To calculate the \)</span>t$-distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>.</p></li>
+<li><p>For any <span class="math notranslate nohighlight">\(p \in [0, 1]\)</span> and <span class="math notranslate nohighlight">\(n \in \mathbb{N}\)</span>, we define <span class="math notranslate nohighlight">\(t_{p,n}\)</span> as the real value for which <span class="math notranslate nohighlight">\(P(T &gt; t_{p,n}) = p.\)</span> Since the <span class="math notranslate nohighlight">\(t\)</span>-distribution has a symmetric PDF, we have $<span class="math notranslate nohighlight">\(t_{1-p,n} = -t_{p,n}\)</span><span class="math notranslate nohighlight">\( To calculate the \)</span>t$-distribution, we can use <code class="docutils literal notranslate"><span class="pre">scipy.stats.t</span></code>.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1426,7 +1427,7 @@ f_T(t, \nu) = \frac{\Gamma \big(\frac{\nu + 1}{2} \big)}{\sqrt{\pi \nu} \Gamma (
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/00f73e2878236804156b8f88637ff4356e5524ecf0be7fa1ecbb5435f1bd26e0.png" src="../../_images/00f73e2878236804156b8f88637ff4356e5524ecf0be7fa1ecbb5435f1bd26e0.png" />
+<img alt="../../_images/981d4383e0af8c8196de7d807acb927230d5835cfaa2caaf2b5f9fea82d51b27.png" src="../../_images/981d4383e0af8c8196de7d807acb927230d5835cfaa2caaf2b5f9fea82d51b27.png" />
 </div>
 </div>
 <p>By the above discussion, we know that</p>
@@ -1625,7 +1626,7 @@ Confidence Interval for Variance = [20.85, 76.91]
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Limit Theorems and Monte Carlo Method</p>
+        <p class="prev-next-title">18. Limit Theorems and Monte Carlo Method</p>
       </div>
     </a>
     <a class="right-next"
@@ -1633,7 +1634,7 @@ Confidence Interval for Variance = [20.85, 76.91]
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Randomized Trials and Hypothesis Checking</p>
+        <p class="prev-next-title">20. Randomized Trials and Hypothesis Checking</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

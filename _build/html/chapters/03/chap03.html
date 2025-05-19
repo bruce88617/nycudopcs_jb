@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Simple Numerical Algorithms I &#8212; Introduction to Computer Science and Programming</title>
+    <title>03. Simple Numerical Algorithms I &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/03/chap03';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Abstraction, Decomposition, and Functions" href="../04/chap04.html" />
-    <link rel="prev" title="Python Basics, Branching, and Iteration" href="../02/chap02.html" />
+    <link rel="next" title="04. Abstraction, Decomposition, and Functions" href="../04/chap04.html" />
+    <link rel="prev" title="02. Python Basics, Branching, and Iteration" href="../02/chap02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simple Numerical Algorithms I</h1>
+    <h1>03. Simple Numerical Algorithms I</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -456,7 +457,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="simple-numerical-algorithms-i">
-<h1>Simple Numerical Algorithms I<a class="headerlink" href="#simple-numerical-algorithms-i" title="Link to this heading">#</a></h1>
+<h1>03. Simple Numerical Algorithms I<a class="headerlink" href="#simple-numerical-algorithms-i" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -841,7 +842,7 @@ x^2 - 2x - 2 = 0
 <blockquote>
 <div><p>Consider an interval <span class="math notranslate nohighlight">\(\displaystyle I=[a,b]\)</span> of real numbers <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and a continuous function <span class="math notranslate nohighlight">\({\displaystyle f\colon I\to \mathbb {R} }\)</span>. Then</p>
 <ul class="simple">
-<li><p>Version 1: if <span class="math notranslate nohighlight">\(u\)</span> is a number between <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span>, that is, $<span class="math notranslate nohighlight">\(\min(f(a),f(b))&lt;u&lt;\max(f(a),f(b)),\)</span><span class="math notranslate nohighlight">\( then there is a \)</span>c\in (a,b)<span class="math notranslate nohighlight">\( such that \)</span>f(c)=u$.</p></li>
+<li><p>Version 1: if <span class="math notranslate nohighlight">\(u\)</span> is a number between <span class="math notranslate nohighlight">\(f(a)\)</span> and <span class="math notranslate nohighlight">\(f(b)\)</span>, that is, <span class="math notranslate nohighlight">\(\min(f(a),f(b))&lt;u&lt;\max(f(a),f(b)),\)</span> then there is a <span class="math notranslate nohighlight">\(c\in (a,b)\)</span> such that <span class="math notranslate nohighlight">\(f(c)=u\)</span>.</p></li>
 <li><p>Version 2: the image set <span class="math notranslate nohighlight">\(f(I)\)</span> is also a closed interval, and it contains <span class="math notranslate nohighlight">\({\bigl [}\min(f(a),f(b)),\max(f(a),f(b)){\bigr ]}\)</span></p></li>
 </ul>
 </div></blockquote>
@@ -1010,7 +1011,7 @@ x^2 - 2x - 2 = 0
 </ul>
 <br />
 <ul class="simple">
-<li><p>General form of floating-point number: <span class="math notranslate nohighlight">\(\pm (1.mantissa) \times 2^{exponent}\)</span></p></li>
+<li><p>General form of floating-point number: <span class="math notranslate nohighlight">\(\pm (1.\text{mantissa}) \times 2^{\text{exponent}}\)</span></p></li>
 </ul>
 <p><a id="tag7"></a></p>
 </section>
@@ -1152,7 +1153,7 @@ Find an approximated root: -1.0009
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Python Basics, Branching, and Iteration</p>
+        <p class="prev-next-title">02. Python Basics, Branching, and Iteration</p>
       </div>
     </a>
     <a class="right-next"
@@ -1160,7 +1161,7 @@ Find an approximated root: -1.0009
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Abstraction, Decomposition, and Functions</p>
+        <p class="prev-next-title">04. Abstraction, Decomposition, and Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
