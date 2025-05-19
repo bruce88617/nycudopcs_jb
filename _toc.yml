@@ -33,7 +33,7 @@ parts:
     - file: chapters/11/chap11.ipynb
       title: 11. Simple Numerical Algorithms II
 
-  - caption: "Part II: Scientific Computing and Data Visualization with Python"
+  - caption: "Part II: Introduction to Data Processing and Visualization with Python"
     chapters:
     - file: chapters/12/chap12.ipynb
       title: 12. Introduction to NumPy and Matplotlib I
