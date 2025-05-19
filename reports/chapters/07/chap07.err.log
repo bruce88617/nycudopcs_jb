@@ -18,30 +18,23 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# import module "nycudopcs2023"
-import nycudopcs2023
-
-# call function in "nycudopcs2023"
-nycudopcs2023.youfool()
-
-# call variables in "nycudopcs2023"
-print(nycudopcs2023.student_id)
-
-# call another function in "nycudopcs2023"
-for i in range(3):
-    nycudopcs2023.gossip(idx=i)
-
-
+testList = [1, 2, 3]
+print(testList[0])
+print(testList[3])
+print("The End.")
 ------------------
 
+----- stdout -----
+1
+------------------
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[1], line 2[0m
-[0;32m      1[0m [38;5;66;03m# import module "nycudopcs2023"[39;00m
-[1;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mnycudopcs2023[39;00m
-[0;32m      4[0m [38;5;66;03m# call function in "nycudopcs2023"[39;00m
-[0;32m      5[0m nycudopcs2023[38;5;241m.[39myoufool()
+[1;31mIndexError[0m                                Traceback (most recent call last)
+Cell [1;32mIn[7], line 3[0m
+[0;32m      1[0m testList [38;5;241m=[39m [[38;5;241m1[39m, [38;5;241m2[39m, [38;5;241m3[39m]
+[0;32m      2[0m [38;5;28mprint[39m(testList[[38;5;241m0[39m])
+[1;32m----> 3[0m [38;5;28mprint[39m([43mtestList[49m[43m[[49m[38;5;241;43m3[39;49m[43m][49m)
+[0;32m      4[0m [38;5;28mprint[39m([38;5;124m"[39m[38;5;124mThe End.[39m[38;5;124m"[39m)
 
-[1;31mModuleNotFoundError[0m: No module named 'nycudopcs2023'
+[1;31mIndexError[0m: list index out of range
 

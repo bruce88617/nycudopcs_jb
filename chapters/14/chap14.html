@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data Analysis and More Data Visualization with Python I &#8212; Introduction to Computer Science and Programming</title>
+    <title>14. Data Analysis and More Data Visualization with Python I &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/14/chap14';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
-    <link rel="prev" title="Introduction to NumPy and Matplotlib II" href="../13/chap13.html" />
+    <link rel="next" title="15. Data Analysis and More Data Visualization with Python II" href="../15/chap15.html" />
+    <link rel="prev" title="13. Introduction to NumPy and Matplotlib II" href="../13/chap13.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data Analysis and More Data Visualization with Python I</h1>
+    <h1>14. Data Analysis and More Data Visualization with Python I</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -433,7 +434,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="data-analysis-and-more-data-visualization-with-python-i">
-<h1>Data Analysis and More Data Visualization with Python I<a class="headerlink" href="#data-analysis-and-more-data-visualization-with-python-i" title="Link to this heading">#</a></h1>
+<h1>14. Data Analysis and More Data Visualization with Python I<a class="headerlink" href="#data-analysis-and-more-data-visualization-with-python-i" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Please refer to <a class="reference external" href="https://github.com/bruce88617/nycudopcs/tree/main/Lectures/Lecture14">here</a> for the data in this lecture.</p></li>
 </ul>
@@ -565,11 +566,11 @@ type(df1.iloc[0]): &lt;class &#39;pandas.core.series.Series&#39;&gt;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    10
-1    13
-2    98
-3    12
-4    25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    99
+1    69
+2     1
+3    83
+4    72
 Name: HW#4, dtype: int32
 </pre></div>
 </div>
@@ -586,11 +587,11 @@ Name: HW#4, dtype: int32
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Student ID  Gender  HW#1  HW#2  HW#3  HW#4
-0  112514001  Female   100    90   100    10
-1  112514002    Male     0    60    75    13
-2  112514003   Third    70    95    80    98
-3  112514004  Female    90    85   100    12
-4  112514005    Male    80   100    60    25
+0  112514001  Female   100    90   100    99
+1  112514002    Male     0    60    75    69
+2  112514003   Third    70    95    80     1
+3  112514004  Female    90    85   100    83
+4  112514005    Male    80   100    60    72
 </pre></div>
 </div>
 </div>
@@ -606,11 +607,11 @@ Name: HW#4, dtype: int32
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Student ID  Gender  HW#1  HW#2  HW#3  HW#4  Final
-0  112514001  Female   100    90   100    10   88.0
-1  112514002    Male     0    60    75    13   41.8
-2  112514003   Third    70    95    80    98   83.3
-3  112514004  Female    90    85   100    12   83.7
-4  112514005    Male    80   100    60    25   74.5
+0  112514001  Female   100    90   100    99   96.9
+1  112514002    Male     0    60    75    69   47.4
+2  112514003   Third    70    95    80     1   73.6
+3  112514004  Female    90    85   100    83   90.8
+4  112514005    Male    80   100    60    72   79.2
 </pre></div>
 </div>
 </div>
@@ -665,56 +666,56 @@ Name: HW#4, dtype: int32
       <td>68.000000</td>
       <td>86.000000</td>
       <td>83.000000</td>
-      <td>31.60000</td>
-      <td>74.260000</td>
+      <td>64.80000</td>
+      <td>77.580000</td>
     </tr>
     <tr>
       <th>std</th>
       <td>39.623226</td>
       <td>15.572412</td>
       <td>17.175564</td>
-      <td>37.58058</td>
-      <td>18.797154</td>
+      <td>37.55263</td>
+      <td>19.218012</td>
     </tr>
     <tr>
       <th>min</th>
       <td>0.000000</td>
       <td>60.000000</td>
       <td>60.000000</td>
-      <td>10.00000</td>
-      <td>41.800000</td>
+      <td>1.00000</td>
+      <td>47.400000</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>70.000000</td>
       <td>85.000000</td>
       <td>75.000000</td>
-      <td>12.00000</td>
-      <td>74.500000</td>
+      <td>69.00000</td>
+      <td>73.600000</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>80.000000</td>
       <td>90.000000</td>
       <td>80.000000</td>
-      <td>13.00000</td>
-      <td>83.300000</td>
+      <td>72.00000</td>
+      <td>79.200000</td>
     </tr>
     <tr>
       <th>75%</th>
       <td>90.000000</td>
       <td>95.000000</td>
       <td>100.000000</td>
-      <td>25.00000</td>
-      <td>83.700000</td>
+      <td>83.00000</td>
+      <td>90.800000</td>
     </tr>
     <tr>
       <th>max</th>
       <td>100.000000</td>
       <td>100.000000</td>
       <td>100.000000</td>
-      <td>98.00000</td>
-      <td>88.000000</td>
+      <td>99.00000</td>
+      <td>96.900000</td>
     </tr>
   </tbody>
 </table>
@@ -762,16 +763,16 @@ dtype: object
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           2050-12-29  2051-01-05  2051-01-12  2051-01-19  2051-01-26
-139514001           1           1           0           0           0
-139514002           0           0           2           2           1
-139514003           2           2           0           0           2
-139514004           1           0           0           2           0
-139514005           0           0           0           0           1
-139514006           0           1           0           2           2
-139514007           2           2           2           1           0
-139514008           0           2           2           0           2
-139514009           0           2           0           1           1
-139514010           2           0           0           0           0
+139514001           0           1           0           1           0
+139514002           2           2           1           2           0
+139514003           1           2           0           0           1
+139514004           1           1           0           0           0
+139514005           0           2           2           1           2
+139514006           0           2           2           1           0
+139514007           0           2           0           1           1
+139514008           1           0           2           0           2
+139514009           0           1           2           0           0
+139514010           1           2           2           1           2
 Index([&#39;139514001&#39;, &#39;139514002&#39;, &#39;139514003&#39;, &#39;139514004&#39;, &#39;139514005&#39;,
        &#39;139514006&#39;, &#39;139514007&#39;, &#39;139514008&#39;, &#39;139514009&#39;, &#39;139514010&#39;],
       dtype=&#39;object&#39;)
@@ -1018,8 +1019,8 @@ DatetimeIndex([&#39;2050-12-29&#39;, &#39;2051-01-05&#39;, &#39;2051-01-12&#39;,
 <section id="exercise-14-2-calculate-the-ops">
 <h3>Exercise 14.2: calculate the <strong>OPS+</strong><a class="headerlink" href="#exercise-14-2-calculate-the-ops" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Please write a program that calculates the <strong>On-base Plus Slugging Plus (<span class="math notranslate nohighlight">\(\bold{OPS^+}\)</span>)</strong> of all players that had played in MLB 2023 seasons.</p></li>
-<li><p>The definitions of <em>Batting Average (BA)</em>, <em>On-based Percentage (OBP)</em>, <em>On-based Plus Slugging (OPS)</em>, and <em><span class="math notranslate nohighlight">\(OPS^+\)</span></em> are:</p></li>
+<li><p>Please write a program that calculates the <strong>On-base Plus Slugging Plus (<span class="math notranslate nohighlight">\(\text{OPS}^+\)</span>)</strong> of all players that had played in MLB 2023 seasons.</p></li>
+<li><p>The definitions of <em>Batting Average (BA)</em>, <em>On-based Percentage (OBP)</em>, <em>On-based Plus Slugging (OPS)</em>, and <em><span class="math notranslate nohighlight">\(\text{OPS}^+\)</span></em> are:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}
@@ -1040,11 +1041,9 @@ DatetimeIndex([&#39;2050-12-29&#39;, &#39;2051-01-05&#39;, &#39;2051-01-12&#39;,
 <hr class="docutils" />
 <section id="exercise-14-3-calculate-the-woba-wraa-and-wrc">
 <h3>Exercise 14.3: calculate the <strong>wOBA</strong>, <strong>wRAA</strong>, and <strong>wRC</strong><a class="headerlink" href="#exercise-14-3-calculate-the-woba-wraa-and-wrc" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Please write a program that calculates the <strong>weighted on-base average (wOBA)</strong>, <strong>weighted runs above average (wRAA)</strong>, and <strong>weighted Runs Created (wRC)</strong> of all player that had played in MLB 2023 season.</p></li>
-<li><p><a class="reference internal" href="#.//data/data_batting_2021-2023.xlsx"><span class="xref myst">Your data is here.</span></a></p></li>
-<li><p>The definitions of <strong>wOBA</strong>, <strong>wRAA</strong>, and <strong>wRC</strong> of MLB 2023 are:</p></li>
-</ul>
+<p>Please write a program that calculates the <strong>weighted on-base average (wOBA)</strong>, <strong>weighted runs above average (wRAA)</strong>, and <strong>weighted Runs Created (wRC)</strong> of all player that had played in MLB 2023 season.</p>
+<p><a class="reference external" href="https://github.com/bruce88617/nycudopcs_jb/blob/8d858d4491dc8ad2b501a6a32041083cbad4ffdb/chapters/14/data/data_batting16-24.xlsx">Your data is here.</a></p>
+<p>The definitions of <strong>wOBA</strong>, <strong>wRAA</strong>, and <strong>wRC</strong> of MLB 2023 are:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\begin{split}
 \begin{aligned}
@@ -1326,7 +1325,7 @@ DatetimeIndex([&#39;2050-12-29&#39;, &#39;2051-01-05&#39;, &#39;2051-01-12&#39;,
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> and <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> II</p>
+        <p class="prev-next-title">13. Introduction to <code class="docutils literal notranslate"><span class="pre">NumPy</span></code> and <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> II</p>
       </div>
     </a>
     <a class="right-next"
@@ -1334,7 +1333,7 @@ DatetimeIndex([&#39;2050-12-29&#39;, &#39;2051-01-05&#39;, &#39;2051-01-12&#39;,
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Analysis and More Data Visualization with Python II</p>
+        <p class="prev-next-title">15. Data Analysis and More Data Visualization with Python II</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

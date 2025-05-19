@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introduction to Object-Oriented Programming I &#8212; Introduction to Computer Science and Programming</title>
+    <title>08. Introduction to Object-Oriented Programming I &#8212; Introduction to Computer Science and Programming</title>
   
   
   
@@ -62,8 +62,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapters/08/chap08';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to Object-Oriented Programming II" href="../09/chap09.html" />
-    <link rel="prev" title="Modules, Packages, Exception, and Assertion" href="../07/chap07.html" />
+    <link rel="next" title="09. Introduction to Object-Oriented Programming II" href="../09/chap09.html" />
+    <link rel="prev" title="07. Modules, Packages, Exception, and Assertion" href="../07/chap07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,7 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../10/chap10.html">10. Introduction to Computational Complexity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../11/chap11.html">11. Simple Numerical Algorithms II</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Scientific Computing and Data Visualization with Python</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II: Introduction to Data Processing and Visualization with Python</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../12/chap12.html">12. Introduction to NumPy and Matplotlib I</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13/chap13.html">13. Introduction to NumPy and Matplotlib II</a></li>
@@ -213,6 +213,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Archives</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../archives/IntroConcurrencyParallelism.html">A01. Introduction to Concurrency and Parallelism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives/Homeworks/hws.html">A02. Homeworks</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Introduction to Object-Oriented Programming I</h1>
+    <h1>08. Introduction to Object-Oriented Programming I</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -442,7 +443,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-object-oriented-programming-i">
-<h1>Introduction to Object-Oriented Programming I<a class="headerlink" href="#introduction-to-object-oriented-programming-i" title="Link to this heading">#</a></h1>
+<h1>08. Introduction to Object-Oriented Programming I<a class="headerlink" href="#introduction-to-object-oriented-programming-i" title="Link to this heading">#</a></h1>
 <section id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -622,21 +623,21 @@ Example: <code class="docutils literal notranslate"><span class="pre">len()</spa
 <hr class="docutils" />
 <section id="exercise-8-1">
 <h3>Exercise 8.1<a class="headerlink" href="#exercise-8-1" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Please create an object called <code class="docutils literal notranslate"><span class="pre">Line2D</span></code> that aims to represent a 2D line.</p>
+<p>Please create an object called <code class="docutils literal notranslate"><span class="pre">Line2D</span></code> that aims to represent a 2D line.</p>
 <ol class="arabic simple">
-<li><p>It has 3 default parameters <span class="math notranslate nohighlight">\((x_0, y_0, m)\)</span>.
-$<span class="math notranslate nohighlight">\(
+<li><p>It has 3 default parameters <span class="math notranslate nohighlight">\((x_0, y_0, m)\)</span>.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 (x_0, y_0): &amp; \text{ the coordinate of an arbitrary point on the line} \\
 m: &amp; \text{ the slope of the line}
 \end{aligned}
-\)</span>$</p></li>
+\end{split}\]</div>
+<ol class="arabic simple" start="2">
 <li><p>It should return a message with its equation when you <code class="docutils literal notranslate"><span class="pre">print</span></code> it.</p></li>
 </ol>
-</li>
-<li><p>Here is your sample code:</p></li>
-</ul>
+<p>Here is your sample code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Line2D</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
         <span class="err">???</span>
@@ -646,9 +647,7 @@ m: &amp; \text{ the slope of the line}
         <span class="err">???</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><p>For example, you might get this message when you run the script:</p></li>
-</ul>
+<p>For example, you might get this message when you run the script:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">line1</span> <span class="o">=</span> <span class="n">Line2D</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">line1</span><span class="p">)</span>
@@ -947,7 +946,7 @@ Does y have __next__? False
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;list_iterator object at 0x000002381594FD60&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;list_iterator object at 0x000002610248E0E0&gt;
 9
 4
 ==================================================
@@ -1271,7 +1270,7 @@ End of testIterator5, the second time
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Modules, Packages, Exception, and Assertion</p>
+        <p class="prev-next-title">07. Modules, Packages, Exception, and Assertion</p>
       </div>
     </a>
     <a class="right-next"
@@ -1279,7 +1278,7 @@ End of testIterator5, the second time
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Object-Oriented Programming II</p>
+        <p class="prev-next-title">09. Introduction to Object-Oriented Programming II</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
