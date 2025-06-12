@@ -57,3 +57,8 @@ Throughout the course, Python will serve as the primary programming language, al
 
 Finally, we strongly encourage everyone to take on the [homework assignment](https://github.com/bruce88617/nycudopcs_jb/blob/main/archives/Homeworks/113B/HW02.pdf). This assignment focuses on an engineering problem related to natural gas pipelines. You will practice applying the Monte Carlo Method to simulate corrosion processes and estimate the probability of gas leakage over the pipeline’s operational lifespan. Through this exercise, you will deepen your understanding of the course material and gain practical experience in using probabilistic modeling to solve real-world problems.
 
+
+## Integrated Development Environment (IDE) Setup for Python Programming
+
+Please refer to this: [EnvSetup.pdf](https://github.com/bruce88617/nycudopcs_jb/blob/main/archives/EnvSetup.pdf)
+
